@@ -1,0 +1,23 @@
+# Summary
+
+- [Introduction](./introduction.md)
+- [Architecture](./architecture.md)
+  - [Multi-tenancy](./multitenancy.md)
+  - [Security](./security.md)
+  - [Scaling](./scaling.md)
+------------------------------------------------------------------------------------
+- [Reference](./reference.md)
+  - [Translations](./translations.md)
+  - [createOptions extensions](./createoptions_extensions.md)
+------------------------------------------------------------------------------------
+- [Examples](./examples.md)
+  - [Hello world!](./examples/helloworld.md)
+  - [Using persistent volumes](./examples/pervol.md)
+    - [With createOptions translations](./examples/pervol_translation.md)
+    - [With createOptions extensions](./examples/pervol_extensions.md)
+  - [Using  volumes with configmaps](./examples/configmaps.md)
+  - [HA setup for node failure resilience](./examples/ha.md)
+  - [Exposing services within the cluster](./examples/services_internal.md)
+  - [Exposing services outside the cluster](./examples/services_external.md)
+  - [Scheduling on specific nodes](./examples/nodeselector.md)
+  - [Specifying resource requirements and limits ](./examples/resources.md)
