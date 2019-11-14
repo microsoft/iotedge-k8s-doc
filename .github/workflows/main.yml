@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master    
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install Rust
+      run: rustup update stable && rustup default stable
+    - run: cargo install mdbook --version 0.2.3.
+    - name: Build book
+      run: mdbook build .
+    - name: Deploy to gh-pages
+      env:
+        GITHUB_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+      run: |
+        touch ./book/.nojekyll
+        curl -LsSf https://raw.githubusercontent.com/rust-lang/simpleinfra/master/setup-deploy-keys/src/deploy.rs | rustc - -o /tmp/deploy
+        cd book
+        /tmp/deploy
+
