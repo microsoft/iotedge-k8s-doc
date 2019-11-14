@@ -9,6 +9,8 @@
 - [Reference](./reference.md)
   - [Translations](./translations.md)
   - [createOptions extensions](./createoptions_extensions.md)
+  - [iotedged env vars](./iotedged_vars.md)
+  - [edgeagent env vars](./edgeagent_vars.md)
 ------------------------------------------------------------------------------------
 - [Examples](./examples.md)
   - [Setup tooling](./examples/setuptooling.md)

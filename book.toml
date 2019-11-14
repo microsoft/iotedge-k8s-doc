@@ -3,3 +3,6 @@ authors = []
 language = "en"
 multilingual = false
 src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/microsoft/iotedge-k8s-doc/tree/master/src"
