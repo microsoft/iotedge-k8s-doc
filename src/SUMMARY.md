@@ -11,7 +11,8 @@
   - [createOptions extensions](./createoptions_extensions.md)
 ------------------------------------------------------------------------------------
 - [Examples](./examples.md)
-  - [Hello world!](./examples/helloworld.md)
+  - [Setup tooling](./examples/setuptooling.md)
+  - [Hello, world!](./examples/helloworld.md)
   - [Using persistent volumes](./examples/pervol.md)
     - [With createOptions translations](./examples/pervol_translation.md)
     - [With createOptions extensions](./examples/pervol_extensions.md)
