@@ -13,7 +13,7 @@
   - [edgeagent env variables](./edgeagent_vars.md)
 ------------------------------------------------------------------------------------
 - [Examples](./examples.md)
-  - [Prerequisites](./examples/setuptooling.md)
+  - [Prerequisites](./examples/prereqs.md)
   - [Hello, world!](./examples/helloworld.md)
   - [Using persistent volumes](./examples/pervol.md)
     - [With createOptions translations](./examples/pervol_translation.md)
