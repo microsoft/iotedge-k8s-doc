@@ -1,5 +1,5 @@
 [book]
-title = "Deploy Azure IoT Edge on Kubernetes"
+title = "Deploy Azure IoT Edge on Kubernetes (preview)"
 author = "IoT Edge authors"
 language = "en"
 multilingual = false

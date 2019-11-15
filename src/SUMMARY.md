@@ -12,7 +12,7 @@
   - [iotedged env variables](./iotedged_vars.md)
   - [edgeagent env variables](./edgeagent_vars.md)
 ------------------------------------------------------------------------------------
-- [Examples](./examples.md)
+- [Tutorials](./examples.md)
   - [Prerequisites](./examples/prereqs.md)
   - [Hello, world!](./examples/helloworld.md)
   - [Using persistent volumes](./examples/pervol.md)
