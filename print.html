@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Deploy Azure IoT Edge on Kubernetes</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li><a href="edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li><a href="examples.html"><strong aria-hidden="true">4.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/setuptooling.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> HA setup for node failure resilience</a></li><li><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li><a href="edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li><a href="examples.html"><strong aria-hidden="true">4.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> HA setup for node failure resilience</a></li><li><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -105,7 +105,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title"></h1> 
+                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes</h1> 
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -145,7 +145,21 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="#examples" id="examples"><h1>Examples</h1></a>
-<a class="header" href="#prerequisites" id="prerequisites"><h1>Prerequisites</h1></a>
+<a class="header" href="#a-kubernetes-cluster" id="a-kubernetes-cluster"><h2>A Kubernetes cluster</h2></a>
+<p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. However, a relatively recent release (v1.12+) is recommended. Here are the couple of recommendations if you don't already have one available:</p>
+<p>For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can get one stood up easily using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">AKS QuickStart</a> instructions.</p>
+<p>For a local development environment, you can use <a href="https://kubernetes.io/docs/setup/learning-environment/minikube/">Minikube</a> or <a href="https://github.com/rancher/k3d#k3s-in-docker">k3d</a> (recommended).</p>
+<a class="header" href="#helm" id="helm"><h2>Helm</h2></a>
+<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow in the <a href="https://v2.helm.sh/docs/using_helm/#installing-helm">insructions</a> to install Helm 2.</p>
+<blockquote>
+<p>⚠️ IoT Edge on Kubernetes has only be tested with Helm 2 at this time. Helm 3 will be supported in the future.</p>
+</blockquote>
+<a class="header" href="#kubectl" id="kubectl"><h2>kubectl</h2></a>
+<p>Kubectl is tool for viewing and interacting with your cluster. Here are its <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">install instructions</a></p>
+<a class="header" href="#visual-studio-code" id="visual-studio-code"><h2>Visual Studio Code</h2></a>
+<p><a href="https://code.visualstudio.com/download">Visual Studio Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge">IoT Edge extension</a> is recommended for working with IoT Edge's deployment manifests and submitting them to IoT Hub.</p>
+<a class="header" href="#visualization-tools-optional" id="visualization-tools-optional"><h2>Visualization tools (optional)</h2></a>
+<p>Tools like <a href="https://github.com/vmware-tanzu/octant">Octant</a> and <a href="https://k9ss.io">K9s</a> make help understand the architecture and state of your IoT Edge application.</p>
 
                     </main>
 
