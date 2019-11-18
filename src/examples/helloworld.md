@@ -53,8 +53,8 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 ### Cleanup
 
 ```
-kubectl delete --purge edge1 && \
-  kubectl delete ns helloworld
+helm delete --purge edge1 && \
+kubectl delete ns helloworld
  ```` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).
 
