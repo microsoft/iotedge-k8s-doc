@@ -1,9 +1,13 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,11 +34,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -56,10 +60,13 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -75,7 +82,10 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li><a href="edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> HA setup for node failure resilience</a></li><li><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li class="expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> HA setup for node failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -105,7 +115,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1> 
+                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -144,7 +154,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#introduction" id="introduction"><h1>Introduction</h1></a>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <p>Azure IoT Edge can integrate with Kubernetes, using it as a resilient, highly available infrastructure layer. It registers an IoT Edge Custom Resource Definition (CRD) with the Kubernetes API Server and provides a CRD controller that reconciles cloud-managed desired state with the local cluster state.</p>
 <p>Module lifetime is managed by the Kubernetes scheduler, which maintains module availability and chooses their placement. IoT Edge manages the edge application platform running on top, continuously reconciling the desired state specified in IoT Hub with the state on the edge cluster. The edge application model is still the familiar model based on IoT Edge modules and routes. The IoT Edge agent performs the role of a CRD controller, automatically <em>translating</em> from IoT Edge application model to Kubernetes native constructs like pods, deployments, services etc.</p>
 <blockquote>
@@ -153,26 +163,26 @@
 </blockquote>
 <p><img src="./media/k8s_model.png" alt="" /></p>
 <p>The high level diagram above might help you understand where Kubernetes fits in a typical production IoT Edge architecture.</p>
-<a class="header" href="#examples" id="examples"><h1>Examples</h1></a>
-<a class="header" href="#prerequisites" id="prerequisites"><h1>Prerequisites</h1></a>
-<a class="header" href="#a-kubernetes-cluster" id="a-kubernetes-cluster"><h2>A Kubernetes cluster</h2></a>
+<h1><a class="header" href="#examples" id="examples">Examples</a></h1>
+<h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
+<h2><a class="header" href="#a-kubernetes-cluster" id="a-kubernetes-cluster">A Kubernetes cluster</a></h2>
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>
 <p>For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can stand one up using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">AKS QuickStart</a> instructions.</p>
 <p>For a local development environment, you can use <a href="https://kubernetes.io/docs/setup/learning-environment/minikube/">Minikube</a> or <a href="https://github.com/rancher/k3d#k3s-in-docker">k3d</a> (recommended).</p>
-<a class="header" href="#helm" id="helm"><h2>Helm</h2></a>
-<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the Helm 2 install <a href="https://v2.helm.sh/docs/using_helm/#installing-helm">insructions</a>.</p>
+<h2><a class="header" href="#helm" id="helm">Helm</a></h2>
+<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the Helm 2 install <a href="https://v2.helm.sh/docs/using_helm/#installing-helm">insructions</a>. </p>
 <blockquote>
 <p>💣</p>
 <p>IoT Edge on Kubernetes has only been tested with Helm 2 at this time. Support for Helm 3 will be added in the future.</p>
 </blockquote>
-<a class="header" href="#kubectl" id="kubectl"><h2>kubectl</h2></a>
+<h2><a class="header" href="#kubectl" id="kubectl">kubectl</a></h2>
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is an essential tool for interacting with your cluster.</p>
-<a class="header" href="#visual-studio-code" id="visual-studio-code"><h2>Visual Studio Code</h2></a>
+<h2><a class="header" href="#visual-studio-code" id="visual-studio-code">Visual Studio Code</a></h2>
 <p><a href="https://code.visualstudio.com/download">Visual Studio Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge">IoT Edge extension</a> is recommended for working with IoT Edge's deployment manifests and submitting them to IoT Hub.</p>
-<a class="header" href="#visualization-tools-optional" id="visualization-tools-optional"><h2>Visualization tools (optional)</h2></a>
+<h2><a class="header" href="#visualization-tools-optional" id="visualization-tools-optional">Visualization tools (optional)</a></h2>
 <p>Tools like <a href="https://github.com/vmware-tanzu/octant">Octant</a> and <a href="https://k9ss.io">K9s</a> can help you understand the architecture and state of your cluster application.</p>
 <p>This example demostrates a &quot;Hello, world&quot; scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites.</p>
-<a class="header" href="#setup-steps" id="setup-steps"><h3>Setup steps</h3></a>
+<h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
 <ol>
 <li>
 <p><a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">Register an IoT Edge device</a> and <a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#deploy-a-module">deploy the simulated temperature sensor module</a>. Be sure to note the device's connection string.</p>
@@ -183,8 +193,6 @@
 helm repo update  
 </code></pre>
 </li>
-</ol>
-<ol>
 <li>
 <p>Create a Kubernetes namespace to install the edge deployment into.</p>
 <pre><code class="language-shell">kubectl create ns helloworld
@@ -221,13 +229,13 @@ kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperatur
 </code></pre>
 </li>
 </ol>
-<a class="header" href="#cleanup" id="cleanup"><h3>Cleanup</h3></a>
+<h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code>helm delete --purge edge1 &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<a class="header" href="#setup-steps-1" id="setup-steps-1"><h3>Setup steps</h3></a>
+<h3><a class="header" href="#setup-steps-1" id="setup-steps-1">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -260,11 +268,11 @@ helm install \
 </code></pre>
 </li>
 <li>
-<p>In the Visual Studio Code command palette (View menu -&gt; Command Palette...), search for and select <strong>Azure IoT Edge: New IoT Edge Solution</strong>. Follow the prompts and use the following values to create your solution:</p>
-<table><thead><tr><th> Field </th><th> Value </th></tr></thead><tbody>
-<tr><td> Select folder </td><td> Choose the location on your development machine for VS Code to create the solution files. </td></tr>
-<tr><td> Provide a solution name </td><td> Enter a descriptive name for your solution or accept the default <strong>EdgeSolution</strong>. </td></tr>
-<tr><td> Select module template </td><td> Choose <strong>Empty solution</strong>. </td></tr>
+<p>In the Visual Studio Code command palette (View menu -&gt; Command Palette...), search for and select <strong>Azure IoT Edge: New IoT Edge Solution</strong>. Follow the prompts and use the following values to create your solution: </p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Select folder</td><td>Choose the location on your development machine for VS Code to create the solution files.</td></tr>
+<tr><td>Provide a solution name</td><td>Enter a descriptive name for your solution or accept the default <strong>EdgeSolution</strong>.</td></tr>
+<tr><td>Select module template</td><td>Choose <strong>Empty solution</strong>.</td></tr>
 </tbody></table>
 <p>You'll be making updates to <strong>deployment.template.json</strong> (see navigation pane on the left) to configure the <code>edgeHub</code> module to use K8s configmaps.</p>
 </li>
@@ -277,11 +285,8 @@ helm install \
 </code></pre>
 </li>
 <li>
-<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="">extended createOptions</a> feature.</p>
-</li>
-</ol>
-<pre><code>```diff
-{
+<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="examples/">extended createOptions</a> feature.</p>
+<pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {
     &quot;$edgeAgent&quot;: {
@@ -357,15 +362,13 @@ helm install \
     }
   }
 } 
-```
-
-[Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core) and [VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core) API reference have details on allowed values and defaults.
-
-&gt;🗒
-&gt;
-&gt;*We've used `edgeHub` as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.*
 </code></pre>
-<ol>
+<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
+<blockquote>
+<p>🗒</p>
+<p><em>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</em></p>
+</blockquote>
+</li>
 <li>
 <p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
 </li>
@@ -373,7 +376,7 @@ helm install \
 <p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the subsequently displayed list, choose the device created in step 1 to complete the operation.</p>
 </li>
 <li>
-<p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the configmap keys mounted as files at the specified location.</p>
+<p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the configmap keys mounted as files at the specified location. </p>
 <pre><code class="language-shell"># Get pod names
 kubectl get pods -n cm
 
@@ -386,7 +389,7 @@ kubectl exec --namespace=cm $ehname -c edgehub ls /etc/module
 </code></pre>
 </li>
 </ol>
-<a class="header" href="#cleanup-1" id="cleanup-1"><h3>Cleanup</h3></a>
+<h3><a class="header" href="#cleanup-1" id="cleanup-1">Cleanup</a></h3>
 <pre><code>helm delete --purge cm-example &amp;&amp; \
 kubectl delete ns cm
 </code></pre>
@@ -415,6 +418,14 @@ kubectl delete ns cm
 
         
 
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
         
 
         
