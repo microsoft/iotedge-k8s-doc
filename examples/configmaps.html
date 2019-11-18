@@ -144,7 +144,172 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<a class="header" href="#setup-steps" id="setup-steps"><h3>Setup steps</h3></a>
+<ol>
+<li>
+<p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux#set-up-vs-code-and-tools">Set up VS Code and tools</a>, associate with IoT Hub from the previous step.</p>
+</li>
+<li>
+<p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
+<pre><code class="language-shell"># Add IoT Edge repo
+helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
+helm repo update
+
+# Create K8s namespace
+kubectl create ns cm
+
+# Install IoT Edge CRD
+helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+
+# Store the device connection string a variable
+export connStr=replace-with-device-connection-string-from-step-1
+
+# Install the edge workload into the cluster namespace
+helm install \
+  -n cm-example \
+  --namespace cm \
+  --set $connStr \
+  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+</li>
+<li>
+<p>In the Visual Studio Code command palette (View menu -&gt; Command Palette...), search for and select <strong>Azure IoT Edge: New IoT Edge Solution</strong>. Follow the prompts and use the following values to create your solution:</p>
+<table><thead><tr><th> Field </th><th> Value </th></tr></thead><tbody>
+<tr><td> Select folder </td><td> Choose the location on your development machine for VS Code to create the solution files. </td></tr>
+<tr><td> Provide a solution name </td><td> Enter a descriptive name for your solution or accept the default <strong>EdgeSolution</strong>. </td></tr>
+<tr><td> Select module template </td><td> Choose <strong>Empty solution</strong>. </td></tr>
+</tbody></table>
+<p>You'll be making updates to <strong>deployment.template.json</strong> (see navigation pane on the left) to configure the <code>edgeHub</code> module to use K8s configmaps.</p>
+</li>
+<li>
+<p>Create a configmap in the namespace previously created.</p>
+<pre><code class="language-shell">kubectl create configmap special-config \
+  --from-literal=special.how=very \
+  --from-literal=special.type=charm \
+  --namespace=cm
+</code></pre>
+</li>
+<li>
+<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="">extended createOptions</a> feature.</p>
+</li>
+</ol>
+<pre><code>```diff
+{
+  &quot;$schema-template&quot;: &quot;2.0.0&quot;,
+  &quot;modulesContent&quot;: {
+    &quot;$edgeAgent&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;runtime&quot;: {
+          &quot;type&quot;: &quot;docker&quot;,
+          &quot;settings&quot;: {
+            &quot;minDockerVersion&quot;: &quot;v1.25&quot;,
+            &quot;loggingOptions&quot;: &quot;&quot;,
+            &quot;registryCredentials&quot;: {}
+          }
+        },
+        &quot;systemModules&quot;: {
+          &quot;edgeAgent&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-agent:1.0&quot;,
+              &quot;createOptions&quot;: {}
+            }
+          },
+          &quot;edgeHub&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;status&quot;: &quot;running&quot;,
+            &quot;restartPolicy&quot;: &quot;always&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-hub:1.0&quot;,
+              &quot;createOptions&quot;: {
+                &quot;HostConfig&quot;: {
+                  &quot;PortBindings&quot;: {
+                    &quot;5671/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;5671&quot;
+                    }],
+                    &quot;8883/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;8883&quot;
+                    }],
+                    &quot;443/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;443&quot;
+                    }]
+                  }
+                },
++               &quot;k8s-experimental&quot;: {
++                 &quot;volumes&quot;: [{
++                   &quot;volume&quot;: {
++                     &quot;name&quot;: &quot;cmvol&quot;,
++                     &quot;configMap&quot;: {
++                       &quot;optional&quot;: &quot;true&quot;,
++                       &quot;name&quot;: &quot;special-config&quot;
++                     }
++                   },
++                   &quot;volumeMounts&quot;: [{
++                     &quot;name&quot;: &quot;cmvol&quot;,
++                     &quot;mountPath&quot;: &quot;/etc/module&quot;,
++                     &quot;readOnly&quot;: &quot;true&quot;
++                   }]
++                 }]
++               }
+              }
+            }
+          }
+        },
+        &quot;modules&quot;: {}
+      }
+    },
+    &quot;$edgeHub&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;routes&quot;: {},
+        &quot;storeAndForwardConfiguration&quot;: {
+          &quot;timeToLiveSecs&quot;: 7200
+        }
+      }
+    }
+  }
+} 
+```
+
+[Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core) and [VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core) API reference have details on allowed values and defaults.
+
+&gt;🗒
+&gt;
+&gt;*We've used `edgeHub` as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.*
+</code></pre>
+<ol>
+<li>
+<p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
+</li>
+<li>
+<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the subsequently displayed list, choose the device created in step 1 to complete the operation.</p>
+</li>
+<li>
+<p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the configmap keys mounted as files at the specified location.</p>
+<pre><code class="language-shell"># Get pod names
+kubectl get pods -n cm
+
+# Save edgehub pod name in env var
+export ehname=replace-with-edgehub-pod-name
+
+# List volume mount location
+kubectl exec --namespace=cm $ehname -c edgehub ls /etc/module
+
+</code></pre>
+</li>
+</ol>
+<a class="header" href="#cleanup" id="cleanup"><h3>Cleanup</h3></a>
+<pre><code>helm delete --purge cm-example &amp;&amp; \
+kubectl delete ns cm
+</code></pre>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

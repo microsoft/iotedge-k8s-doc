@@ -195,8 +195,8 @@ kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperatur
 </li>
 </ol>
 <a class="header" href="#cleanup" id="cleanup"><h3>Cleanup</h3></a>
-<pre><code>kubectl delete --purge edge1 &amp;&amp; \
-  kubectl delete ns helloworld
+<pre><code>helm delete --purge edge1 &amp;&amp; \
+kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 
