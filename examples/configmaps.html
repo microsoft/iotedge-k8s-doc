@@ -163,7 +163,7 @@
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-shell"># Add IoT Edge repo
+<pre><code class="language-bash"># Add IoT Edge repo
 helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
 helm repo update
 
@@ -196,7 +196,7 @@ helm install \
 </li>
 <li>
 <p>Create a configmap in the namespace previously created.</p>
-<pre><code class="language-shell">kubectl create configmap special-config \
+<pre><code class="language-bash">kubectl create configmap special-config \
   --from-literal=special.how=very \
   --from-literal=special.type=charm \
   --namespace=cm
@@ -291,11 +291,11 @@ helm install \
 <p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
 </li>
 <li>
-<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the subsequently displayed list, choose the device created in step 1 to complete the operation.</p>
+<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the displayed list, choose the device created in step 1 to complete the operation.</p>
 </li>
 <li>
 <p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the configmap keys mounted as files at the specified location. </p>
-<pre><code class="language-shell"># Get pod names
+<pre><code class="language-bash"># Get pod names
 kubectl get pods -n cm
 
 # Save edgehub pod name in env var
@@ -308,7 +308,8 @@ kubectl exec --namespace=cm $ehname -c edgehub ls /etc/module
 </li>
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
-<pre><code>helm delete --purge cm-example &amp;&amp; \
+<pre><code class="language-bash"># Cleanup
+helm delete --purge cm-example &amp;&amp; \
 kubectl delete ns cm
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>

@@ -163,16 +163,13 @@
 </li>
 <li>
 <p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
-<blockquote>
-<p><em>Use <code>--node-count 2</code> in the <code>az aks create</code> command to test high availability.</em></p>
-</blockquote>
 </li>
 <li>
 <p><a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">Create an Azure File storage class</a>, <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-cluster-role-and-binding">a cluster role and binding</a>, and <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">a persistent volume claim</a>.</p>
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-shell"># Add IoT Edge repo
+<pre><code class="language-bash"># Add IoT Edge repo
 helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
 helm repo update
 
@@ -188,7 +185,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 </li>
 <li>
 <p>Specify persistent volume details to use in <code>edgeAgent</code> module's environment variables during workload install.</p>
-<pre><code class="language-shell">helm install \
+<pre><code class="language-bash">helm install \
   -n pv-example1 \
   --namespace pv1 \
   --set $connStr \
@@ -285,17 +282,18 @@ export connStr=replace-with-device-connection-string-from-step-1
 <p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
 </li>
 <li>
-<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the subsequently displayed list, choose the device created in step 1 to complete the operation.</p>
+<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the displayed list, choose the device created in step 1 to complete the operation.</p>
 </li>
 <li>
 <p>In a few seconds, you'll see a new <code>edgeHub</code> container instantiated with <code>/storage</code> location backed by a persistent volume.</p>
-<pre><code class="language-shell"># List persistent volume claims 
+<pre><code class="language-bash"># List persistent volume claims 
 kubectl get pvc -n pv1
 </code></pre>
 </li>
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
-<pre><code>helm delete --purge pv-example1 &amp;&amp; \
+<pre><code class="language-bash"># Cleanup
+helm delete --purge pv-example1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>

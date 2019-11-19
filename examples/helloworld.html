@@ -160,23 +160,23 @@
 </li>
 <li>
 <p>Add and prepare the IoT Edge Helm repo.</p>
-<pre><code class="language-shell">helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
+<pre><code class="language-bash">helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
 helm repo update  
 </code></pre>
 </li>
 <li>
 <p>Create a Kubernetes namespace to install the edge deployment into.</p>
-<pre><code class="language-shell">kubectl create ns helloworld
+<pre><code class="language-bash">kubectl create ns helloworld
 </code></pre>
 </li>
 <li>
 <p>Install IoT Edge Custom Resource Definition (CRD).</p>
-<pre><code class="language-shell">helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+<pre><code class="language-bash">helm install --name edge-crd edgek8s/edge-kubernetes-crd  
 </code></pre>
 </li>
 <li>
 <p>Deploy the edge deployment into the previously created K8s namespace.</p>
-<pre><code class="language-shell"># Store the device connection string a variable
+<pre><code class="language-bash"># Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install edge deployment into the created namespace
@@ -193,7 +193,7 @@ helm install \
 </li>
 <li>
 <p>In a couple of minutes, you should see the workload modules defined in the edge deploymentment running as pods along with <code>edgeagent</code> and <code>iotedged</code>. Confirm this using:</p>
-<pre><code>kubectl get pods -n helloworld
+<pre><code class="language-bash">kubectl get pods -n helloworld
 
 # View the logs from the simlulated temperature sensor module
 kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperaturesensor
@@ -201,7 +201,8 @@ kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperatur
 </li>
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
-<pre><code>helm delete --purge edge1 &amp;&amp; \
+<pre><code class="language-bash"># Cleanup
+helm delete --purge edge1 &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
