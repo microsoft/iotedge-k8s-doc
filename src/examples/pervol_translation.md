@@ -8,13 +8,11 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 1. [Create an AKS cluster](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster) and [connect to it](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster).
 
-    >*Use `--node-count 2` in the `az aks create` command to test high availability.*
-
 1. [Create an Azure File storage class](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class), [a cluster role and binding](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-cluster-role-and-binding), and [a persistent volume claim](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim).
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
-    ```shell
+    ```bash
     # Add IoT Edge repo
     helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
     helm repo update
@@ -31,7 +29,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 1. Specify persistent volume details to use in `edgeAgent` module's environment variables during workload install.
 
-    ```shell
+    ```bash
     helm install \
       -n pv-example1 \
       --namespace pv1 \
@@ -129,19 +127,21 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 1. Generate the workload deployment config by right-clicking the **deployment.template.json** in the left navigation pane and selecting **Generate IoT Edge Deployment Manifest**. This will generate the minified **deployment.amd64.json** under the **config** directory.
 
-1. Update the configuration for the device by right-clicking **deployment.amd64.json** and selecting **Create Deployment for Single Device**. In the subsequently displayed list, choose the device created in step 1 to complete the operation.
+1. Update the configuration for the device by right-clicking **deployment.amd64.json** and selecting **Create Deployment for Single Device**. In the displayed list, choose the device created in step 1 to complete the operation.
 
 1. In a few seconds, you'll see a new `edgeHub` container instantiated with `/storage` location backed by a persistent volume.
 
-    ```shell
+    ```bash
     # List persistent volume claims 
     kubectl get pvc -n pv1
     ```
 
 ### Cleanup
 
-```
+```bash
+# Cleanup
 helm delete --purge pv-example1 && \
 kubectl delete ns pv1
- ```` 
+ ``` 
+
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)

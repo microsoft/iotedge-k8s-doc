@@ -8,7 +8,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
-    ```shell
+    ```bash
     # Add IoT Edge repo
     helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
     helm repo update
@@ -43,7 +43,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 1. Create a configmap in the namespace previously created.
 
-    ```shell
+    ```bash
     kubectl create configmap special-config \
       --from-literal=special.how=very \
       --from-literal=special.type=charm \
@@ -140,11 +140,11 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 1. Generate the workload deployment config by right-clicking the **deployment.template.json** in the left navigation pane and selecting **Generate IoT Edge Deployment Manifest**. This will generate the minified **deployment.amd64.json** under the **config** directory.
 
-1. Update the configuration for the device by right-clicking **deployment.amd64.json** and selecting **Create Deployment for Single Device**. In the subsequently displayed list, choose the device created in step 1 to complete the operation.
+1. Update the configuration for the device by right-clicking **deployment.amd64.json** and selecting **Create Deployment for Single Device**. In the displayed list, choose the device created in step 1 to complete the operation.
 
 1. In a few seconds, you'll see a new `edgeHub` pod instantiated with the configmap keys mounted as files at the specified location. 
 
-    ```shell
+    ```bash
     # Get pod names
     kubectl get pods -n cm
 
@@ -158,10 +158,11 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 ### Cleanup
 
-```
+```bash
+# Cleanup
 helm delete --purge cm-example && \
 kubectl delete ns cm
- ```` 
+ ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)
 
 

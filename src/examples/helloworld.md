@@ -6,7 +6,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 1. Add and prepare the IoT Edge Helm repo.
 
-    ```shell
+    ```bash
     helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
     helm repo update  
     ```
@@ -14,19 +14,19 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 1. Create a Kubernetes namespace to install the edge deployment into.
 
-    ```shell
+    ```bash
     kubectl create ns helloworld
     ```
 
 1. Install IoT Edge Custom Resource Definition (CRD).
 
-    ```shell
+    ```bash
     helm install --name edge-crd edgek8s/edge-kubernetes-crd  
     ```
 
 1. Deploy the edge deployment into the previously created K8s namespace.
 
-    ```shell
+    ```bash
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
 
@@ -43,7 +43,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 6. In a couple of minutes, you should see the workload modules defined in the edge deploymentment running as pods along with `edgeagent` and `iotedged`. Confirm this using:
 
-    ```
+    ```bash
     kubectl get pods -n helloworld
 
     # View the logs from the simlulated temperature sensor module
@@ -52,7 +52,8 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 ### Cleanup
 
-```
+```bash
+# Cleanup
 helm delete --purge edge1 && \
 kubectl delete ns helloworld
  ```` 
