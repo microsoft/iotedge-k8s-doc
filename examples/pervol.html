@@ -152,7 +152,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h2><a class="header" href="#using-kubernetes-persistent-volumes" id="using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
+<p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while perserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
+<p>IoT Edge modules can leverage persistent volumes impictly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
