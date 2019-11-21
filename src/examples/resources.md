@@ -140,7 +140,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
     # Save edgehub pod name in env var
     export ehname=replace-with-edgehub-pod-name
 
-    # List volume mount location
+    # Describe pod spec to see resource requests
     kubectl describe pod --namespace=resources $ehname
 
     ```
