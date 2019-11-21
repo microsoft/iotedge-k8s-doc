@@ -34,7 +34,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
     helm install \
       -n edge1 \
       --namespace helloworld \
-      --set $connStr \
+      --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.runAsNonRoot=true" \
       edgek8s/edge-kubernetes
     ```

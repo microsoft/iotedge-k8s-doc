@@ -26,7 +26,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
     helm install \
       -n cm-example \
       --namespace cm \
-      --set $connStr \
+      --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.runAsNonRoot=true" \
       edgek8s/edge-kubernetes
     ```
@@ -50,7 +50,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
       --namespace=cm
     ```
 
-1. Reference the configmap in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [extended createOptions]() feature.
+1. Reference the configmap in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [extended createOptions](https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md) feature.
 
 
     ```diff

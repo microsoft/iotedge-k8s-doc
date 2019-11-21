@@ -33,7 +33,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
     helm install \
       -n pv-example1 \
       --namespace pv1 \
-      --set $connStr \
+      --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000" \
       --set "edgeAgent.env.storageClassName=azurefile" \
       --set "edgeAgent.env.runAsNonRoot=true" \
