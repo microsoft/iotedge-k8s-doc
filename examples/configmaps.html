@@ -180,7 +180,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 helm install \
   -n cm-example \
   --namespace cm \
-  --set $connStr \
+  --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
   edgek8s/edge-kubernetes
 </code></pre>
@@ -203,7 +203,7 @@ helm install \
 </code></pre>
 </li>
 <li>
-<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="">extended createOptions</a> feature.</p>
+<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">extended createOptions</a> feature.</p>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {

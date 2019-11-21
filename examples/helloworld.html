@@ -183,7 +183,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 helm install \
   -n edge1 \
   --namespace helloworld \
-  --set $connStr \
+  --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
   edgek8s/edge-kubernetes
 </code></pre>

@@ -188,7 +188,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 <pre><code class="language-bash">helm install \
   -n pv-example1 \
   --namespace pv1 \
-  --set $connStr \
+  --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
   --set &quot;edgeAgent.env.storageClassName=azurefile&quot; \
   --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
