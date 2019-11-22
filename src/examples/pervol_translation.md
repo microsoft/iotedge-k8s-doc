@@ -1,4 +1,4 @@
-This example demostrates how to back the `edgeHub` module's message store by using persistent volumes implicitly via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and `kubectl` installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.
+This example demostrates how to back the `edgeHub` module's message store by using persistent volumes *implicitly* via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and `kubectl` installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.
 
 ### Setup steps
 
@@ -8,7 +8,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 1. [Create an AKS cluster](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster) and [connect to it](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster).
 
-1. [Create an Azure File storage class](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class), [a cluster role and binding](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-cluster-role-and-binding), and [a persistent volume claim](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim).
+1. Create an Azure File [storage class](https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class).
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
@@ -144,4 +144,4 @@ helm delete --purge pv-example1 && \
 kubectl delete ns pv1
  ``` 
 
- ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)
+ ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).

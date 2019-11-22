@@ -24,7 +24,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
     helm install --name edge-crd edgek8s/edge-kubernetes-crd  
     ```
 
-1. Deploy the edge deployment into the previously created K8s namespace.
+1. Deploy the edge workload into the previously created K8s namespace.
 
     ```bash
     # Store the device connection string a variable
