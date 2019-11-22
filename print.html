@@ -211,7 +211,7 @@ helm repo update
 </code></pre>
 </li>
 <li>
-<p>Deploy the edge deployment into the previously created K8s namespace.</p>
+<p>Deploy the edge workload into the previously created K8s namespace.</p>
 <pre><code class="language-bash"># Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
@@ -245,7 +245,7 @@ kubectl delete ns helloworld
 <h2><a class="header" href="#using-kubernetes-persistent-volumes" id="using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
 <p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while perserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
 <p>IoT Edge modules can leverage persistent volumes impictly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
-<p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes implicitly via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>implicitly</em> via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3><a class="header" href="#setup-steps-1" id="setup-steps-1">Setup steps</a></h3>
 <ol>
 <li>
@@ -258,7 +258,7 @@ kubectl delete ns helloworld
 <p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
 </li>
 <li>
-<p><a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">Create an Azure File storage class</a>, <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-cluster-role-and-binding">a cluster role and binding</a>, and <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">a persistent volume claim</a>.</p>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
@@ -389,9 +389,165 @@ kubectl get pvc -n pv1
 helm delete --purge pv-example1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
-<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>
-<p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>explicitly</em> via K8s createOptions extensions. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3><a class="header" href="#setup-steps-2" id="setup-steps-2">Setup steps</a></h3>
+<ol>
+<li>
+<p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux#set-up-vs-code-and-tools">Set up VS Code and tools</a>, associate with IoT Hub from the previous step.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
+</li>
+<li>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
+</li>
+<li>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">persistent volume claim</a> and make note of its name.</p>
+</li>
+<li>
+<p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
+<pre><code class="language-bash"># Add IoT Edge repo
+helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
+helm repo update
+
+# Create K8s namespace
+kubectl create ns pv2
+
+# Install IoT Edge CRD
+helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+
+# Store the device connection string a variable
+export connStr=replace-with-device-connection-string-from-step-1
+</code></pre>
+</li>
+<li>
+<p>Deploy the edge workload into the previously created K8s namespace.</p>
+<pre><code class="language-bash">helm install \
+  -n pv-example2 \
+  --namespace pv2 \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+</li>
+<li>
+<p>In the Visual Studio Code command palette (View menu -&gt; Command Palette...), search for and select <strong>Azure IoT Edge: New IoT Edge Solution</strong>. Follow the prompts and use the following values to create your solution: </p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Select folder</td><td>Choose the location on your development machine for VS Code to create the solution files.</td></tr>
+<tr><td>Provide a solution name</td><td>Enter a descriptive name for your solution or accept the default <strong>EdgeSolution</strong>.</td></tr>
+<tr><td>Select module template</td><td>Choose <strong>Empty solution</strong>.</td></tr>
+</tbody></table>
+<p>Make updates to the <strong>deployment.template.json</strong> (see navigation pane on the left) to configure the <code>edgeHub</code> module to use a storage folder backed by a volume.</p>
+<pre><code class="language-diff">{
+  &quot;$schema-template&quot;: &quot;2.0.0&quot;,
+  &quot;modulesContent&quot;: {
+    &quot;$edgeAgent&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;runtime&quot;: {
+          &quot;type&quot;: &quot;docker&quot;,
+          &quot;settings&quot;: {
+            &quot;minDockerVersion&quot;: &quot;v1.25&quot;,
+            &quot;loggingOptions&quot;: &quot;&quot;,
+            &quot;registryCredentials&quot;: {}
+          }
+        },
+        &quot;systemModules&quot;: {
+          &quot;edgeAgent&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-agent:1.0&quot;,
+              &quot;createOptions&quot;: {}
+            }
+          },
+          &quot;edgeHub&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;status&quot;: &quot;running&quot;,
+            &quot;restartPolicy&quot;: &quot;always&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;azureiotedge/azureiotedge-hub:latest&quot;,
+              &quot;createOptions&quot;: {
++               &quot;Env&quot;: [
++                 &quot;storageFolder=/storage&quot;
++               ],
+                &quot;HostConfig&quot;: {
+                  &quot;PortBindings&quot;: {
+                    &quot;5671/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;5671&quot;
+                    }],
+                    &quot;8883/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;8883&quot;
+                    }],
+                    &quot;443/tcp&quot;: [{
+                      &quot;HostPort&quot;: &quot;443&quot;
+                    }]
+                  }
+                },
++               &quot;k8s-experimental&quot;: {
++                 &quot;volumes&quot;: [{
++                   &quot;volume&quot;: {
++                     &quot;name&quot;: &quot;pvcvol&quot;,
++                     &quot;persistentVolumeClaim&quot;: {
++                       &quot;claimName&quot;: &quot;azurefile&quot;
++                     }
++                   },
++                   &quot;volumeMounts&quot;: [{
++                     &quot;name&quot;: &quot;pvcvol&quot;,
++                     &quot;mountPath&quot;: &quot;/storage&quot;
++                   }]
++                 }]
++               }
+              }
+            }
+          }
+        },
+        &quot;modules&quot;: {}
+      }
+    },
+    &quot;$edgeHub&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;routes&quot;: {
+          &quot;upstream&quot;: &quot;FROM /messages/* INTO $upstream&quot;
+        },
+        &quot;storeAndForwardConfiguration&quot;: {
+          &quot;timeToLiveSecs&quot;: 7200
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
+<blockquote>
+<p>🗒</p>
+<p><em>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</em></p>
+</blockquote>
+</li>
+<li>
+<p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
+</li>
+<li>
+<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the displayed list, choose the device created in step 1 to complete the operation.</p>
+</li>
+<li>
+<p>In a few seconds, you'll see a new <code>edgeHub</code> container instantiated with <code>/storage</code> location backed by a persistent volume.</p>
+<pre><code class="language-bash"># List persistent volume claims 
+kubectl get pvc -n pv2
+</code></pre>
+</li>
+</ol>
+<h3><a class="header" href="#cleanup-2" id="cleanup-2">Cleanup</a></h3>
+<pre><code class="language-bash"># Cleanup
+helm delete --purge pv-example2 &amp;&amp; \
+kubectl delete ns pv2
+</code></pre>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<h3><a class="header" href="#setup-steps-3" id="setup-steps-3">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -545,14 +701,14 @@ kubectl exec --namespace=cm $ehname -c edgehub ls /etc/module
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-2" id="cleanup-2">Cleanup</a></h3>
+<h3><a class="header" href="#cleanup-3" id="cleanup-3">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm delete --purge cm-example &amp;&amp; \
 kubectl delete ns cm
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>
 <p>This example demostrates how you can use <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes resources</a> in an IoT Edge workload deployment manifest.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-3" id="setup-steps-3">Setup steps</a></h3>
+<h3><a class="header" href="#setup-steps-4" id="setup-steps-4">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -696,7 +852,7 @@ kubectl describe pod --namespace=resources $ehname
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-3" id="cleanup-3">Cleanup</a></h3>
+<h3><a class="header" href="#cleanup-4" id="cleanup-4">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm delete --purge resources-example &amp;&amp; \
 kubectl delete ns resources

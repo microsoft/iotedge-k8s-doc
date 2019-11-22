@@ -152,7 +152,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes implicitly via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+                        <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>implicitly</em> via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
 <ol>
 <li>
@@ -165,7 +165,7 @@
 <p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
 </li>
 <li>
-<p><a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">Create an Azure File storage class</a>, <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-cluster-role-and-binding">a cluster role and binding</a>, and <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">a persistent volume claim</a>.</p>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
@@ -296,7 +296,7 @@ kubectl get pvc -n pv1
 helm delete --purge pv-example1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
-<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 
                     </main>
 
