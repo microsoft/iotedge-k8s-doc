@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>HA setup for node failure resilience - Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        <title>Setup for node failure resilience - Deploy Azure IoT Edge on Kubernetes (preview)</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="../translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li class="expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="../examples/ha.html" class="active"><strong aria-hidden="true">4.5.</strong> HA setup for node failure resilience</a></li><li class="expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="../examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="../translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li class="expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="../examples/ha.html" class="active"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="../examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -152,7 +152,60 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <p>This example demostrates how to back the <code>iotedged</code> pod using persistent volumes. <code>iotedged</code> contains certificates and other security state which must be persisted on durable storage in order for the edge deployment to be remain functional should the <code>iotedged</code> pod be restarted and/or relocated to another node.</p>
+<p>This tutorial requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites.</p>
+<h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
+<ol>
+<li>
+<p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
+</li>
+<li>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
+</li>
+<li>
+<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">persistent volume claim</a> and make note of its name.</p>
+</li>
+<li>
+<p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
+<pre><code class="language-bash"># Add IoT Edge repo
+helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
+helm repo update
+
+# Create K8s namespace
+kubectl create ns ha-iotedged
+
+# Install IoT Edge CRD
+helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+
+# Store the device connection string a variable
+export connStr=replace-with-device-connection-string-from-step-1
+</code></pre>
+</li>
+<li>
+<p>Specify persistent volume details to use for storing <code>iotedged</code> data during workload install.</p>
+<pre><code class="language-bash">helm install \
+  -n ha-example \
+  --namespace ha-iotedged \
+  --set &quot;iotedged.data.persistentVolumeClaim.name=azurefile&quot; \
+  --set &quot;iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4&quot; \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+</li>
+<li>
+<p>In addition to <code>iotedged</code>, the <code>edgeHub</code> module's message store should also be a backed by a persistent volume to prevent data loss when deployed in a Kubernetes environment. See <a href="pervol_extensions.html">this tutorial</a> for the steps on how to do this.</p>
+</li>
+</ol>
+<h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
+<pre><code class="language-bash"># Cleanup
+helm delete --purge ha-example &amp;&amp; \
+kubectl delete ns ha-iotedged
+</code></pre>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
