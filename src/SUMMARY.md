@@ -19,7 +19,7 @@
     - [With createOptions translations](./examples/pervol_translation.md)
     - [With createOptions extensions](./examples/pervol_extensions.md)
   - [Using  volumes with configmaps](./examples/configmaps.md)
-  - [HA setup for node failure resilience](./examples/ha.md)
+  - [Setup for node failure resilience](./examples/ha.md)
   - [Exposing services within the cluster](./examples/services_internal.md)
   - [Exposing services outside the cluster](./examples/services_external.md)
   - [Scheduling on specific nodes](./examples/nodeselector.md)
