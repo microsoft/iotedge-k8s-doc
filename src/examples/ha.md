@@ -37,6 +37,7 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
       --namespace ha-iotedged \
       --set "iotedged.data.persistentVolumeClaim.name=azurefile" \
       --set "iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4" \
+      --set "iotedged.data.persistentVolumeClaim.size=64m" \
       --set "deviceConnectionString=$connStr" \
       edgek8s/edge-kubernetes
     ```
