@@ -191,6 +191,7 @@ export connStr=replace-with-device-connection-string-from-step-1
   --namespace ha-iotedged \
   --set &quot;iotedged.data.persistentVolumeClaim.name=azurefile&quot; \
   --set &quot;iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4&quot; \
+  --set &quot;iotedged.data.persistentVolumeClaim.size=64m&quot; \
   --set &quot;deviceConnectionString=$connStr&quot; \
   edgek8s/edge-kubernetes
 </code></pre>
