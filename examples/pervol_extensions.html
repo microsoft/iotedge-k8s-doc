@@ -180,7 +180,7 @@ helm repo update
 kubectl create ns pv2
 
 # Install IoT Edge CRD
-helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+helm install edge-crd edgek8s/edge-kubernetes-crd  
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
@@ -188,8 +188,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 </li>
 <li>
 <p>Deploy the edge workload into the previously created K8s namespace.</p>
-<pre><code class="language-bash">helm install \
-  -n pv-example2 \
+<pre><code class="language-bash">helm install pv-example2 \
   --namespace pv2 \
   --set &quot;deviceConnectionString=$connStr&quot; \
   edgek8s/edge-kubernetes
@@ -304,7 +303,7 @@ kubectl get pvc -n pv2
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm delete --purge pv-example2 &amp;&amp; \
+helm del pv-example2 -n pv2 &amp;&amp; \
 kubectl delete ns pv2
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>

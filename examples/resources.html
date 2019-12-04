@@ -171,14 +171,13 @@ helm repo update
 kubectl create ns resources
 
 # Install IoT Edge CRD
-helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+helm install edge-crd edgek8s/edge-kubernetes-crd  
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install the edge workload into the cluster namespace
-helm install \
-  -n resources-example \
+helm install resources-example \
   --namespace resources \
   --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
@@ -299,7 +298,7 @@ kubectl describe pod --namespace=resources $ehname
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm delete --purge resources-example &amp;&amp; \
+helm del resources-example -n resources &amp;&amp; \
 kubectl delete ns resources
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>

@@ -177,7 +177,7 @@ helm repo update
 kubectl create ns pv1
 
 # Install IoT Edge CRD
-helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+helm install edge-crd edgek8s/edge-kubernetes-crd  
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
@@ -185,8 +185,7 @@ export connStr=replace-with-device-connection-string-from-step-1
 </li>
 <li>
 <p>Specify persistent volume details to use in <code>edgeAgent</code> module's environment variables during workload install.</p>
-<pre><code class="language-bash">helm install \
-  -n pv-example1 \
+<pre><code class="language-bash">helm install pv-example1 \
   --namespace pv1 \
   --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
@@ -293,7 +292,7 @@ kubectl get pvc -n pv1
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm delete --purge pv-example1 &amp;&amp; \
+helm del pv-example1 -n pv1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>

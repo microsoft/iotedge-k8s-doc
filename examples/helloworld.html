@@ -171,7 +171,7 @@ helm repo update
 </li>
 <li>
 <p>Install IoT Edge Custom Resource Definition (CRD).</p>
-<pre><code class="language-bash">helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+<pre><code class="language-bash">helm install edge-crd edgek8s/edge-kubernetes-crd  
 </code></pre>
 </li>
 <li>
@@ -180,8 +180,7 @@ helm repo update
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install edge deployment into the created namespace
-helm install \
-  -n edge1 \
+helm install edge1 \
   --namespace helloworld \
   --set &quot;deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
@@ -202,7 +201,7 @@ kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperatur
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm delete --purge edge1 &amp;&amp; \
+helm del edge1 -n helloworld &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
