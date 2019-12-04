@@ -21,7 +21,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 1. Install IoT Edge Custom Resource Definition (CRD).
 
     ```bash
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
     ```
 
 1. Deploy the edge workload into the previously created K8s namespace.
@@ -31,8 +31,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
     export connStr=replace-with-device-connection-string-from-step-1
 
     # Install edge deployment into the created namespace
-    helm install \
-      -n edge1 \
+    helm install edge1 \
       --namespace helloworld \
       --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.runAsNonRoot=true" \
@@ -54,7 +53,7 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 ```bash
 # Cleanup
-helm delete --purge edge1 && \
+helm del edge1 -n helloworld && \
 kubectl delete ns helloworld
  ```` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).

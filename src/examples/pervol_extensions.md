@@ -23,7 +23,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
     kubectl create ns pv2
 
     # Install IoT Edge CRD
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
@@ -32,8 +32,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 1. Deploy the edge workload into the previously created K8s namespace.
 
     ```bash
-    helm install \
-      -n pv-example2 \
+    helm install pv-example2 \
       --namespace pv2 \
       --set "deviceConnectionString=$connStr" \
       edgek8s/edge-kubernetes
@@ -152,7 +151,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 ```bash
 # Cleanup
-helm delete --purge pv-example2 && \
+helm del pv-example2 -n pv2 && \
 kubectl delete ns pv2
  ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).

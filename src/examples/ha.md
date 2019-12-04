@@ -23,7 +23,7 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
     kubectl create ns ha-iotedged
 
     # Install IoT Edge CRD
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
@@ -32,8 +32,7 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
 1. Specify persistent volume details to use for storing `iotedged` data during workload install.
 
     ```bash
-    helm install \
-      -n ha-example \
+    helm install ha-example \
       --namespace ha-iotedged \
       --set "iotedged.data.persistentVolumeClaim.name=azurefile" \
       --set "iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4" \
@@ -48,8 +47,7 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
 
 ```bash
 # Cleanup
-helm delete --purge ha-example && \
+helm del ha-example -n ha-iotedged && \
 kubectl delete ns ha-iotedged
 ``` 
-
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).

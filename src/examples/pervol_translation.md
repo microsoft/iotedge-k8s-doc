@@ -21,7 +21,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
     kubectl create ns pv1
 
     # Install IoT Edge CRD
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
@@ -30,8 +30,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 1. Specify persistent volume details to use in `edgeAgent` module's environment variables during workload install.
 
     ```bash
-    helm install \
-      -n pv-example1 \
+    helm install pv-example1 \
       --namespace pv1 \
       --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000" \
@@ -140,8 +139,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
 ```bash
 # Cleanup
-helm delete --purge pv-example1 && \
+helm del pv-example1 -n pv1 && \
 kubectl delete ns pv1
  ``` 
-
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).

@@ -17,14 +17,13 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
     kubectl create ns cm
 
     # Install IoT Edge CRD
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
 
     # Install the edge workload into the cluster namespace
-    helm install \
-      -n cm-example \
+    helm install cm-example \
       --namespace cm \
       --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.runAsNonRoot=true" \
@@ -160,7 +159,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 ```bash
 # Cleanup
-helm delete --purge cm-example && \
+helm del cm-example -n cm && \
 kubectl delete ns cm
  ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)

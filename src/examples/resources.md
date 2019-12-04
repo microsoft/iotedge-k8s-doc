@@ -17,14 +17,13 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
     kubectl create ns resources
 
     # Install IoT Edge CRD
-    helm install --name edge-crd edgek8s/edge-kubernetes-crd  
+    helm install edge-crd edgek8s/edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
 
     # Install the edge workload into the cluster namespace
-    helm install \
-      -n resources-example \
+    helm install resources-example \
       --namespace resources \
       --set "deviceConnectionString=$connStr" \
       --set "edgeAgent.env.runAsNonRoot=true" \
@@ -149,7 +148,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 
 ```bash
 # Cleanup
-helm delete --purge resources-example && \
+helm del resources-example -n resources && \
 kubectl delete ns resources
  ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).
