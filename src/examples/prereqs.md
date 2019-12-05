@@ -8,9 +8,9 @@ For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can
 For a local development environment, you can use [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/) or [k3d](https://github.com/rancher/k3d#k3s-in-docker) (recommended).
 
 ## Helm
-Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the **Helm 3** install [insructions](https://helm.sh/docs/intro/install/). 
+Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the **Helm 3** install [instructions](https://helm.sh/docs/intro/install/). 
 
->💡 Helm **3** is recommended for installing IoT Edge charts.
+>💡 Helm 3 is recommended for installing IoT Edge charts
 
 ## kubectl
 [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is an essential tool for interacting with your cluster.
