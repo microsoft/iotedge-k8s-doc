@@ -152,7 +152,65 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#coming-soon---see-repo-docs-a-hrefhttpsgithubcomazureiotedgeblobmasterkubernetesdocrbacmdherea" id="coming-soon---see-repo-docs-a-hrefhttpsgithubcomazureiotedgeblobmasterkubernetesdocrbacmdherea">Coming soon - <em>see repo docs <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/rbac.md">here</a></em></a></h2>
+                        <h1><a class="header" href="#security-architecture" id="security-architecture">Security architecture</a></h1>
+<p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
+<pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
+| ServiceAccount |---+---| ClusterRoleBinding            |------| ClusterRole                          |
+| iotedged       |   |   | iotedge:{name}:auth-delegator |      | system:auth-delegator                |
++----------------+   |   +-------------------------------+      +--------------------------------------+
+                     |   +-------------------------------+      +--------------------------------------+
+                     +---| ClusterRoleBinding [OPTIONAL] |------| ClusterRole [OPTIONAL]               |
+                     |   | iotedge:{name}:node-observer  |      | iotedge:{name}:iotedge:node-observer |
+                     |   +-------------------------------+      +--------------------------------------+
+                     |   +-------------------------------+      +--------------------------------------+
+                     +---| RoleBinding                   |------| Role                                 |
+                         | iotedged                      |      | iotedged                             |
+                         +-------------------------------+      +--------------------------------------+
+
+
++----------------+       +-------------------------------+      +--------------------------------------+
+| ServiceAccount |-------| RoleBinding                   |------| Role                                 |
+| edgeagent      |       | edgeagent                     |      | edgeagent                            |
++----------------+       +-------------------------------+      +--------------------------------------+
+</code></pre>
+<h2><a class="header" href="#iotedged" id="iotedged">iotedged</a></h2>
+<p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">main repository</a>. </p>
+<p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
+<p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
+<ul>
+<li>When reporting system information, it lists nodes and collects all unique types of architecture with number of nodes of this type. </li>
+<li>TokenReview, which is the foundation of module authentication.</li>
+</ul>
+<p>Each installation will create its own ClusterRole and ClusterRoleBinding for iotedged.</p>
+<h2><a class="header" href="#edgeagent" id="edgeagent">EdgeAgent</a></h2>
+<p>EdgeAgent doesn’t need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.</p>
+<h2><a class="header" href="#edgehub-and-modules" id="edgehub-and-modules">EdgeHub and modules</a></h2>
+<p>EdgeHub and other modules shouldn’t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.</p>
+<h1><a class="header" href="#module-authentication" id="module-authentication">Module Authentication</a></h1>
+<p>In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.</p>
+<p>Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as module identity in Kubernetes cluster. It doesn’t require to have any roles associated with it so EdgeAgent doesn’t create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to iotedged as an Authorization bearer token which iotedged reviews against Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.</p>
+<p>For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between iotedged and module container. The trust bundle that iotedged generates during an initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.</p>
+<p>In addition, proxy reads auth token file from mounted pod volume and provide it as an Authorization bearer token with every outgoing request to iotedged.</p>
+<p>From a module point of view, it communicates with iotedged via HTTP and all necessary work to secure connection is taking care of by sidecar proxy.</p>
+<pre><code>+--------------------------------------------------------------------------------+
+| +----------------+                  +----------------------------------------+ |                
+| | +------------+ |                  | +-----------+            +-----------+ | |                
+| | |            | |      HTTPS       | |           |    HTTP    |           | | |                 
+| | |  iotedged  |&lt;--------------------&gt;|   proxy   |&lt;----------&gt;|  ModuleA  | | |                 
+| | |            | |   Authorization  | |           |            |           | | |                 
+| | +------------+ |                  | +-----------+            +-----------+ | |                 
+| | pod   ^        |                  | pod                                    | |                 
+| +-------|--------+                  +----------------------------------------+ |                 
+|         |                                                           namespace  |                  
++---------|----------------------------------------------------------------------+
+          |
+    HTTPS | POST                                                                              
+          | TokenReview                                                                            
+          v                                                                                        
+    +------------+                                                                                 
+    |  Kube API  |                                                                                 
+    +------------+                                                                                 
+</code></pre>
 
                     </main>
 
