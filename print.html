@@ -154,7 +154,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+                        <h2><a class="header" href="#introduction" id="introduction">Introduction</a></h2>
 <p>Azure IoT Edge can integrate with Kubernetes, using it as a resilient, highly available infrastructure layer. It registers an IoT Edge Custom Resource Definition (CRD) with the Kubernetes API Server and provides a CRD controller that reconciles cloud-managed desired state with the local cluster state.</p>
 <p>Module lifetime is managed by the Kubernetes scheduler, which maintains module availability and chooses their placement. IoT Edge manages the edge application platform running on top, continuously reconciling the desired state specified in IoT Hub with the state on the edge cluster. The edge application model is still the familiar model based on IoT Edge modules and routes. The IoT Edge agent performs the role of a CRD controller, automatically <em>translating</em> from IoT Edge application model to Kubernetes native constructs like pods, deployments, services etc.</p>
 <p><img src="./media/k8s_model.png" alt="" /></p>
@@ -163,10 +163,10 @@
 <p>💡</p>
 <p>A good mental model for this integration is to think of Kubernetes as another operating environment IoT Edge applications can run on in addition to Linux and Windows.</p>
 </blockquote>
-<h1><a class="header" href="#architecture-and-initialization-flow" id="architecture-and-initialization-flow">Architecture and initialization flow</a></h1>
+<h2><a class="header" href="#architecture-and-initialization-flow" id="architecture-and-initialization-flow">Architecture and initialization flow</a></h2>
 <p><img src="./media/pp-refresh-k8s.png" alt="" /></p>
 <h2><a class="header" href="#coming-soon" id="coming-soon">Coming soon</a></h2>
-<h1><a class="header" href="#security-architecture" id="security-architecture">Security architecture</a></h1>
+<h2><a class="header" href="#security-architecture" id="security-architecture">Security architecture</a></h2>
 <p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
 <pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
 | ServiceAccount |---+---| ClusterRoleBinding            |------| ClusterRole                          |
@@ -175,7 +175,7 @@
                      |   +-------------------------------+      +--------------------------------------+
                      +---| ClusterRoleBinding [OPTIONAL] |------| ClusterRole [OPTIONAL]               |
                      |   | iotedge:{name}:node-observer  |      | iotedge:{name}:iotedge:node-observer |
-                     |   +-------------------------------+      +--------------------------------------+
+ ###                    |   +-------------------------------+      +--------------------------------------+
                      |   +-------------------------------+      +--------------------------------------+
                      +---| RoleBinding                   |------| Role                                 |
                          | iotedged                      |      | iotedged                             |
@@ -187,7 +187,7 @@
 | edgeagent      |       | edgeagent                     |      | edgeagent                            |
 +----------------+       +-------------------------------+      +--------------------------------------+
 </code></pre>
-<h2><a class="header" href="#iotedged" id="iotedged">iotedged</a></h2>
+<h3><a class="header" href="#iotedged" id="iotedged">iotedged</a></h3>
 <p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">main repository</a>. </p>
 <p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
 <p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
@@ -196,11 +196,11 @@
 <li>TokenReview, which is the foundation of module authentication.</li>
 </ul>
 <p>Each installation will create its own ClusterRole and ClusterRoleBinding for iotedged.</p>
-<h2><a class="header" href="#edgeagent" id="edgeagent">EdgeAgent</a></h2>
+<h3><a class="header" href="#edgeagent" id="edgeagent">EdgeAgent</a></h3>
 <p>EdgeAgent doesn’t need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.</p>
-<h2><a class="header" href="#edgehub-and-modules" id="edgehub-and-modules">EdgeHub and modules</a></h2>
+<h3><a class="header" href="#edgehub-and-modules" id="edgehub-and-modules">EdgeHub and modules</a></h3>
 <p>EdgeHub and other modules shouldn’t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.</p>
-<h1><a class="header" href="#module-authentication" id="module-authentication">Module Authentication</a></h1>
+<h2><a class="header" href="#module-authentication" id="module-authentication">Module Authentication</a></h2>
 <p>In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.</p>
 <p>Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as module identity in Kubernetes cluster. It doesn’t require to have any roles associated with it so EdgeAgent doesn’t create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to iotedged as an Authorization bearer token which iotedged reviews against Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.</p>
 <p>For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between iotedged and module container. The trust bundle that iotedged generates during an initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.</p>
@@ -227,7 +227,110 @@
 </code></pre>
 <h2><a class="header" href="#coming-soon-1" id="coming-soon-1">Coming soon</a></h2>
 <h2><a class="header" href="#coming-soon-2" id="coming-soon-2">Coming soon</a></h2>
-<h2><a class="header" href="#coming-soon---see-repo-docs-a-hrefhttpsgithubcomazureiotedgeblobmasterkubernetesdoccreate-optionsmdherea" id="coming-soon---see-repo-docs-a-hrefhttpsgithubcomazureiotedgeblobmasterkubernetesdoccreate-optionsmdherea">Coming soon - <em>see repo docs <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">here</a></em></a></h2>
+<h2><a class="header" href="#createoptions-extensions" id="createoptions-extensions">createOptions extensions</a></h2>
+<p>As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.</p>
+<p>In order to leverage some useful Kubernetes specific constructs in an IoT Edge deployment manifest, you can use the createOptions extensions feature. This allows you to use native Kubernetes API format to express requirements in a module's createOptions section.</p>
+<p>Here are some key points to take note of regarding this feature:</p>
+<ul>
+<li>
+<p>Only a small subset of Kubernetes appication model, listed below, are supported.</p>
+</li>
+<li>
+<p>When present, the createOptions extensions section is ignored without error when processed by the edgeAgent operating in a non-Kuberenetes mode (i.e. when deployed on a single device with a docker engine).</p>
+</li>
+</ul>
+<h2><a class="header" href="#feature-enabling" id="feature-enabling">Feature enabling</a></h2>
+<p>These options will take effect if both variables <strong>ExperimentalFeatures__Enabled</strong> and <strong>ExperimentalFeatures__EnableK8SExtensions</strong> are set to <strong>true</strong> for edgeAgent when operating in Kubernetes mode. </p>
+<p>These are turned on by default in edgek8s/edge-kubernetes Helm chart.</p>
+<p>Several examples in the <a href="examples.html">tutorials</a> section demonstrate how to use the feature.</p>
+<h2><a class="header" href="#volumes" id="volumes">Volumes</a></h2>
+<p>EdgeAgent allows to mount existing volumes in the namespace from different sources e.g. <code>ConfigMap</code> as a pod <code>Volume</code>.</p>
+<h3><a class="header" href="#create-options" id="create-options">Create Options</a></h3>
+<p>A <code>volumes</code> section of config used to describe how a <code>ConfigMap</code> or any other volume source existing in a namespace will be mounted into module container. The value of this config section is an array of pairs <code>volume</code> and <code>volumeMount</code>. A <code>volume</code> part describes how a specified volume source is mounted to <code>pod</code> and <code>volumeMounts</code> describes a mounting of a <code>volume</code> within a module main container. See <a href="https://kubernetes.io/docs/concepts/storage/volumes/">Volumes</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podspec-v1-core">PodSpec</a> reference for more information.</p>
+<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns values to the <code>pod</code> and <code>container</code> specs. The description of exact structure can be found here for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a>.</p>
+<pre><code class="language-json">{
+  &quot;k8s-experimental&quot;: {
+    &quot;volumes&quot;: [
+      {
+        &quot;volume&quot;: {
+          &quot;name&quot;: &quot;ModuleA&quot;,
+          &quot;configMap&quot;: {
+            &quot;optional&quot;: &quot;true&quot;,
+            &quot;defaultMode&quot;: 420,
+            &quot;items&quot;: [{
+                &quot;key&quot;: &quot;config-file&quot;,
+                &quot;path&quot;: &quot;config.yaml&quot;,
+                &quot;mode&quot;: 420
+            }],
+            &quot;name&quot;: &quot;module-config&quot;
+          }
+        },
+        &quot;volumeMounts&quot;: [
+          {
+            &quot;name&quot;: &quot;module-config&quot;,
+            &quot;mountPath&quot;: &quot;/etc/module/config.yaml&quot;,
+            &quot;mountPropagation&quot;: &quot;None&quot;,
+            &quot;readOnly&quot;: &quot;true&quot;,
+            &quot;subPath&quot;: &quot;&quot; 
+          }
+        ]
+      }
+    ]
+  }
+}
+</code></pre>
+<h2><a class="header" href="#cpu-memory-and-device-resources" id="cpu-memory-and-device-resources">CPU, Memory and Device Resources</a></h2>
+<p>EdgeAgent allows to specify Compute resources for a module container. Edge supports HostConfig CPU and Memory limits. They will be overrriten if a user specifis <code>resources</code> section described below.</p>
+<h3><a class="header" href="#create-options-1" id="create-options-1">Create Options</a></h3>
+<p>A <code>resources</code> section of config used to specify compute resources for an IoT Edge Module container. The value of this section is the same description Kubernetes uses for <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">container spec</a>. In addition to CPU and Memory EdgeAgent operator can specify <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">device</a> limits for a module.</p>
+<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>resources</code> parameter of container spec. The description of exact structure can be found <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core">here</a>.</p>
+<pre><code class="language-json">{
+  &quot;k8s-experimental&quot;: {
+    &quot;resources&quot;: {
+      &quot;limits&quot;: {
+        &quot;memory&quot;: &quot;128Mi&quot;,
+        &quot;cpu&quot;: &quot;500m&quot;,
+        &quot;hardware-vendor.example/foo&quot;: 2
+      },
+      &quot;requests&quot;: {
+        &quot;memory&quot;: &quot;64Mi&quot;,
+        &quot;cpu&quot;: &quot;250m&quot;,
+        &quot;hardware-vendor.example/foo&quot;: 2
+      }
+    }
+  }
+}
+</code></pre>
+<h2><a class="header" href="#assigning-modules-to-nodes" id="assigning-modules-to-nodes">Assigning Modules to Nodes</a></h2>
+<p>EdgeAgent allows to constrain an IoT Edge Module to only be able to run on particular node(s).</p>
+<h3><a class="header" href="#createoptions" id="createoptions">CreateOptions</a></h3>
+<p>A <code>nodeSelector</code> section of config used for node selection constrain. It specifies a map of key-value pairs that corresponds to a key-value pair of node labels. To know more please refer to a <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">corresponding docs</a>.</p>
+<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>nodeSelector</code> parameter of a pod spec.</p>
+<pre><code class="language-json">{
+  &quot;k8s-experimental&quot;: {
+    &quot;nodeSelector&quot;: {
+      &quot;disktype&quot;: &quot;ssd&quot;,
+      &quot;gpu&quot;: &quot;true&quot;
+    }
+  }
+}
+</code></pre>
+<h2><a class="header" href="#apply-pod-security-context" id="apply-pod-security-context">Apply Pod Security Context</a></h2>
+<p>By default EdgeAgent doesn't make any assumptions about pod security context and allows to run containers under the user this container was built. With this section user can specify exact pod security policy module will run with.</p>
+<h3><a class="header" href="#createoptions-1" id="createoptions-1">CreateOptions</a></h3>
+<p>A <code>securityContext</code> section of config used to apply a pod security context to a module pod spec. The section has the same structure as a Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podsecuritycontext-v1-core">Pod spec</a>.</p>
+<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>securityContext</code> parameter of a pod spec.</p>
+<pre><code class="language-json">{
+  &quot;k8s-experimental&quot;: {
+    &quot;securityContext&quot;: {
+      &quot;fsGroup&quot;: &quot;1&quot;,
+      &quot;runAsGroup&quot;: &quot;1001&quot;,
+      &quot;runAsUser&quot;: &quot;1000&quot;,
+      ...
+    }
+  }
+}
+</code></pre>
 <h2><a class="header" href="#coming-soon-3" id="coming-soon-3">Coming soon</a></h2>
 <h2><a class="header" href="#coming-soon-4" id="coming-soon-4">Coming soon</a></h2>
 <h1><a class="header" href="#examples" id="examples">Examples</a></h1>
