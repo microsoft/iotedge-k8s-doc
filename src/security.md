@@ -1,5 +1,5 @@
 
-# Security architecture
+## Security architecture
 
 IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.
 
@@ -11,7 +11,7 @@ IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/d
                      |   +-------------------------------+      +--------------------------------------+
                      +---| ClusterRoleBinding [OPTIONAL] |------| ClusterRole [OPTIONAL]               |
                      |   | iotedge:{name}:node-observer  |      | iotedge:{name}:iotedge:node-observer |
-                     |   +-------------------------------+      +--------------------------------------+
+ ###                    |   +-------------------------------+      +--------------------------------------+
                      |   +-------------------------------+      +--------------------------------------+
                      +---| RoleBinding                   |------| Role                                 |
                          | iotedged                      |      | iotedged                             |
@@ -24,7 +24,7 @@ IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/d
 +----------------+       +-------------------------------+      +--------------------------------------+
 ```
 
-## iotedged
+### iotedged
 
 `iotedged` is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the [main repository](https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml). 
 
@@ -36,15 +36,15 @@ In addition to standard permissions to list, create, delete, update and watch Ku
 
 Each installation will create its own ClusterRole and ClusterRoleBinding for iotedged.
 
-## EdgeAgent
+### EdgeAgent
 
 EdgeAgent doesn’t need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.
 
-## EdgeHub and modules
+### EdgeHub and modules
 
 EdgeHub and other modules shouldn’t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.
 
-# Module Authentication
+## Module Authentication
 
 In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.
 
