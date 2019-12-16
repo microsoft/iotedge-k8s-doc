@@ -152,7 +152,92 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#coming-soon" id="coming-soon">Coming soon</a></h2>
+                        <p>Edge agent can be configured with various environment variables as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expore the service externally using a cloud provider's load balancer </li> <ul></td></tr>
+<tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>
+<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>True</strong> to enable the logging for K8s service API </li> <li><strong>False</strong> to enable the logging for K8s service API </li></td></tr>
+<tr><td>runtimeLogLevel</td><td><ul><li> debug </li> <li> info </li> <li> warn </li> <li> error </li></ul></td></tr>
+<tr><td>upstreamProtocol</td><td><ul><li><strong>Amqp</strong> for AMQP protocol </li>  <li><strong>AmqpWs</strong> for the fallback sceanrio </ul></td></tr>
+<tr><td>runAsNonRoot</td><td><ul><li><strong>True</strong> to run the agent as non-root user </li>  <li><strong>False</strong> to run the agent as root user </li> <ul></td></tr>
+<tr><td>enableK8sExtensions</td><td><ul><li><strong>True</strong> to enable the module's create options with K8s primitvies </li>  <li> <strong>False</strong> to disable the module's create options with K8s primitvies </li> </ul></td></tr>
+<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>True</strong> to enable the experimental features </li> <li> <strong>False</strong> to disable the experimental features </li> </ul></td></tr>
+<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that back persistent storage in modules to use dynamically provisioned PVCs </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that back up the persistent storage in modules to use that PV </ul></td></tr>
+<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
+</tbody></table>
+<h3><a class="header" href="#examples" id="examples">Examples</a></h3>
+<ol>
+<li>Run edge agent as non-root user with experimental features enabled along with K8s extensions</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
+  --set &quot;edgeAgent.env.enableK8sExtensions=true&quot; \
+  --set &quot;edgeAgent.env.enableExperimentalFeatures=true&quot; \
+  --set &quot;edgeAgent.env.backupConfigFilePath=/tmp/backup.json&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+<ol start="2">
+<li>Run edge agent with persistent volume for other modules to use it</li>
+</ol>
+<pre><code class="language-bash">#Create a storage class and use that as Persistent volume 
+helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  --set &quot;edgeAgent.env.storageClassName=azurefile&quot; \
+  edgek8s/edge-kubernetes
+
+#Create a persistent volume in the cluster and set a claim for it
+ helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeName=pv-agent&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  edgek8s/edge-kubernetes          
+</code></pre>
+<ol start="3">
+<li>Run edge agent with different logging options</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.enableK8sServiceCallTracing=true&quot; \
+  --set &quot;edge.Agent.env.runtimeLogLevel=true&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<ol start="4">
+<li>Run edge agent with a different upstream protocol. Default is AmqpWs</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.upStreamProtocol=Amqp&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<ol start="5">
+<li>Expose edge agent with different port map settings</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=LoadBalancer&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=clusterIP&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=NodePort&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
 
                     </main>
 

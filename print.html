@@ -226,7 +226,7 @@
     +------------+                                                                                 
 </code></pre>
 <h2><a class="header" href="#coming-soon-1" id="coming-soon-1">Coming soon</a></h2>
-<h2><a class="header" href="#coming-soon-2" id="coming-soon-2">Coming soon</a></h2>
+<p>##Coming Soon</p>
 <h2><a class="header" href="#createoptions-extensions" id="createoptions-extensions">createOptions extensions</a></h2>
 <p>As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.</p>
 <p>In order to leverage some useful Kubernetes specific constructs in an IoT Edge deployment manifest, you can use the createOptions extensions feature. This allows you to use native Kubernetes API format to express requirements in a module's createOptions section.</p>
@@ -331,9 +331,121 @@
   }
 }
 </code></pre>
-<h2><a class="header" href="#coming-soon-3" id="coming-soon-3">Coming soon</a></h2>
-<h2><a class="header" href="#coming-soon-4" id="coming-soon-4">Coming soon</a></h2>
-<h1><a class="header" href="#examples" id="examples">Examples</a></h1>
+<p>IoT Edge Daemon can be configured with various settings as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>enableGetNodesRBAC</td><td><ul><li><strong>True</strong> to enable node selection for the edge daemon</li> <li><strong>False</strong> to disable node selection for the edge daemon </li></ul></td></tr>
+<tr><td>storageClassName</td><td><ul>Specify the storage class name which backs up the edge daemon for High Availability </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name which backs up the edge daemon for High Availability </ul></td></tr>
+<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim which backs up the edge daemon for High Availability </ul></td></tr>
+</tbody></table>
+<h3><a class="header" href="#examples" id="examples">Examples</a></h3>
+<ol>
+<li>Run edge daemon with persistent volume with storage class</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  --set &quot;iotedged.env.storageClassName=azurefile&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+<ol start="2">
+<li>Run edge daemon with persistent volume claim</li>
+</ol>
+<pre><code class="language-bash"> helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;iotedged.env.persistentVolumeName=pv-iotedged&quot; \
+  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  edgek8s/edge-kubernetes          
+</code></pre>
+<p>Edge agent can be configured with various environment variables as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expore the service externally using a cloud provider's load balancer </li> <ul></td></tr>
+<tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>
+<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>True</strong> to enable the logging for K8s service API </li> <li><strong>False</strong> to enable the logging for K8s service API </li></td></tr>
+<tr><td>runtimeLogLevel</td><td><ul><li> debug </li> <li> info </li> <li> warn </li> <li> error </li></ul></td></tr>
+<tr><td>upstreamProtocol</td><td><ul><li><strong>Amqp</strong> for AMQP protocol </li>  <li><strong>AmqpWs</strong> for the fallback sceanrio </ul></td></tr>
+<tr><td>runAsNonRoot</td><td><ul><li><strong>True</strong> to run the agent as non-root user </li>  <li><strong>False</strong> to run the agent as root user </li> <ul></td></tr>
+<tr><td>enableK8sExtensions</td><td><ul><li><strong>True</strong> to enable the module's create options with K8s primitvies </li>  <li> <strong>False</strong> to disable the module's create options with K8s primitvies </li> </ul></td></tr>
+<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>True</strong> to enable the experimental features </li> <li> <strong>False</strong> to disable the experimental features </li> </ul></td></tr>
+<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that back persistent storage in modules to use dynamically provisioned PVCs </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that back up the persistent storage in modules to use that PV </ul></td></tr>
+<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
+</tbody></table>
+<h3><a class="header" href="#examples-1" id="examples-1">Examples</a></h3>
+<ol>
+<li>Run edge agent as non-root user with experimental features enabled along with K8s extensions</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
+  --set &quot;edgeAgent.env.enableK8sExtensions=true&quot; \
+  --set &quot;edgeAgent.env.enableExperimentalFeatures=true&quot; \
+  --set &quot;edgeAgent.env.backupConfigFilePath=/tmp/backup.json&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+<ol start="2">
+<li>Run edge agent with persistent volume for other modules to use it</li>
+</ol>
+<pre><code class="language-bash">#Create a storage class and use that as Persistent volume 
+helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  --set &quot;edgeAgent.env.storageClassName=azurefile&quot; \
+  edgek8s/edge-kubernetes
+
+#Create a persistent volume in the cluster and set a claim for it
+ helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeName=pv-agent&quot; \
+  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  edgek8s/edge-kubernetes          
+</code></pre>
+<ol start="3">
+<li>Run edge agent with different logging options</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.enableK8sServiceCallTracing=true&quot; \
+  --set &quot;edge.Agent.env.runtimeLogLevel=true&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<ol start="4">
+<li>Run edge agent with a different upstream protocol. Default is AmqpWs</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.upStreamProtocol=Amqp&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<ol start="5">
+<li>Expose edge agent with different port map settings</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=LoadBalancer&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=clusterIP&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;edge.Agent.env.portMappingServiceType=NodePort&quot; \
+  edgek8s/edge-kubernetes  
+</code></pre>
+<h1><a class="header" href="#examples-2" id="examples-2">Examples</a></h1>
 <h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
 <h2><a class="header" href="#a-kubernetes-cluster" id="a-kubernetes-cluster">A Kubernetes cluster</a></h2>
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>

@@ -152,7 +152,34 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#coming-soon" id="coming-soon">Coming soon</a></h2>
+                        <p>IoT Edge Daemon can be configured with various settings as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>enableGetNodesRBAC</td><td><ul><li><strong>True</strong> to enable node selection for the edge daemon</li> <li><strong>False</strong> to disable node selection for the edge daemon </li></ul></td></tr>
+<tr><td>storageClassName</td><td><ul>Specify the storage class name which backs up the edge daemon for High Availability </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name which backs up the edge daemon for High Availability </ul></td></tr>
+<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim which backs up the edge daemon for High Availability </ul></td></tr>
+</tbody></table>
+<h3><a class="header" href="#examples" id="examples">Examples</a></h3>
+<ol>
+<li>Run edge daemon with persistent volume with storage class</li>
+</ol>
+<pre><code class="language-bash">helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  --set &quot;iotedged.env.storageClassName=azurefile&quot; \
+  edgek8s/edge-kubernetes
+</code></pre>
+<ol start="2">
+<li>Run edge daemon with persistent volume claim</li>
+</ol>
+<pre><code class="language-bash"> helm install edge1 \
+  --namespace helloworld \
+  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;iotedged.env.persistentVolumeName=pv-iotedged&quot; \
+  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
+  edgek8s/edge-kubernetes          
+</code></pre>
 
                     </main>
 
