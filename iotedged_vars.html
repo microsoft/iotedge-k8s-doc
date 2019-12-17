@@ -155,9 +155,9 @@
                         <p>IoT Edge Daemon can be configured with various settings as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
 <tr><td>data.enableGetNodesRBAC</td><td><ul><li><strong>true</strong> indicates <code>iotedged</code> has permssions to query node type for the purposes of reporting this value to IoT Hub. Setting to <code>true</code> will attempt to create a <em>NodeObserver</em> cluster role</li><br><br> <li><strong>false</strong> indicates <code>iotedged</code> does not have persmission to query node type information <br><br> Should be set to <code>false</code> if <code>NodeObserver</code> cluster role cannot be created with your access permissions. </li></ul></td></tr>
-<tr><td>data.persistentVolumeClaim.storageClassName</td><td><ul>Sstorage class name which backs up the edge daemon data directory. </ul></td></tr>
-<tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name which backs up the edge daemon data directory. </ul></td></tr>
-<tr><td>data.persistentVolumeClaim.size</td><td><ul>persistent volume claim which backs up the edge daemon data directory </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.storageClassName</td><td><ul>Storage class name that backs iotedged data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name that backs iotedged data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.size</td><td><ul>size, in Mb, of persistent volume claim that backs iotedged data directory </ul></td></tr>
 </tbody></table>
 
                     </main>
