@@ -9,8 +9,9 @@
 - [Reference](./reference.md)
   - [Translations](./translations.md)
   - [createOptions extensions](./createoptions_extensions.md)
-  - [iotedged env variables](./iotedged_vars.md)
-  - [edgeagent env variables](./edgeagent_vars.md)
+  - [Helm chart install options](./helmOptions.md)
+    - [iotedged](./iotedged_vars.md)
+    - [edgeagent](./edgeagent_vars.md)
 ------------------------------------------------------------------------------------
 - [Tutorials](./examples.md)
   - [Prerequisites](./examples/prereqs.md)
