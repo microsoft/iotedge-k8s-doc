@@ -4,7 +4,7 @@
 - [Architecture](./architecture.md)
   - [Multi-tenancy](./multitenancy.md)
   - [Security](./security.md)
-  - [Scaling](./scaling.md)
+  - [HA and scaling](./scaling.md)
 ------------------------------------------------------------------------------------
 - [Reference](./reference.md)
   - [Translations](./translations.md)
