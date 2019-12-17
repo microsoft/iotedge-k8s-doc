@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>edgeagent env variables - Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        <title>edgeagent - Deploy Azure IoT Edge on Kubernetes (preview)</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li class="expanded "><a href="edgeagent_vars.html" class="active"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="edgeagent_vars.html" class="active"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -154,90 +154,18 @@
                     <main>
                         <p>Edge agent can be configured with various environment variables as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
-<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expore the service externally using a cloud provider's load balancer </li> <ul></td></tr>
+<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expose the service externally using a cloud provider's load balancer </li> <ul></td></tr>
 <tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>
-<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>True</strong> to enable the logging for K8s service API </li> <li><strong>False</strong> to enable the logging for K8s service API </li></td></tr>
+<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>true</strong> to enable the logging for K8s service API </li> <li><strong>false</strong> to enable the logging for K8s service API </li></td></tr>
 <tr><td>runtimeLogLevel</td><td><ul><li> debug </li> <li> info </li> <li> warn </li> <li> error </li></ul></td></tr>
 <tr><td>upstreamProtocol</td><td><ul><li><strong>Amqp</strong> for AMQP protocol </li>  <li><strong>AmqpWs</strong> for the fallback sceanrio </ul></td></tr>
-<tr><td>runAsNonRoot</td><td><ul><li><strong>True</strong> to run the agent as non-root user </li>  <li><strong>False</strong> to run the agent as root user </li> <ul></td></tr>
-<tr><td>enableK8sExtensions</td><td><ul><li><strong>True</strong> to enable the module's create options with K8s primitvies </li>  <li> <strong>False</strong> to disable the module's create options with K8s primitvies </li> </ul></td></tr>
-<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>True</strong> to enable the experimental features </li> <li> <strong>False</strong> to disable the experimental features </li> </ul></td></tr>
-<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that back persistent storage in modules to use dynamically provisioned PVCs </ul></td></tr>
-<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that back up the persistent storage in modules to use that PV </ul></td></tr>
+<tr><td>runAsNonRoot</td><td><ul><li><strong>true</strong> starts all modules as a non-root user (uid 1000) </li>  <li><strong>false</strong> starts all module per user specfied in Dockerfile (docker defaults to <code>root</code> if no user is specified in Dockerfile) </li> <ul></td></tr>
+<tr><td>enableK8sExtensions</td><td><ul><li><strong>true</strong> to enable the module's create options with K8s primitvies </li>  <li> <strong>false</strong> to disable the module's create options with K8s primitives </li> </ul></td></tr>
+<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>true</strong> to enable the experimental features </li> <li> <strong>false</strong> to disable the experimental features </li> </ul></td></tr>
+<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that backs persistent storage in modules to use dynamically provisioned PVCs. <br><br> When the edgeAgent is started with this option, any module that specifies a docker mount of type <code>volume</code> will be backed by a dynamically created PVC. </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that backs up the persistent storage in modules to use that PV </ul></td></tr>
 <tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
 </tbody></table>
-<h3><a class="header" href="#examples" id="examples">Examples</a></h3>
-<ol>
-<li>Run edge agent as non-root user with experimental features enabled along with K8s extensions</li>
-</ol>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  --set &quot;edgeAgent.env.enableK8sExtensions=true&quot; \
-  --set &quot;edgeAgent.env.enableExperimentalFeatures=true&quot; \
-  --set &quot;edgeAgent.env.backupConfigFilePath=/tmp/backup.json&quot; \
-  edgek8s/edge-kubernetes
-</code></pre>
-<ol start="2">
-<li>Run edge agent with persistent volume for other modules to use it</li>
-</ol>
-<pre><code class="language-bash">#Create a storage class and use that as Persistent volume 
-helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
-  --set &quot;edgeAgent.env.storageClassName=azurefile&quot; \
-  edgek8s/edge-kubernetes
-
-#Create a persistent volume in the cluster and set a claim for it
- helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.persistentVolumeName=pv-agent&quot; \
-  --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
-  edgek8s/edge-kubernetes          
-</code></pre>
-<ol start="3">
-<li>Run edge agent with different logging options</li>
-</ol>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edge.Agent.env.enableK8sServiceCallTracing=true&quot; \
-  --set &quot;edge.Agent.env.runtimeLogLevel=true&quot; \
-  edgek8s/edge-kubernetes  
-</code></pre>
-<ol start="4">
-<li>Run edge agent with a different upstream protocol. Default is AmqpWs</li>
-</ol>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edge.Agent.env.upStreamProtocol=Amqp&quot; \
-  edgek8s/edge-kubernetes  
-</code></pre>
-<ol start="5">
-<li>Expose edge agent with different port map settings</li>
-</ol>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edge.Agent.env.portMappingServiceType=LoadBalancer&quot; \
-  edgek8s/edge-kubernetes  
-</code></pre>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edge.Agent.env.portMappingServiceType=clusterIP&quot; \
-  edgek8s/edge-kubernetes  
-</code></pre>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edge.Agent.env.portMappingServiceType=NodePort&quot; \
-  edgek8s/edge-kubernetes  
-</code></pre>
 
                     </main>
 

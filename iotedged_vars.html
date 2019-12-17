@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>iotedged env variables - Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        <title>iotedged - Deploy Azure IoT Edge on Kubernetes (preview)</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="iotedged_vars.html" class="active"><strong aria-hidden="true">3.3.</strong> iotedged env variables</a></li><li class="expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">3.4.</strong> edgeagent env variables</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> Scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="iotedged_vars.html" class="active"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -154,39 +154,18 @@
                     <main>
                         <p>IoT Edge Daemon can be configured with various settings as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
-<tr><td>enableGetNodesRBAC</td><td><ul><li><strong>True</strong> to enable node selection for the edge daemon</li> <li><strong>False</strong> to disable node selection for the edge daemon </li></ul></td></tr>
-<tr><td>storageClassName</td><td><ul>Specify the storage class name which backs up the edge daemon for High Availability </ul></td></tr>
-<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name which backs up the edge daemon for High Availability </ul></td></tr>
-<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim which backs up the edge daemon for High Availability </ul></td></tr>
+<tr><td>data.enableGetNodesRBAC</td><td><ul><li><strong>true</strong> indicates <code>iotedged</code> has permssions to query node type for the purposes of reporting this value to IoT Hub. Setting to <code>true</code> will attempt to create a <em>NodeObserver</em> cluster role</li><br><br> <li><strong>false</strong> indicates <code>iotedged</code> does not have persmission to query node type information <br><br> Should be set to <code>false</code> if <code>NodeObserver</code> cluster role cannot be created with your access permissions. </li></ul></td></tr>
+<tr><td>data.persistentVolumeClaim.storageClassName</td><td><ul>Sstorage class name which backs up the edge daemon data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name which backs up the edge daemon data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.size</td><td><ul>persistent volume claim which backs up the edge daemon data directory </ul></td></tr>
 </tbody></table>
-<h3><a class="header" href="#examples" id="examples">Examples</a></h3>
-<ol>
-<li>Run edge daemon with persistent volume with storage class</li>
-</ol>
-<pre><code class="language-bash">helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
-  --set &quot;iotedged.env.storageClassName=azurefile&quot; \
-  edgek8s/edge-kubernetes
-</code></pre>
-<ol start="2">
-<li>Run edge daemon with persistent volume claim</li>
-</ol>
-<pre><code class="language-bash"> helm install edge1 \
-  --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;iotedged.env.persistentVolumeName=pv-iotedged&quot; \
-  --set &quot;iotedged.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
-  edgek8s/edge-kubernetes          
-</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="createoptions_extensions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="helmOptions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
@@ -204,7 +183,7 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="createoptions_extensions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="helmOptions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
