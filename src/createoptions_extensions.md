@@ -59,6 +59,8 @@ A `volumes` section of config used to describe how a `ConfigMap` or any other vo
   }
 }
 ```
+Note, when a volume is specified as "ReadWriteOnce", there is an known issue that the module with the ReadWriteOnce volume mounted can be stuck at crash backoff loop state when updating through a new deployment. 
+To workaround, one has to delete the module and re-deploy with the new setting(s). 
 
 ## CPU, Memory and Device Resources
 
