@@ -157,11 +157,14 @@
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>
 <p>For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can stand one up using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">AKS QuickStart</a> instructions.</p>
 <p>For a local development environment, you can use <a href="https://kubernetes.io/docs/setup/learning-environment/minikube/">Minikube</a> or <a href="https://github.com/rancher/k3d#k3s-in-docker">k3d</a> (recommended).</p>
-<h2><a class="header" href="#helm" id="helm">Helm</a></h2>
-<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
+<h2><a class="header" href="#persistent-storage-for-the-iot-edge-daemon-iotedged" id="persistent-storage-for-the-iot-edge-daemon-iotedged">Persistent storage for the IoT Edge daemon (iotedged)</a></h2>
+<p>IoT Edge has a stateful architecture. Even if the workload modules are stateless, at a minimum, the context store for <code>iotedged</code> pod should be backed by non-ephemeral storage. Barring first-class support for native persistent volumes in your distribution, the <a href="https://github.com/rancher/local-path-provisioner">local-path-provisioner</a> provides a convenient way to utilize device local storage as a persistent store in a Kubernetes-native manner. For multi-node setup with node failure resilience, see the <a href="../scaling.html#what-is-supported">HA and scaling</a> section.</p>
 <blockquote>
-<p>💡 Helm 3 is recommended for installing IoT Edge charts</p>
+<p>💣</p>
+<p>For simplicity, most tutorials that follow don't specify a persistent store for <code>iotedged</code> during install. However, for any serious/PoC deployment, follow the best practice example shown in step 6 of <a href="./ha.html#setup-steps">node failure resilience tutorial</a> <em>even in a single node setup</em> (you can use any persistent volume or storage class, not just <code>azurefile</code>).</p>
 </blockquote>
+<h2><a class="header" href="#helm-3" id="helm-3">Helm 3</a></h2>
+<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
 <h2><a class="header" href="#kubectl" id="kubectl">kubectl</a></h2>
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is an essential tool for interacting with your cluster.</p>
 <h2><a class="header" href="#visual-studio-code" id="visual-studio-code">Visual Studio Code</a></h2>

@@ -228,10 +228,19 @@
     +------------+                                                                                 
 </code></pre>
 <h2><a class="header" href="#high-availability-and-scaling" id="high-availability-and-scaling">High availability and scaling</a></h2>
-<p>While IoT Edge on Kubernetes does provide resilience to node failure, it does <strong>not</strong> yet provide high availablity with manual or auto scaling per the usual Kubernetes definition. In other words, all modules deployed via IoT Edge are currently <em>singletons</em> - only single instances are supported.</p>
-<p>The primary reason for this is that IoT Edge couples the application model (based on Docker API) with an opinionated programming model (based on Azure IoT SDK). While it is certainly possible to deploy modules that do not use IoT SDK using IoT Edge, each module gets an IoT Hub identity anyway even if it doesn't use it.</p>
-<p>The ability to dynamically create new module identities when multiple replicas are requested is not yet implemented. This is because the programming model is optimized for in-order message delivery which is important for many IoT scenarios. IoT Edge's in-order message delivery guarantee combined with multiple module replicas is challenging to implement and needs careful design. We intend to explore this use case in the future.</p>
-<p>It is however possible to scale modules <em>mechanically</em> by specifing modules with different <code>moduleId</code>s but same container image in the IoT Edge deployment and fronting them with an ingress controller at a cluster level.</p>
+<h3><a class="header" href="#what-is-supported" id="what-is-supported">What is supported</a></h3>
+<p><strong>Resilience to node failure</strong> </p>
+<p>As IoT Edge uses Kubernetes native constructs like Deployments, it benefits from inherent platform capabilities (when configured for HA) to keep workloads running by moving them off unhealthy nodes to healthy ones. This avoids having a single point of failure for mission critical edge workloads.</p>
+<blockquote>
+<p>⚠️</p>
+<p>To avoid data/context loss in the event of a node failure, Kubernetes needs to be configured to use remote or replicated (non local-only) storage providers. Public cloud vendors like Azure and most managed Kubernetes distributions provide a first-class solution for this. For a custom setup there are a number of OSS providers like NFS, Rook, OpenEBS etc. Read this CNCF <a href="https://www.cncf.io/blog/2018/04/19/container-attached-storage-a-primer/">blogpost</a> to learn more, and see some of <a href="https://kubernetes.io/docs/concepts/storage/">providers that are supported</a>.</p>
+</blockquote>
+<p><strong>Scaling by adding modules to the deployment manifest</strong></p>
+<p>It is possible to scale edge modules <em>mechanically</em> by specifying modules with different IDs but same container image in the same IoT Edge deployment and fronting them with a reverse proxy.</p>
+<h3><a class="header" href="#what-is-not-supported" id="what-is-not-supported">What is not supported</a></h3>
+<p>IoT Edge on Kubernetes does not yet provide high availability with manual or auto scaling per the usual Kubernetes definition. In other words, all modules deployed via IoT Edge are currently <em>singletons</em> - only single instances are supported. </p>
+<p>The primary reason for this is that IoT Edge couples the application model based on Docker API with an opinionated programming model based on Azure IoT SDK. The programming model is optimized for in-order message delivery which is important for many IoT scenarios. While it is certainly possible to deploy modules that do not use IoT SDK using IoT Edge, each module gets an IoT Hub identity anyway even if it doesn't use it.</p>
+<p>The ability to dynamically create new module identities when multiple replicas are requested is not yet implemented. IoT Edge's in-order message delivery guarantee combined with multiple module replicas is challenging to implement and needs careful design. We intend to explore this use case in the future.</p>
 <p>Azure IoT Edge was originally designed for running on a standalone system. Now with IoT Edge on 
 Kubernetes, Azure IoT Edge supports deployments of IoT Edge devices on a Kubernetes cluster. 
 The expectation is that these edge deployments running on a single node will &quot;just work&quot; 
@@ -657,11 +666,14 @@ To workaround, one has to delete the module and re-deploy with the new setting(s
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>
 <p>For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can stand one up using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">AKS QuickStart</a> instructions.</p>
 <p>For a local development environment, you can use <a href="https://kubernetes.io/docs/setup/learning-environment/minikube/">Minikube</a> or <a href="https://github.com/rancher/k3d#k3s-in-docker">k3d</a> (recommended).</p>
-<h2><a class="header" href="#helm" id="helm">Helm</a></h2>
-<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
+<h2><a class="header" href="#persistent-storage-for-the-iot-edge-daemon-iotedged" id="persistent-storage-for-the-iot-edge-daemon-iotedged">Persistent storage for the IoT Edge daemon (iotedged)</a></h2>
+<p>IoT Edge has a stateful architecture. Even if the workload modules are stateless, at a minimum, the context store for <code>iotedged</code> pod should be backed by non-ephemeral storage. Barring first-class support for native persistent volumes in your distribution, the <a href="https://github.com/rancher/local-path-provisioner">local-path-provisioner</a> provides a convenient way to utilize device local storage as a persistent store in a Kubernetes-native manner. For multi-node setup with node failure resilience, see the <a href="examples/../scaling.html#what-is-supported">HA and scaling</a> section.</p>
 <blockquote>
-<p>💡 Helm 3 is recommended for installing IoT Edge charts</p>
+<p>💣</p>
+<p>For simplicity, most tutorials that follow don't specify a persistent store for <code>iotedged</code> during install. However, for any serious/PoC deployment, follow the best practice example shown in step 6 of <a href="examples/./ha.html#setup-steps">node failure resilience tutorial</a> <em>even in a single node setup</em> (you can use any persistent volume or storage class, not just <code>azurefile</code>).</p>
 </blockquote>
+<h2><a class="header" href="#helm-3" id="helm-3">Helm 3</a></h2>
+<p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
 <h2><a class="header" href="#kubectl" id="kubectl">kubectl</a></h2>
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is an essential tool for interacting with your cluster.</p>
 <h2><a class="header" href="#visual-studio-code" id="visual-studio-code">Visual Studio Code</a></h2>
