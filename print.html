@@ -687,32 +687,26 @@ To workaround, one has to delete the module and re-deploy with the new setting(s
 <p><a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">Register an IoT Edge device</a> and <a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#deploy-a-module">deploy the simulated temperature sensor module</a>. Be sure to note the device's connection string.</p>
 </li>
 <li>
-<p>Add and prepare the IoT Edge Helm repo.</p>
-<pre><code class="language-bash">helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update  
-</code></pre>
-</li>
-<li>
 <p>Create a Kubernetes namespace to install the edge deployment into.</p>
 <pre><code class="language-bash">kubectl create ns helloworld
 </code></pre>
 </li>
 <li>
 <p>Install IoT Edge Custom Resource Definition (CRD).</p>
-<pre><code class="language-bash">helm install edge-crd edgek8s/edge-kubernetes-crd  
+<pre><code class="language-bash">helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd  
 </code></pre>
 </li>
 <li>
 <p>Deploy the edge workload into the previously created K8s namespace.</p>
-<pre><code class="language-bash"># Store the device connection string a variable
+<pre><code class="language-bash">
+# Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install edge deployment into the created namespace
-helm install edge1 \
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge1 edge-kubernetes \
   --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 <blockquote>
 <p><em>Setting the <code>runAsNonRoot</code> edgeAgent env variable causes all IoT Edge modules to be launched in containers using a non-root user account for improved security. The edgeAgent is always started in a container as a non-root user.</em></p>
@@ -734,8 +728,8 @@ kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <h2><a class="header" href="#using-kubernetes-persistent-volumes" id="using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
-<p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while perserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
-<p>IoT Edge modules can leverage persistent volumes impictly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
+<p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while preserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
+<p>IoT Edge modules can leverage persistent volumes implicitly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
 <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>implicitly</em> via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3><a class="header" href="#setup-steps-1" id="setup-steps-1">Setup steps</a></h3>
 <ol>
@@ -753,29 +747,27 @@ kubectl delete ns helloworld
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns pv1
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
+
 </code></pre>
 </li>
 <li>
 <p>Specify persistent volume details to use in <code>edgeAgent</code> module's environment variables during workload install.</p>
-<pre><code class="language-bash">helm install pv-example1 \
+<pre><code class="language-bash">
+helm install --repo https://edgek8s.blob.core.windows.net/staging pv-example1 edge-kubernetes \
   --namespace pv1 \
-  --set &quot;deviceConnectionString=$connStr&quot; \
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot; \
   --set &quot;edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000&quot; \
-  --set &quot;edgeAgent.env.storageClassName=azurefile&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;edgeAgent.env.storageClassName=azurefile&quot;
+
 </code></pre>
 <blockquote>
 <p><em>With these install options, any edge workload module that specifies a bind type of <code>volume</code> in the <strong>createOptions</strong> <code>HostConfig</code> section will be backed by a persistent volume <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim">claim</a> on the provided <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">StorageClass</a>.</em></p>
@@ -816,7 +808,7 @@ export connStr=replace-with-device-connection-string-from-step-1
             &quot;status&quot;: &quot;running&quot;,
             &quot;restartPolicy&quot;: &quot;always&quot;,
             &quot;settings&quot;: {
-              &quot;image&quot;: &quot;veyalla/eh-nonetbind:latest&quot;,
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-hub:1.0&quot;,
               &quot;createOptions&quot;: {
 +               &quot;Env&quot;: [
 +                 &quot;storageFolder=/storage&quot;
@@ -900,26 +892,25 @@ kubectl delete ns pv1
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns pv2
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd  
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
+
 </code></pre>
 </li>
 <li>
 <p>Deploy the edge workload into the previously created K8s namespace.</p>
-<pre><code class="language-bash">helm install pv-example2 \
+<pre><code class="language-bash">
+helm install --repo https://edgek8s.blob.core.windows.net/staging pv-example2 edge-kubernetes \
   --namespace pv2 \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -1046,25 +1037,21 @@ kubectl delete ns pv2
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns cm
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install the edge workload into the cluster namespace
-helm install cm-example \
+helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edge-kubernetes \
   --namespace cm \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -1213,29 +1200,28 @@ kubectl delete ns cm
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
-kubectl create ns ha-iotedged
+kubectl create ns pv-iotedged
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
+
 </code></pre>
 </li>
 <li>
 <p>Specify persistent volume details to use for storing <code>iotedged</code> data during workload install.</p>
-<pre><code class="language-bash">helm install ha-example \
-  --namespace ha-iotedged \
+<pre><code class="language-bash">
+helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
+  --namespace pv-iotedged \
   --set &quot;iotedged.data.persistentVolumeClaim.name=azurefile&quot; \
   --set &quot;iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4&quot; \
   --set &quot;iotedged.data.persistentVolumeClaim.size=64m&quot; \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -1244,8 +1230,8 @@ export connStr=replace-with-device-connection-string-from-step-1
 </ol>
 <h3><a class="header" href="#cleanup-4" id="cleanup-4">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm del ha-example -n ha-iotedged &amp;&amp; \
-kubectl delete ns ha-iotedged
+helm del pv-iotedged-example -n pv-iotedged &amp;&amp; \
+kubectl delete ns pv-iotedged
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).</p>
 <p>This example demostrates how you can use <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes resources</a> in an IoT Edge workload deployment manifest.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
@@ -1259,25 +1245,21 @@ kubectl delete ns ha-iotedged
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns resources
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install the edge workload into the cluster namespace
-helm install resources-example \
+helm install --repo https://edgek8s.blob.core.windows.net/staging resources-example edge-kubernetes \
   --namespace resources \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -1380,7 +1362,8 @@ helm install resources-example \
 </li>
 <li>
 <p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the resources defined deployment manifest.</p>
-<pre><code class="language-bash"># Get pod names
+<pre><code class="language-bash">
+# Get pod names
 kubectl get pods -n resources
 
 # Save edgehub pod name in env var
@@ -1393,9 +1376,11 @@ kubectl describe pod --namespace=resources $ehname
 </li>
 </ol>
 <h3><a class="header" href="#cleanup-5" id="cleanup-5">Cleanup</a></h3>
-<pre><code class="language-bash"># Cleanup
+<pre><code class="language-bash">
+# Cleanup
 helm del resources-example -n resources &amp;&amp; \
 kubectl delete ns resources
+
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 

@@ -163,25 +163,21 @@
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns resources
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install the edge workload into the cluster namespace
-helm install resources-example \
+helm install --repo https://edgek8s.blob.core.windows.net/staging resources-example edge-kubernetes \
   --namespace resources \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -284,7 +280,8 @@ helm install resources-example \
 </li>
 <li>
 <p>In a few seconds, you'll see a new <code>edgeHub</code> pod instantiated with the resources defined deployment manifest.</p>
-<pre><code class="language-bash"># Get pod names
+<pre><code class="language-bash">
+# Get pod names
 kubectl get pods -n resources
 
 # Save edgehub pod name in env var
@@ -297,9 +294,11 @@ kubectl describe pod --namespace=resources $ehname
 </li>
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
-<pre><code class="language-bash"># Cleanup
+<pre><code class="language-bash">
+# Cleanup
 helm del resources-example -n resources &amp;&amp; \
 kubectl delete ns resources
+
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 

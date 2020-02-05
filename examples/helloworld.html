@@ -159,32 +159,26 @@
 <p><a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">Register an IoT Edge device</a> and <a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#deploy-a-module">deploy the simulated temperature sensor module</a>. Be sure to note the device's connection string.</p>
 </li>
 <li>
-<p>Add and prepare the IoT Edge Helm repo.</p>
-<pre><code class="language-bash">helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update  
-</code></pre>
-</li>
-<li>
 <p>Create a Kubernetes namespace to install the edge deployment into.</p>
 <pre><code class="language-bash">kubectl create ns helloworld
 </code></pre>
 </li>
 <li>
 <p>Install IoT Edge Custom Resource Definition (CRD).</p>
-<pre><code class="language-bash">helm install edge-crd edgek8s/edge-kubernetes-crd  
+<pre><code class="language-bash">helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd  
 </code></pre>
 </li>
 <li>
 <p>Deploy the edge workload into the previously created K8s namespace.</p>
-<pre><code class="language-bash"># Store the device connection string a variable
+<pre><code class="language-bash">
+# Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install edge deployment into the created namespace
-helm install edge1 \
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge1 edge-kubernetes \
   --namespace helloworld \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 <blockquote>
 <p><em>Setting the <code>runAsNonRoot</code> edgeAgent env variable causes all IoT Edge modules to be launched in containers using a non-root user account for improved security. The edgeAgent is always started in a container as a non-root user.</em></p>

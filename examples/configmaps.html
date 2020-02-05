@@ -163,25 +163,21 @@
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
 kubectl create ns cm
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
 
 # Install the edge workload into the cluster namespace
-helm install cm-example \
+helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edge-kubernetes \
   --namespace cm \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.runAsNonRoot=true&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>

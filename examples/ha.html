@@ -170,29 +170,28 @@
 </li>
 <li>
 <p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
-<pre><code class="language-bash"># Add IoT Edge repo
-helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-helm repo update
-
+<pre><code class="language-bash">
 # Create K8s namespace
-kubectl create ns ha-iotedged
+kubectl create ns pv-iotedged
 
-# Install IoT Edge CRD
-helm install edge-crd edgek8s/edge-kubernetes-crd  
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string a variable
 export connStr=replace-with-device-connection-string-from-step-1
+
 </code></pre>
 </li>
 <li>
 <p>Specify persistent volume details to use for storing <code>iotedged</code> data during workload install.</p>
-<pre><code class="language-bash">helm install ha-example \
-  --namespace ha-iotedged \
+<pre><code class="language-bash">
+helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
+  --namespace pv-iotedged \
   --set &quot;iotedged.data.persistentVolumeClaim.name=azurefile&quot; \
   --set &quot;iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4&quot; \
   --set &quot;iotedged.data.persistentVolumeClaim.size=64m&quot; \
-  --set &quot;deviceConnectionString=$connStr&quot; \
-  edgek8s/edge-kubernetes
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+
 </code></pre>
 </li>
 <li>
@@ -201,8 +200,8 @@ export connStr=replace-with-device-connection-string-from-step-1
 </ol>
 <h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
-helm del ha-example -n ha-iotedged &amp;&amp; \
-kubectl delete ns ha-iotedged
+helm del pv-iotedged-example -n pv-iotedged &amp;&amp; \
+kubectl delete ns pv-iotedged
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).</p>
 
