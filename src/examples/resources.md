@@ -9,25 +9,21 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
     ```bash
-    # Add IoT Edge repo
-    helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-    helm repo update
 
     # Create K8s namespace
     kubectl create ns resources
 
-    # Install IoT Edge CRD
-    helm install edge-crd edgek8s/edge-kubernetes-crd  
+    # Install IoT Edge CRD, if not already installed
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
 
     # Install the edge workload into the cluster namespace
-    helm install resources-example \
+    helm install --repo https://edgek8s.blob.core.windows.net/staging resources-example edge-kubernetes \
       --namespace resources \
-      --set "deviceConnectionString=$connStr" \
-      --set "edgeAgent.env.runAsNonRoot=true" \
-      edgek8s/edge-kubernetes
+      --set "provisioning.deviceConnectionString=$connStr"
+
     ```
 
 1. In the Visual Studio Code command palette (View menu -> Command Palette...), search for and select **Azure IoT Edge: New IoT Edge Solution**. Follow the prompts and use the following values to create your solution: 
@@ -133,6 +129,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 1. In a few seconds, you'll see a new `edgeHub` pod instantiated with the resources defined deployment manifest.
 
     ```bash
+
     # Get pod names
     kubectl get pods -n resources
 
@@ -147,8 +144,10 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 ### Cleanup
 
 ```bash
+
 # Cleanup
 helm del resources-example -n resources && \
 kubectl delete ns resources
+
  ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).

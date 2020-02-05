@@ -13,30 +13,28 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
     ```bash
-    # Add IoT Edge repo
-    helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-    helm repo update
 
     # Create K8s namespace
     kubectl create ns pv1
 
-    # Install IoT Edge CRD
-    helm install edge-crd edgek8s/edge-kubernetes-crd  
+    # Install IoT Edge CRD, if not already installed
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
+
     ```
 
 1. Specify persistent volume details to use in `edgeAgent` module's environment variables during workload install.
 
     ```bash
-    helm install pv-example1 \
+
+    helm install --repo https://edgek8s.blob.core.windows.net/staging pv-example1 edge-kubernetes \
       --namespace pv1 \
-      --set "deviceConnectionString=$connStr" \
+      --set "provisioning.deviceConnectionString=$connStr" \
       --set "edgeAgent.env.persistentVolumeClaimDefaultSizeInMb=5000" \
-      --set "edgeAgent.env.storageClassName=azurefile" \
-      --set "edgeAgent.env.runAsNonRoot=true" \
-      edgek8s/edge-kubernetes
+      --set "edgeAgent.env.storageClassName=azurefile"
+
     ```
 
     >*With these install options, any edge workload module that specifies a bind type of `volume` in the **createOptions** `HostConfig` section will be backed by a persistent volume [claim](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim) on the provided [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/).*
@@ -79,7 +77,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
                 "status": "running",
                 "restartPolicy": "always",
                 "settings": {
-                  "image": "veyalla/eh-nonetbind:latest",
+                  "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
                   "createOptions": {
     +               "Env": [
     +                 "storageFolder=/storage"

@@ -15,27 +15,26 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
     ```bash
-    # Add IoT Edge repo
-    helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-    helm repo update
 
     # Create K8s namespace
     kubectl create ns pv2
 
-    # Install IoT Edge CRD
-    helm install edge-crd edgek8s/edge-kubernetes-crd  
+    # Install IoT Edge CRD, if not already installed
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd  
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
+
     ```
 
 1. Deploy the edge workload into the previously created K8s namespace.
 
     ```bash
-    helm install pv-example2 \
+
+    helm install --repo https://edgek8s.blob.core.windows.net/staging pv-example2 edge-kubernetes \
       --namespace pv2 \
-      --set "deviceConnectionString=$connStr" \
-      edgek8s/edge-kubernetes
+      --set "provisioning.deviceConnectionString=$connStr"
+
     ```
 
 1. In the Visual Studio Code command palette (View menu -> Command Palette...), search for and select **Azure IoT Edge: New IoT Edge Solution**. Follow the prompts and use the following values to create your solution: 

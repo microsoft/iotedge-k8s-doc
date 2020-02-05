@@ -4,14 +4,6 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 1. [Register an IoT Edge device](https://docs.microsoft.com/azure/iot-edge/quickstart-linux#register-an-iot-edge-device) and [deploy the simulated temperature sensor module](https://docs.microsoft.com/azure/iot-edge/quickstart-linux#deploy-a-module). Be sure to note the device's connection string.
 
-1. Add and prepare the IoT Edge Helm repo.
-
-    ```bash
-    helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-    helm repo update  
-    ```
-
-
 1. Create a Kubernetes namespace to install the edge deployment into.
 
     ```bash
@@ -21,21 +13,21 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 1. Install IoT Edge Custom Resource Definition (CRD).
 
     ```bash
-    helm install edge-crd edgek8s/edge-kubernetes-crd  
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd  
     ```
 
 1. Deploy the edge workload into the previously created K8s namespace.
 
     ```bash
+
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
 
     # Install edge deployment into the created namespace
-    helm install edge1 \
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge1 edge-kubernetes \
       --namespace helloworld \
-      --set "deviceConnectionString=$connStr" \
-      --set "edgeAgent.env.runAsNonRoot=true" \
-      edgek8s/edge-kubernetes
+      --set "provisioning.deviceConnectionString=$connStr"
+
     ```
 
     >*Setting the `runAsNonRoot` edgeAgent env variable causes all IoT Edge modules to be launched in containers using a non-root user account for improved security. The edgeAgent is always started in a container as a non-root user.*

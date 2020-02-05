@@ -15,31 +15,30 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
     ```bash
-    # Add IoT Edge repo
-    helm repo add edgek8s https://edgek8s.blob.core.windows.net/staging  
-    helm repo update
 
     # Create K8s namespace
-    kubectl create ns ha-iotedged
+    kubectl create ns pv-iotedged
 
-    # Install IoT Edge CRD
-    helm install edge-crd edgek8s/edge-kubernetes-crd  
+    # Install IoT Edge CRD, if not already installed
+    helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
     # Store the device connection string a variable
     export connStr=replace-with-device-connection-string-from-step-1
+
     ```
 
 1. Specify persistent volume details to use for storing `iotedged` data during workload install.
 
     ```bash
-    helm install ha-example \
-      --namespace ha-iotedged \
+
+    helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
+      --namespace pv-iotedged \
       --set "iotedged.data.persistentVolumeClaim.name=azurefile" \
       --set "iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4" \
       --set "iotedged.data.persistentVolumeClaim.size=64m" \
-      --set "deviceConnectionString=$connStr" \
-      edgek8s/edge-kubernetes
-    ```
+      --set "provisioning.deviceConnectionString=$connStr"
+
+   ```
 
 1. In addition to `iotedged`, the `edgeHub` module's message store should also be a backed by a persistent volume to prevent data loss when deployed in a Kubernetes environment. See [this tutorial](pervol_extensions.html) for the steps on how to do this.
 
@@ -47,7 +46,7 @@ This example demostrates how to back the `iotedged` pod using persistent volumes
 
 ```bash
 # Cleanup
-helm del ha-example -n ha-iotedged && \
-kubectl delete ns ha-iotedged
+helm del pv-iotedged-example -n pv-iotedged && \
+kubectl delete ns pv-iotedged
 ``` 
  ...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).
