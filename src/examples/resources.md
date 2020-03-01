@@ -83,7 +83,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
                       }
                     },
     +               "k8s-experimental": {
-    +                 "resources ": {
+    +                 "resources": {
     +                   "limits": {
     +                     "memory": "128Mi",
     +                     "cpu": "500m",
