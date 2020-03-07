@@ -20,8 +20,8 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
     ```bash
 
-    # Store the device connection string a variable
-    export connStr=replace-with-device-connection-string-from-step-1
+    # Store the device connection string in a variable (enclose in single quotes)
+    export connStr='replace-with-device-connection-string-from-step-1'
 
     # Install edge deployment into the created namespace
     helm install --repo https://edgek8s.blob.core.windows.net/staging edge1 edge-kubernetes \
