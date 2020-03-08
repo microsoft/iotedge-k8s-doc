@@ -18,6 +18,9 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
 
 1. Deploy the edge workload into the previously created K8s namespace.
 
+    > 
+    > For simplicity, this tutorial doesn't specify a persistent store for `iotedged` during install. However, for any serious/PoC deployment, follow the best practice example shown in the [iotedged failure resilience tutorial](./ha.html).
+
     ```bash
 
     # Store the device connection string in a variable (enclose in single quotes)
@@ -29,8 +32,6 @@ This example demostrates a "Hello, world" scenario of deploying a simulated temp
       --set "provisioning.deviceConnectionString=$connStr"
 
     ```
-
-    >*Setting the `runAsNonRoot` edgeAgent env variable causes all IoT Edge modules to be launched in containers using a non-root user account for improved security. The edgeAgent is always started in a container as a non-root user.*
 
 6. In a couple of minutes, you should see the workload modules defined in the edge deploymentment running as pods along with `edgeagent` and `iotedged`. Confirm this using:
 

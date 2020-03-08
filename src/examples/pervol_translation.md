@@ -20,12 +20,15 @@ This example demostrates how to back the `edgeHub` module's message store by usi
     # Install IoT Edge CRD, if not already installed
     helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
-    # Store the device connection string a variable
-    export connStr=replace-with-device-connection-string-from-step-1
+    # Store the device connection string in a variable (enclose in single quotes)
+    export connStr='replace-with-device-connection-string-from-step-1'
 
     ```
 
 1. Specify persistent volume details to use in `edgeAgent` module's environment variables during workload install.
+
+    > 
+    > For simplicity, this tutorial doesn't specify a persistent store for `iotedged` during install. However, for any serious/PoC deployment, follow the best practice example shown in the [iotedged failure resilience tutorial](./ha.html).
 
     ```bash
 
@@ -37,7 +40,8 @@ This example demostrates how to back the `edgeHub` module's message store by usi
 
     ```
 
-    >*With these install options, any edge workload module that specifies a bind type of `volume` in the **createOptions** `HostConfig` section will be backed by a persistent volume [claim](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim) on the provided [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/).*
+    >With these install options, any edge workload module that specifies a bind type of `volume` in the **createOptions** `HostConfig` section will be backed by a persistent volume [claim](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim) on the provided [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/).
+
 
 1. In the Visual Studio Code command palette (View menu -> Command Palette...), search for and select **Azure IoT Edge: New IoT Edge Solution**. Follow the prompts and use the following values to create your solution: 
 

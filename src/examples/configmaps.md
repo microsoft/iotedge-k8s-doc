@@ -8,6 +8,9 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
+    > 
+    > For simplicity, this tutorial doesn't specify a persistent store for `iotedged` during install. However, for any serious/PoC deployment, follow the best practice example shown in step 6 of [iotedged failure resilience tutorial](./ha.html).
+
     ```bash
 
     # Create K8s namespace
@@ -16,8 +19,8 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
     # Install IoT Edge CRD, if not already installed
     helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
-    # Store the device connection string a variable
-    export connStr=replace-with-device-connection-string-from-step-1
+    # Store the device connection string in a variable (enclose in single quotes)
+    export connStr='replace-with-device-connection-string-from-step-1'
 
     # Install the edge workload into the cluster namespace
     helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edge-kubernetes \
@@ -129,10 +132,9 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
 
     [Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core) and [VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core) API reference have details on allowed values and defaults.
 
-    >🗒
     >
-    >*We've used `edgeHub` as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.*
-
+    >We've used `edgeHub` as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.
+    
 1. Generate the workload deployment config by right-clicking the **deployment.template.json** in the left navigation pane and selecting **Generate IoT Edge Deployment Manifest**. This will generate the minified **deployment.amd64.json** under the **config** directory.
 
 1. Update the configuration for the device by right-clicking **deployment.amd64.json** and selecting **Create Deployment for Single Device**. In the displayed list, choose the device created in step 1 to complete the operation.

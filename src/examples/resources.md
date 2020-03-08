@@ -8,6 +8,9 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
+    > 
+    > For simplicity, this tutorial doesn't specify a persistent store for `iotedged` during install. However, for any serious/PoC deployment, follow the best practice example shown in step 6 of [iotedged failure resilience tutorial](./ha.html).
+
     ```bash
 
     # Create K8s namespace

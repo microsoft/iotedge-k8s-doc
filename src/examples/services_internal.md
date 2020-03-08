@@ -8,6 +8,9 @@ This example demonstrates how to expose an in-cluster [Kubernetes Service](https
 
 1. Follow steps, or a subset as needed, to install edge deployment into the cluster.
 
+    > 
+    > For simplicity, this tutorial doesn't specify a persistent store for `iotedged` during install. However, for any serious/PoC deployment, follow the best practice example shown in the [iotedged failure resilience tutorial](./ha.html).
+
     ```bash
 
     # Create K8s namespace
@@ -16,7 +19,7 @@ This example demonstrates how to expose an in-cluster [Kubernetes Service](https
     # Install IoT Edge CRD, if not already installed
     helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
-    # Store the device connection string a variable (enclose in single quotes)
+    # Store the device connection string in a variable (enclose in single quotes)
     export connStr='replace-with-device-connection-string-from-step-1'
 
 
