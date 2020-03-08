@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="../translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="../helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="../examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup for node failure resilience</a></li><li class="expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="../examples/services_external.html" class="active"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="../translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="../helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="../examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="../examples/services_external.html" class="active"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -152,7 +152,173 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <p>This example demonstrates how to expose a <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module outside the cluster. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
+<ol>
+<li>
+<p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux#set-up-vs-code-and-tools">Set up VS Code and tools</a>, associate with IoT Hub from the previous step.</p>
+</li>
+<li>
+<p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
+<blockquote>
+<p>For simplicity, this tutorial doesn't specify a persistent store for <code>iotedged</code> during install. However, for any serious/PoC deployment, follow the best practice example shown in the <a href="./ha.html">iotedged failure resilience tutorial</a>.</p>
+</blockquote>
+<pre><code class="language-bash">
+# Create K8s namespace
+kubectl create ns external-service
+
+# Install IoT Edge CRD, if not already installed
+helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
+
+# Store the device connection string in a variable (enclose in single quotes)
+export connStr='replace-with-device-connection-string-from-step-1'
+
+
+# Install the edge workload into the cluster namespace
+helm install --repo https://edgek8s.blob.core.windows.net/staging external-service-example edge-kubernetes \
+  --namespace external-service \
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot; \
+  --set &quot;edgeAgent.env.portMappingServiceType=LoadBalancer&quot;
+</code></pre>
+<blockquote>
+<p>This example demonstrates the easiest way to expose your service externally. It requires your cluster to be able to assign external IP addresses to services of type <strong>LoadBalancer</strong>.</p>
+<p>The canonical pattern is to use <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Kubernetes Ingress</a> to route requests to your service. The ingress approach is preferred when possible.</p>
+</blockquote>
+</li>
+<li>
+<p>In the Visual Studio Code command palette (View menu -&gt; Command Palette...), search for and select <strong>Azure IoT Edge: New IoT Edge Solution</strong>. Follow the prompts and use the following values to create your solution: </p>
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Select folder</td><td>Choose the location on your development machine for VS Code to create the solution files.</td></tr>
+<tr><td>Provide a solution name</td><td>Enter a descriptive name for your solution or accept the default <strong>EdgeSolution</strong>.</td></tr>
+<tr><td>Select module template</td><td>Choose <strong>Empty solution</strong>.</td></tr>
+</tbody></table>
+<p>You'll update <strong>deployment.template.json</strong> (see navigation pane on the left) to add a sample module that exposes an in-cluster endpoint as a Kubernetes Service.</p>
+</li>
+<li>
+<p>Add a sample <strong>aspnetapp</strong> module under <strong>edgeAgent's</strong> <strong>properties.desired</strong> section as shown below. </p>
+<blockquote>
+<p>The <strong>PortBindings</strong> section of module's <a href="https://docs.docker.com/engine/api/v1.34/#operation/ContainerCreate">createOptions</a> is translated to a Kubernetes Service of type <strong>ClusterIP</strong> by default. This type of service is not accessible outside the cluster directly.</p>
+<p>You can change <strong>HostPort</strong> in the module's <strong>createOptions</strong> to configure the port exposed by the service.</p>
+<p>To only expose the <strong>aspnetapp</strong> module's endpoint externally, the example below changes the <strong>edgeHub</strong> module from using <strong>PortBinding</strong> to <strong>ExposedPorts</strong>. This change prevents <strong>edgeHub</strong> from exposing its endpoints outside the cluster while still being available in-cluster.</p>
+</blockquote>
+<pre><code class="language-diff">{
+  &quot;$schema-template&quot;: &quot;2.0.0&quot;,
+  &quot;modulesContent&quot;: {
+    &quot;$edgeAgent&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;runtime&quot;: {
+          &quot;type&quot;: &quot;docker&quot;,
+          &quot;settings&quot;: {
+            &quot;minDockerVersion&quot;: &quot;v1.25&quot;,
+            &quot;loggingOptions&quot;: &quot;&quot;,
+            &quot;registryCredentials&quot;: {}
+          }
+        },
+        &quot;systemModules&quot;: {
+          &quot;edgeAgent&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-agent:1.0&quot;,
+              &quot;createOptions&quot;: {}
+            }
+          },
+          &quot;edgeHub&quot;: {
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;status&quot;: &quot;running&quot;,
+            &quot;restartPolicy&quot;: &quot;always&quot;,
+            &quot;settings&quot;: {
+              &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-hub:1.0&quot;,
+              &quot;createOptions&quot;: {
++               &quot;ExposedPorts&quot;: {
++                 &quot;8883/tcp&quot;: {},
++                 &quot;5671/tcp&quot;: {},
++                 &quot;443/tcp&quot;: {}
++               }
+-               &quot;HostConfig&quot;: {
+-                 &quot;PortBindings&quot;: {
+-                   &quot;5671/tcp&quot;: [
+-                     {
+-                       &quot;HostPort&quot;: &quot;5671&quot;
+-                     }
+-                   ],
+-                   &quot;8883/tcp&quot;: [
+-                     {
+-                       &quot;HostPort&quot;: &quot;8883&quot;
+-                     }
+-                   ],
+-                   &quot;443/tcp&quot;: [
+-                     {
+-                       &quot;HostPort&quot;: &quot;443&quot;
+-                     }
+-                   ]
+-                 }
+-               }
+              }
+            }
+          }
+        },
+        &quot;modules&quot;: {
++         &quot;aspnetapp&quot;: {
++           &quot;settings&quot;: {
++             &quot;image&quot;: &quot;mcr.microsoft.com/dotnet/core/samples:aspnetapp&quot;,
++             &quot;createOptions&quot;: {
++               &quot;HostConfig&quot;: {
++                 &quot;PortBindings&quot;: {
++                   &quot;80/tcp&quot;: [
++                     {
++                       &quot;HostPort&quot;: &quot;8082&quot;
++                     }
++                   ]
++                 }
++               }
++             }
++           },
++           &quot;type&quot;: &quot;docker&quot;,
++           &quot;version&quot;: &quot;1.0&quot;,
++           &quot;status&quot;: &quot;running&quot;,
++           &quot;restartPolicy&quot;: &quot;always&quot;
++         }
+        }
+      }
+    },
+    &quot;$edgeHub&quot;: {
+      &quot;properties.desired&quot;: {
+        &quot;schemaVersion&quot;: &quot;1.0&quot;,
+        &quot;routes&quot;: {},
+        &quot;storeAndForwardConfiguration&quot;: {
+          &quot;timeToLiveSecs&quot;: 7200
+        }
+      }
+    }
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>Generate the workload deployment config by right-clicking the <strong>deployment.template.json</strong> in the left navigation pane and selecting <strong>Generate IoT Edge Deployment Manifest</strong>. This will generate the minified <strong>deployment.amd64.json</strong> under the <strong>config</strong> directory.</p>
+</li>
+<li>
+<p>Update the configuration for the device by right-clicking <strong>deployment.amd64.json</strong> and selecting <strong>Create Deployment for Single Device</strong>. In the displayed list, choose the device created in step 1 to complete the operation.</p>
+</li>
+<li>
+<p>In a few seconds, you'll see a new pods and services instantiated as defined in the deployment manifest. Check the Services in the namespace to confirm that there's an entry for <strong>aspnetapp</strong>. Notice also that <strong>edgeHub</strong> has a cluster IP address but no external address.</p>
+<pre><code class="language-bash">kubectl get services -n external-service
+</code></pre>
+</li>
+</ol>
+<h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
+<pre><code class="language-bash">
+# Cleanup
+helm del external-service-example -n external-service &amp;&amp; \
+kubectl delete ns external-service
+
+</code></pre>
+<p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
