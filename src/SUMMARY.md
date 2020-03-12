@@ -5,6 +5,7 @@
   - [Multi-tenancy](./multitenancy.md)
   - [Security](./security.md)
   - [HA and scaling](./scaling.md)
+  - [Compare with virtual-kubelet provider](./vk.md)
 ------------------------------------------------------------------------------------
 - [Reference](./reference.md)
   - [Translations](./translations.md)

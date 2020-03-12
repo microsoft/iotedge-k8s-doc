@@ -1,18 +1,8 @@
-Azure IoT Edge was originally designed for running on a standalone system. Now with IoT Edge on 
-Kubernetes, Azure IoT Edge supports deployments of IoT Edge devices on a Kubernetes cluster. 
-The expectation is that these edge deployments running on a single node will "just work" 
-when installed in a Kubernetes cluster.  In order to do that, IoT Edge on K8s has to transform the edge 
-deployment into Kubernetes objects which will support module-module communication. 
 
-Existing edge deployments running on a single system specify some module settings via the [Docker 
-ContainerCreate structure](https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate). 
-This means Edge on K8s will need to translate IoT Edge device and module configuration based 
-on these settings. This document will describe which values are used from the module specification 
-and how they are transformed into Kubernetes objects.
+Azure IoT Edge's application model is based on the Docker API specifically the [createOptions](https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate) schema. When running on Kubernetes, the same application model is retained and the runtime performs a number of automatic translations to the  Kubernetes application model. The goal is that these edge applications designed to run on a single node will work with minimal modifications when installed in a Kubernetes cluster. To achieve this, IoT Edge on Kubernetes has to transform the edge deployment into Kubernetes objects which will support module-module communication. 
 
-IoT Edge on K8s will create Namespaces, Deployments, Services, ImagePullSecrets, 
-PersistentVolumeClaims, and ServiceAccounts to establish this framework.
-The IoT Edge Docker to K8s object mappings will be described in detail in subsequent sections.
+
+IoT Edge on Kubernetes creates Namespaces, Deployments, Services, ImagePullSecrets, PersistentVolumeClaims, and ServiceAccounts to establish this framework. The IoT Edge Docker to Kubernetes object mappings will be described in detail in subsequent sections.
 
 ## Map of configuration source to Kubernetes objects
 

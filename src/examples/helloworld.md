@@ -1,4 +1,4 @@
-This example demostrates a "Hello, world" scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and `kubectl` installed as noted in the prerequisites.
+This example demonstrates a "Hello, world" scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and `kubectl` installed as noted in the [prerequisites](./prereqs.md).
 
 ### Setup steps
 
