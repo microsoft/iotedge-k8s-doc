@@ -104,8 +104,8 @@ This example demonstrates how to assign modules to run on specific nodes. It req
                       }
                     },
     +               "k8s-experimental": {
-    +                 nodeSelector": {
-    +                   "edgehub": "yes"
+    +                 "nodeSelector": {
+    +                   "edgehub": "true"
     +                 }
     +               }
                   }
