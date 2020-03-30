@@ -134,3 +134,19 @@ A `securityContext` section of config used to apply a pod security context to a 
   }
 }
 ```
+
+## Apply Deployment strategy
+
+EdgeAgent uses the default deployment strategy for handling pod replicas. This doesn't always have the expected effects, especially when dealing with persistent volumes. The user may assign this section to get more desireable behavior. This section has the same structure as the Kubernetes [Deployment Strategy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentstrategy-v1-apps) object.
+
+`EdgeAgent` doesn't do any translations or interpretations of values but simply assigns value from module deployment to `strategy` parameter of a deployment spec.
+
+```json
+{
+  "k8s-experimental": {
+    "strategy": {
+      "type": "Recreate"
+    }
+  }
+}
+```
