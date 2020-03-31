@@ -258,6 +258,17 @@ To workaround, one has to delete the module and re-deploy with the new setting(s
   }
 }
 </code></pre>
+<h2><a class="header" href="#apply-deployment-strategy" id="apply-deployment-strategy">Apply Deployment strategy</a></h2>
+<p>EdgeAgent uses the default deployment strategy for handling pod replicas. This doesn't always have the expected effects, especially when dealing with persistent volumes. The user may assign this section to get more desireable behavior. This section has the same structure as the Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentstrategy-v1-apps">Deployment Strategy</a> object.</p>
+<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>strategy</code> parameter of a deployment spec.</p>
+<pre><code class="language-json">{
+  &quot;k8s-experimental&quot;: {
+    &quot;strategy&quot;: {
+      &quot;type&quot;: &quot;Recreate&quot;
+    }
+  }
+}
+</code></pre>
 
                     </main>
 
