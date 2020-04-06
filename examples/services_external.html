@@ -233,30 +233,25 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
             &quot;settings&quot;: {
               &quot;image&quot;: &quot;mcr.microsoft.com/azureiotedge-hub:1.0&quot;,
               &quot;createOptions&quot;: {
-+               &quot;ExposedPorts&quot;: {
-+                 &quot;8883/tcp&quot;: {},
-+                 &quot;5671/tcp&quot;: {},
-+                 &quot;443/tcp&quot;: {}
-+               }
--               &quot;HostConfig&quot;: {
--                 &quot;PortBindings&quot;: {
--                   &quot;5671/tcp&quot;: [
--                     {
--                       &quot;HostPort&quot;: &quot;5671&quot;
--                     }
--                   ],
--                   &quot;8883/tcp&quot;: [
--                     {
--                       &quot;HostPort&quot;: &quot;8883&quot;
--                     }
--                   ],
--                   &quot;443/tcp&quot;: [
--                     {
--                       &quot;HostPort&quot;: &quot;443&quot;
--                     }
--                   ]
--                 }
--               }
+                &quot;HostConfig&quot;: {
+                  &quot;PortBindings&quot;: {
+                    &quot;5671/tcp&quot;: [
+                      {
+                        &quot;HostPort&quot;: &quot;5671&quot;
+                      }
+                    ],
+                    &quot;8883/tcp&quot;: [
+                      {
+                        &quot;HostPort&quot;: &quot;8883&quot;
+                      }
+                    ],
+                    &quot;443/tcp&quot;: [
+                      {
+                        &quot;HostPort&quot;: &quot;443&quot;
+                      }
+                    ]
+                  }
+                }
               }
             }
           }
