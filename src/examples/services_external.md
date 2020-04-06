@@ -83,30 +83,25 @@ This example demonstrates how to expose a [Kubernetes Service](https://kubernete
                 "settings": {
                   "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
                   "createOptions": {
-    +               "ExposedPorts": {
-    +                 "8883/tcp": {},
-    +                 "5671/tcp": {},
-    +                 "443/tcp": {}
-    +               }
-    -               "HostConfig": {
-    -                 "PortBindings": {
-    -                   "5671/tcp": [
-    -                     {
-    -                       "HostPort": "5671"
-    -                     }
-    -                   ],
-    -                   "8883/tcp": [
-    -                     {
-    -                       "HostPort": "8883"
-    -                     }
-    -                   ],
-    -                   "443/tcp": [
-    -                     {
-    -                       "HostPort": "443"
-    -                     }
-    -                   ]
-    -                 }
-    -               }
+                    "HostConfig": {
+                      "PortBindings": {
+                        "5671/tcp": [
+                          {
+                            "HostPort": "5671"
+                          }
+                        ],
+                        "8883/tcp": [
+                          {
+                            "HostPort": "8883"
+                          }
+                        ],
+                        "443/tcp": [
+                          {
+                            "HostPort": "443"
+                          }
+                        ]
+                      }
+                    }
                   }
                 }
               }
