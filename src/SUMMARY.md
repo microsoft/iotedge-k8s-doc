@@ -26,3 +26,4 @@
   - [Exposing services outside the cluster](./examples/services_external.md)
   - [Scheduling on specific nodes](./examples/nodeselector.md)
   - [Specifying resource requirements and limits ](./examples/resources.md)
+  - [IoT Central Tutorial ](./examples/iotcentraltutorial.md)

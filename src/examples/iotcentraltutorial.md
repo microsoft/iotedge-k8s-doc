@@ -15,6 +15,7 @@ This tutorial demonstrates a scenario of deploying a simulated temperature senso
 ### Setup steps for provisoning Edge device to Central
 
 1. Once you have an AKS cluster deployed go to **shell.azure.com**
+
    ![Azure Shell](images/azureshell.png)
 
 2. Set your subscription where you deployed AKS cluster
