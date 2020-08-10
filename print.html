@@ -1320,33 +1320,42 @@ kubectl delete ns cm
 <p><a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#create-aks-cluster">Create an AKS cluster</a> and <a href="https://docs.microsoft.com/azure/aks/kubernetes-walkthrough?view=azure-cli-latest#connect-to-the-cluster">connect to it</a>.</p>
 </li>
 <li>
-<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
+<p>Create a Kubernetes namespace for your IoT Edge deployment</p>
+<pre><code class="language-bash">kubectl create ns pv-iotedged
+</code></pre>
 </li>
 <li>
-<p>Create an Azure File <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-persistent-volume-claim">persistent volume claim</a> and make note of its name.</p>
+<p>Create an Azure Files <a href="https://docs.microsoft.com/azure/aks/azure-files-dynamic-pv#create-a-storage-class">storage class</a>.</p>
 </li>
 <li>
-<p>Follow steps, or a subset as needed, to install edge deployment into the cluster.</p>
+<p>Create a persistent volume claim:</p>
+<pre><code class="language-bash">apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: iotedged-data-azurefile
+  namespace: pv-iotedged
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 100Mi
+</code></pre>
+</li>
+<li>
+<p>Specify persistent volume claim name to use for storing <code>iotedged</code> data during install.</p>
 <pre><code class="language-bash">
-# Create K8s namespace
-kubectl create ns pv-iotedged
-
 # Install IoT Edge CRD, if not already installed
 helm install --repo https://edgek8s.blob.core.windows.net/staging edge-crd edge-kubernetes-crd
 
 # Store the device connection string in a variable (enclose in single quotes)
 export connStr='replace-with-device-connection-string-from-step-1'
 
-</code></pre>
-</li>
-<li>
-<p>Specify persistent volume details to use for storing <code>iotedged</code> data during workload install.</p>
-<pre><code class="language-bash">
+# Install
 helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
   --namespace pv-iotedged \
-  --set &quot;iotedged.data.persistentVolumeClaim.name=azurefile&quot; \
-  --set &quot;iotedged.data.persistentVolumeClaim.storageClassName=replace-with-name-noted-in-step-4&quot; \
-  --set &quot;iotedged.data.persistentVolumeClaim.size=64m&quot; \
+  --set &quot;iotedged.data.persistentVolumeClaim.name=iotedged-data-azurefile&quot; \
   --set &quot;provisioning.deviceConnectionString=$connStr&quot;
 
 </code></pre>
