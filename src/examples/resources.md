@@ -39,7 +39,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
 
    You'll be making updates to **deployment.template.json** (see navigation pane on the left) to configure the `edgeHub` module to use K8s configmaps.
 
-1. Add the Kubernetes resources in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [Kubernetes extended createOptions](https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md) feature.
+1. Add the Kubernetes resources in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [Kubernetes extended createOptions](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md) feature.
 
 
     ```diff
@@ -119,7 +119,7 @@ This example demostrates how you can use [Kubernetes resources](https://kubernet
     }
     ```
 
-    [Resource requirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core) API reference has details on allowed values.
+    [Resource requirements](https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#resourcerequirements-v1-core) API reference has details on allowed values.
 
     >🗒
     >

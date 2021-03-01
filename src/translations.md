@@ -224,7 +224,7 @@ gives the Edge Runtime a default claim size as this is not provided by `createOp
 
 ## ServiceAccount
 
-Service accounts are described in the document describing our [Edge RBAC](rbac.md)
+Service accounts are described in the document describing our [Edge RBAC repo docs](https://github.com/Azure/iotedge/blob/release/1.1/kubernetes/doc/rbac.md)
 
 
 ### K8s Extensions
@@ -232,7 +232,7 @@ Service accounts are described in the document describing our [Edge RBAC](rbac.m
 Some Kubernetes concepts are not represented in the Docker ContainerCreate structure. IoT Edge on 
 K8s has provided extensions to the createOptions which will give some useful extensions to an 
 IoT Edge application running on Kubernetes. This is described in [Kubernetes createOptions 
-Extensions](create-options.md).
+Extensions](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md).
 
 Extensions available:
 - [Kubernetes native volume support](create-options.md#volumes)

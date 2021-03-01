@@ -132,7 +132,7 @@ This example demostrates how to back the `edgeHub` module's message store by usi
     }
     ```
 
-    [Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core) and [VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core) API reference have details on allowed values and defaults.
+    [Volume](https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core) and [VolumeMount](https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core) API reference have details on allowed values and defaults.
 
     >🗒
     >

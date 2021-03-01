@@ -26,7 +26,7 @@ IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/d
 
 ### iotedged
 
-`iotedged` is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the [main repository](https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml). 
+`iotedged` is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the [source repository](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml). 
 
 In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.
 

@@ -48,7 +48,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
       --namespace=cm
     ```
 
-1. Reference the configmap in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [extended createOptions](https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md) feature.
+1. Reference the configmap in the `createOptions` section of the `edgeHub` module in **deployment.template.json** using [extended createOptions](https://github.com/Azure/iotedge/blob/release/1.1/kubernetes/doc/create-options.md) feature.
 
 
     ```diff
@@ -130,7 +130,7 @@ This example demostrates how you can use Kubernetes configmaps, in an IoT Edge d
     } 
     ```
 
-    [Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core) and [VolumeMount](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core) API reference have details on allowed values and defaults.
+    [Volume](https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core) and [VolumeMount](https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core) API reference have details on allowed values and defaults.
 
     >
     >We've used `edgeHub` as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.

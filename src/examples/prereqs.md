@@ -15,7 +15,7 @@ IoT Edge has a stateful architecture. Even if the workload modules are stateless
 ## Helm 3
 Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the **Helm 3** install [instructions](https://helm.sh/docs/intro/install/). 
 
->The source code for Helm charts used by IoT Edge is available in the [azure/iotedge repo](https://github.com/Azure/iotedge/tree/master/kubernetes/charts)
+>The source code for Helm charts used by IoT Edge is available in the [azure/iotedge repo](https://github.com/Azure/iotedge/tree/release/1.1/kubernetes/charts)
 
 ## kubectl
 [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is an essential tool for interacting with your cluster.
