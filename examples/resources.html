@@ -193,7 +193,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging resources-exam
 <p>You'll be making updates to <strong>deployment.template.json</strong> (see navigation pane on the left) to configure the <code>edgeHub</code> module to use K8s configmaps.</p>
 </li>
 <li>
-<p>Add the Kubernetes resources in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">Kubernetes extended createOptions</a> feature.</p>
+<p>Add the Kubernetes resources in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">Kubernetes extended createOptions</a> feature.</p>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {
@@ -269,7 +269,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging resources-exam
   }
 }
 </code></pre>
-<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core">Resource requirements</a> API reference has details on allowed values.</p>
+<p><a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#resourcerequirements-v1-core">Resource requirements</a> API reference has details on allowed values.</p>
 <blockquote>
 <p>🗒</p>
 <p><em>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</em></p>

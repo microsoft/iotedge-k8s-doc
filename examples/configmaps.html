@@ -201,7 +201,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edg
 </code></pre>
 </li>
 <li>
-<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">extended createOptions</a> feature.</p>
+<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/release/1.1/kubernetes/doc/create-options.md">extended createOptions</a> feature.</p>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {
@@ -279,7 +279,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edg
   }
 } 
 </code></pre>
-<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
+<p><a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">Volume</a> and <a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
 <blockquote>
 <p>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</p>
 </blockquote>

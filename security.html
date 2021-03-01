@@ -174,7 +174,7 @@
 +----------------+       +-------------------------------+      +--------------------------------------+
 </code></pre>
 <h3><a class="header" href="#iotedged" id="iotedged">iotedged</a></h3>
-<p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">main repository</a>. </p>
+<p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">source repository</a>. </p>
 <p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
 <p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
 <ul>

@@ -190,7 +190,7 @@
 +----------------+       +-------------------------------+      +--------------------------------------+
 </code></pre>
 <h3><a class="header" href="#iotedged" id="iotedged">iotedged</a></h3>
-<p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">main repository</a>. </p>
+<p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">source repository</a>. </p>
 <p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
 <p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
 <ul>
@@ -509,11 +509,11 @@ gives the Edge Runtime a default claim size as this is not provided by <code>cre
 </li>
 </ul>
 <h2><a class="header" href="#serviceaccount" id="serviceaccount">ServiceAccount</a></h2>
-<p>Service accounts are described in the document describing our <a href="rbac.html">Edge RBAC</a></p>
+<p>Service accounts are described in the document describing our <a href="https://github.com/Azure/iotedge/blob/release/1.1/kubernetes/doc/rbac.md">Edge RBAC repo docs</a></p>
 <h3><a class="header" href="#k8s-extensions" id="k8s-extensions">K8s Extensions</a></h3>
 <p>Some Kubernetes concepts are not represented in the Docker ContainerCreate structure. IoT Edge on 
 K8s has provided extensions to the createOptions which will give some useful extensions to an 
-IoT Edge application running on Kubernetes. This is described in <a href="create-options.html">Kubernetes createOptions 
+IoT Edge application running on Kubernetes. This is described in <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">Kubernetes createOptions 
 Extensions</a>.</p>
 <p>Extensions available:</p>
 <ul>
@@ -538,221 +538,10 @@ Extensions</a>.</p>
 <p>These options will take effect if both variables <strong>ExperimentalFeatures__Enabled</strong> and <strong>ExperimentalFeatures__EnableK8SExtensions</strong> are set to <strong>true</strong> for edgeAgent when operating in Kubernetes mode. </p>
 <p>These are turned on by default in edgek8s/edge-kubernetes Helm chart.</p>
 <p>Several examples in the <a href="examples.html">tutorials</a> section demonstrate how to use the feature.</p>
-<h2><a class="header" href="#volumes" id="volumes">Volumes</a></h2>
-<p>EdgeAgent allows to mount existing volumes in the namespace from different sources e.g. <code>ConfigMap</code> as a pod <code>Volume</code>.</p>
-<h3><a class="header" href="#create-options" id="create-options">Create Options</a></h3>
-<p>A <code>volumes</code> section of config used to describe how a <code>ConfigMap</code> or any other volume source existing in a namespace will be mounted into module container. The value of this config section is an array of pairs <code>volume</code> and <code>volumeMount</code>. A <code>volume</code> part describes how a specified volume source is mounted to <code>pod</code> and <code>volumeMounts</code> describes a mounting of a <code>volume</code> within a module main container. See <a href="https://kubernetes.io/docs/concepts/storage/volumes/">Volumes</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podspec-v1-core">PodSpec</a> reference for more information.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns values to the <code>pod</code> and <code>container</code> specs. The description of exact structure can be found here for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a>.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;volumes&quot;: [
-      {
-        &quot;volume&quot;: {
-          &quot;name&quot;: &quot;ModuleA&quot;,
-          &quot;configMap&quot;: {
-            &quot;optional&quot;: &quot;true&quot;,
-            &quot;defaultMode&quot;: 420,
-            &quot;items&quot;: [{
-                &quot;key&quot;: &quot;config-file&quot;,
-                &quot;path&quot;: &quot;config.yaml&quot;,
-                &quot;mode&quot;: 420
-            }],
-            &quot;name&quot;: &quot;module-config&quot;
-          }
-        },
-        &quot;volumeMounts&quot;: [
-          {
-            &quot;name&quot;: &quot;module-config&quot;,
-            &quot;mountPath&quot;: &quot;/etc/module/config.yaml&quot;,
-            &quot;mountPropagation&quot;: &quot;None&quot;,
-            &quot;readOnly&quot;: &quot;true&quot;,
-            &quot;subPath&quot;: &quot;&quot; 
-          }
-        ]
-      }
-    ]
-  }
-}
-</code></pre>
-<h2><a class="header" href="#cpu-memory-and-device-resources" id="cpu-memory-and-device-resources">CPU, Memory and Device Resources</a></h2>
-<p>EdgeAgent allows to specify Compute resources for a module container. Edge supports HostConfig CPU and Memory limits. They will be overrriten if a user specifis <code>resources</code> section described below.</p>
-<h3><a class="header" href="#create-options-1" id="create-options-1">Create Options</a></h3>
-<p>A <code>resources</code> section of config used to specify compute resources for an IoT Edge Module container. The value of this section is the same description Kubernetes uses for <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">container spec</a>. In addition to CPU and Memory EdgeAgent operator can specify <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">device</a> limits for a module.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>resources</code> parameter of container spec. The description of exact structure can be found <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core">here</a>.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;resources&quot;: {
-      &quot;limits&quot;: {
-        &quot;memory&quot;: &quot;128Mi&quot;,
-        &quot;cpu&quot;: &quot;500m&quot;,
-        &quot;hardware-vendor.example/foo&quot;: 2
-      },
-      &quot;requests&quot;: {
-        &quot;memory&quot;: &quot;64Mi&quot;,
-        &quot;cpu&quot;: &quot;250m&quot;,
-        &quot;hardware-vendor.example/foo&quot;: 2
-      }
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#assigning-modules-to-nodes" id="assigning-modules-to-nodes">Assigning Modules to Nodes</a></h2>
-<p>EdgeAgent allows to constrain an IoT Edge Module to only be able to run on particular node(s).</p>
-<h3><a class="header" href="#createoptions" id="createoptions">CreateOptions</a></h3>
-<p>A <code>nodeSelector</code> section of config used for node selection constrain. It specifies a map of key-value pairs that corresponds to a key-value pair of node labels. To know more please refer to a <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">corresponding docs</a>.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>nodeSelector</code> parameter of a pod spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;nodeSelector&quot;: {
-      &quot;disktype&quot;: &quot;ssd&quot;,
-      &quot;gpu&quot;: &quot;true&quot;
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#apply-pod-security-context" id="apply-pod-security-context">Apply Pod Security Context</a></h2>
-<p>By default EdgeAgent doesn't make any assumptions about pod security context and allows to run containers under the user this container was built. With this section user can specify exact pod security policy module will run with.</p>
-<h3><a class="header" href="#createoptions-1" id="createoptions-1">CreateOptions</a></h3>
-<p>A <code>securityContext</code> section of config used to apply a pod security context to a module pod spec. The section has the same structure as a Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podsecuritycontext-v1-core">Pod spec</a>.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>securityContext</code> parameter of a pod spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;securityContext&quot;: {
-      &quot;fsGroup&quot;: &quot;1&quot;,
-      &quot;runAsGroup&quot;: &quot;1001&quot;,
-      &quot;runAsUser&quot;: &quot;1000&quot;,
-      ...
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#apply-service-options" id="apply-service-options">Apply Service options</a></h2>
-<p>EdgeAgent creates a service for each module that exposes one or more ports. Default service types (typically ClusterIp) are assigned to the service.  This does not allow the use to mix service types on an edge deployment. If provided, the <code>serviceOptions.type</code> field will override the <code>type</code> option for the module's ServiceSpec. Also, if provided, the <code>serviceOptions.loadBalancerIP</code> field will be assigned to the <code>loadBalancerIP</code> field.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>type</code> and <code>loadBalancerIP</code> parameter of a service spec. Valid <code>type</code> options are &quot;ClusterIP&quot;, &quot;NodePort&quot;, and &quot;LoadBalancer.&quot;</p>
-<h3><a class="header" href="#createoptions-2" id="createoptions-2">CreateOptions</a></h3>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;serviceOptions&quot; : {
-      &quot;loadBalancerIP&quot; : &quot;100.23.201.78&quot;,
-      &quot;type&quot; : &quot;LoadBalancer&quot;
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#apply-deployment-strategy" id="apply-deployment-strategy">Apply Deployment strategy</a></h2>
-<p>EdgeAgent uses the default deployment strategy for handling pod replicas. This doesn't always have the expected effects, especially when dealing with persistent volumes. The user may assign this section to get more desireable behavior. This section has the same structure as the Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentstrategy-v1-apps">Deployment Strategy</a> object.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>strategy</code> parameter of a deployment spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;strategy&quot;: {
-      &quot;type&quot;: &quot;Recreate&quot;
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#volumes-1" id="volumes-1">Volumes</a></h2>
-<p>EdgeAgent allows to mount existing volumes in the namespace from different sources e.g. <code>ConfigMap</code> as a pod <code>Volume</code>.</p>
-<h3><a class="header" href="#create-options-2" id="create-options-2">Create Options</a></h3>
-<p>A <code>volumes</code> section of config used to describe how a <code>ConfigMap</code> or any other volume source existing in a namespace will be mounted into module container. The value of this config section is an array of pairs <code>volume</code> and <code>volumeMount</code>. A <code>volume</code> part describes how a specified volume source is mounted to <code>pod</code> and <code>volumeMounts</code> describes a mounting of a <code>volume</code> within a module main container. See <a href="https://kubernetes.io/docs/concepts/storage/volumes/">Volumes</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podspec-v1-core">PodSpec</a> reference for more information.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns values to the <code>pod</code> and <code>container</code> specs. The description of exact structure can be found here for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and for <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a>.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;volumes&quot;: [
-      {
-        &quot;volume&quot;: {
-          &quot;name&quot;: &quot;ModuleA&quot;,
-          &quot;configMap&quot;: {
-            &quot;optional&quot;: &quot;true&quot;,
-            &quot;defaultMode&quot;: 420,
-            &quot;items&quot;: [{
-                &quot;key&quot;: &quot;config-file&quot;,
-                &quot;path&quot;: &quot;config.yaml&quot;,
-                &quot;mode&quot;: 420
-            }],
-            &quot;name&quot;: &quot;module-config&quot;
-          }
-        },
-        &quot;volumeMounts&quot;: [
-          {
-            &quot;name&quot;: &quot;module-config&quot;,
-            &quot;mountPath&quot;: &quot;/etc/module/config.yaml&quot;,
-            &quot;mountPropagation&quot;: &quot;None&quot;,
-            &quot;readOnly&quot;: &quot;true&quot;,
-            &quot;subPath&quot;: &quot;&quot; 
-          }
-        ]
-      }
-    ]
-  }
-}
-</code></pre>
-<p>Note, when a volume is specified as &quot;ReadWriteOnce&quot;, there is an known issue that the module with the ReadWriteOnce volume mounted can be stuck at crash backoff loop state when updating through a new deployment. 
-To workaround, one has to delete the module and re-deploy with the new setting(s). </p>
-<h2><a class="header" href="#cpu-memory-and-device-resources-1" id="cpu-memory-and-device-resources-1">CPU, Memory and Device Resources</a></h2>
-<p>EdgeAgent allows to specify Compute resources for a module container. Edge supports HostConfig CPU and Memory limits. They will be overrriten if a user specifis <code>resources</code> section described below.</p>
-<h3><a class="header" href="#create-options-3" id="create-options-3">Create Options</a></h3>
-<p>A <code>resources</code> section of config used to specify compute resources for an IoT Edge Module container. The value of this section is the same description Kubernetes uses for <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">container spec</a>. In addition to CPU and Memory EdgeAgent operator can specify <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">device</a> limits for a module.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>resources</code> parameter of container spec. The description of exact structure can be found <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core">here</a>.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;resources&quot;: {
-      &quot;limits&quot;: {
-        &quot;memory&quot;: &quot;128Mi&quot;,
-        &quot;cpu&quot;: &quot;500m&quot;,
-        &quot;hardware-vendor.example/foo&quot;: 2
-      },
-      &quot;requests&quot;: {
-        &quot;memory&quot;: &quot;64Mi&quot;,
-        &quot;cpu&quot;: &quot;250m&quot;,
-        &quot;hardware-vendor.example/foo&quot;: 2
-      }
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#assigning-modules-to-nodes-1" id="assigning-modules-to-nodes-1">Assigning Modules to Nodes</a></h2>
-<p>EdgeAgent allows to constrain an IoT Edge Module to only be able to run on particular node(s).</p>
-<h3><a class="header" href="#createoptions-3" id="createoptions-3">CreateOptions</a></h3>
-<p>A <code>nodeSelector</code> section of config used for node selection constrain. It specifies a map of key-value pairs that corresponds to a key-value pair of node labels. To know more please refer to a <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">corresponding docs</a>.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>nodeSelector</code> parameter of a pod spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;nodeSelector&quot;: {
-      &quot;disktype&quot;: &quot;ssd&quot;,
-      &quot;gpu&quot;: &quot;true&quot;
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#apply-pod-security-context-1" id="apply-pod-security-context-1">Apply Pod Security Context</a></h2>
-<p>By default EdgeAgent doesn't make any assumptions about pod security context and allows to run containers under the user this container was built. With this section user can specify exact pod security policy module will run with.</p>
-<h3><a class="header" href="#createoptions-4" id="createoptions-4">CreateOptions</a></h3>
-<p>A <code>securityContext</code> section of config used to apply a pod security context to a module pod spec. The section has the same structure as a Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#podsecuritycontext-v1-core">Pod spec</a>.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>securityContext</code> parameter of a pod spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;securityContext&quot;: {
-      &quot;fsGroup&quot;: &quot;1&quot;,
-      &quot;runAsGroup&quot;: &quot;1001&quot;,
-      &quot;runAsUser&quot;: &quot;1000&quot;,
-      ...
-    }
-  }
-}
-</code></pre>
-<h2><a class="header" href="#apply-deployment-strategy-1" id="apply-deployment-strategy-1">Apply Deployment strategy</a></h2>
-<p>EdgeAgent uses the default deployment strategy for handling pod replicas. This doesn't always have the expected effects, especially when dealing with persistent volumes. The user may assign this section to get more desireable behavior. This section has the same structure as the Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentstrategy-v1-apps">Deployment Strategy</a> object.</p>
-<p><code>EdgeAgent</code> doesn't do any translations or interpretations of values but simply assigns value from module deployment to <code>strategy</code> parameter of a deployment spec.</p>
-<pre><code class="language-json">{
-  &quot;k8s-experimental&quot;: {
-    &quot;strategy&quot;: {
-      &quot;type&quot;: &quot;Recreate&quot;
-    }
-  }
-}
-</code></pre>
+<h2><a class="header" href="#translation-details" id="translation-details">Translation details</a></h2>
+<p>See the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">repo docs</a> for translation details.</p>
 <h1><a class="header" href="#helm-chart-install-options" id="helm-chart-install-options">Helm chart install options</a></h1>
-<p>This section lists the <code>edgeAgent</code> and <code>iotedged</code> options can be set using command line or the Helm chart's <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/charts/edge-kubernetes/values.yaml">values.yaml</a> file during installation.</p>
+<p>This section lists the <code>edgeAgent</code> and <code>iotedged</code> options can be set using command line or the Helm chart's <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/values.yaml">values.yaml</a> file during installation.</p>
 <p>Few examples in the <a href="./examples.html">Tutorials</a> section demonstrate how to set the options from command line.</p>
 <p>IoT Edge Daemon can be configured with various settings as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
@@ -789,7 +578,7 @@ To workaround, one has to delete the module and re-deploy with the new setting(s
 <h2><a class="header" href="#helm-3" id="helm-3">Helm 3</a></h2>
 <p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
 <blockquote>
-<p>The source code for Helm charts used by IoT Edge is available in the <a href="https://github.com/Azure/iotedge/tree/master/kubernetes/charts">azure/iotedge repo</a></p>
+<p>The source code for Helm charts used by IoT Edge is available in the <a href="https://github.com/Azure/iotedge/tree/release/1.1/kubernetes/charts">azure/iotedge repo</a></p>
 </blockquote>
 <h2><a class="header" href="#kubectl" id="kubectl">kubectl</a></h2>
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is an essential tool for interacting with your cluster.</p>
@@ -1124,7 +913,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging pv-example2 ed
   }
 }
 </code></pre>
-<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
+<p><a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">Volume</a> and <a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
 <blockquote>
 <p>🗒</p>
 <p><em>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</em></p>
@@ -1198,7 +987,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edg
 </code></pre>
 </li>
 <li>
-<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">extended createOptions</a> feature.</p>
+<p>Reference the configmap in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/release/1.1/kubernetes/doc/create-options.md">extended createOptions</a> feature.</p>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {
@@ -1276,7 +1065,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging cm-example edg
   }
 } 
 </code></pre>
-<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volume-v1-core">Volume</a> and <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
+<p><a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">Volume</a> and <a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">VolumeMount</a> API reference have details on allowed values and defaults.</p>
 <blockquote>
 <p>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</p>
 </blockquote>
@@ -1879,7 +1668,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging resources-exam
 <p>You'll be making updates to <strong>deployment.template.json</strong> (see navigation pane on the left) to configure the <code>edgeHub</code> module to use K8s configmaps.</p>
 </li>
 <li>
-<p>Add the Kubernetes resources in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/master/kubernetes/doc/create-options.md">Kubernetes extended createOptions</a> feature.</p>
+<p>Add the Kubernetes resources in the <code>createOptions</code> section of the <code>edgeHub</code> module in <strong>deployment.template.json</strong> using <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">Kubernetes extended createOptions</a> feature.</p>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
   &quot;modulesContent&quot;: {
@@ -1955,7 +1744,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging resources-exam
   }
 }
 </code></pre>
-<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#resourcerequirements-v1-core">Resource requirements</a> API reference has details on allowed values.</p>
+<p><a href="https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#resourcerequirements-v1-core">Resource requirements</a> API reference has details on allowed values.</p>
 <blockquote>
 <p>🗒</p>
 <p><em>We've used <code>edgeHub</code> as an example here, however you can specify K8s extended createOptions for any module in the edge deployment.</em></p>
