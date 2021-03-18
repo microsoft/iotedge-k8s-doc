@@ -5,7 +5,7 @@
   - [Multi-tenancy](./multitenancy.md)
   - [Security](./security.md)
   - [HA and scaling](./scaling.md)
-  - [Compare with virtual-kubelet provider](./vk.md)
+  - [createOptions extensions](./createoptions_extensions.md)
 ------------------------------------------------------------------------------------
 - [Best practices](./bestpractices.md)
   - [Storage]()
@@ -39,7 +39,7 @@
 ------------------------------------------------------------------------------------
 - [Reference](./reference.md)
   - [Translations](./translations.md)
-  - [createOptions extensions](./createoptions_extensions.md)
   - [Helm chart install options](./helmOptions.md)
     - [iotedged](./iotedged_vars.md)
     - [edgeagent](./edgeagent_vars.md)
+  - [Compare with virtual-kubelet provider](./vk.md)

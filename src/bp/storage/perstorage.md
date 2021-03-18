@@ -1,6 +1,8 @@
 # Persistent storage
 
-### Use Kubernetes persistent volumes.
+>💡 For Azure Stack Edge specific guidance, please see the [ASE section](ase.html).
+
+## Use Kubernetes persistent volumes.
 
 If your module needs to persist non-ephemeral data, be sure to use
 [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
@@ -8,7 +10,7 @@ In the namespace for your IoT Edge workloads, pre-create [Persistent Volume
 Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) 
  (PVC) for modules that require persistence.
 
-### Always configure `iotedged` with a PVC
+## Always configure `iotedged` with a PVC
 
 At a minimum, one PVC is required for `iotedged` to store its crypto material.
 On multi-node k8s clusters this PVC cannot be backed by host local storage as 
@@ -30,7 +32,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-ex
   --set "provisioning.deviceConnectionString=$connStr"
 ```
 
-### Configure `edgeHub` with a PVC to avoid message loss
+## Configure `edgeHub` with a PVC to avoid message loss
 
 `edgeHub` always persists messages before sending an *ack* to the sender. This 
 is what enables offline store-and-forward functionality. If `edgeHub` is not 
@@ -41,36 +43,37 @@ instance are lost.
 If your scenario requires no message loss be sure to configure `edgeHub` with 
 a PVC. On a multi-node cluster, this persistent volume should be backed by non-host-local storage. 
 
-### Configure modules' persistent storage using createOption extensions
+## Configure modules' persistent storage using createOption extensions
 
 Rather than rely on Docker API translations, it is simplest to use createOption 
 extensions to assign pre-created PVCs to modules. The technique is demonstrated 
 by [this](../../examples/pervol_extensions.md) tutorial. 
 
-### `ReadWriteOnce` volumes need additional configuration
+## `ReadWriteOnce` volumes need additional configuration
 
 Volumes can have different [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes). 
 
-For `ReadWriteOnce` volumes deployment strategy should be set to `Recreate`.  
-For more details, see [Deployment strategy guidance](../depstrat.html)
+For `ReadWriteOnce` volumes deployment strategy should be set to `Recreate`. For 
+more details, see [Deployment strategy guidance](../depstrat.html)
 
-### Some StorageClasses may need custom security context
+## Some StorageClasses may need custom security context
 
-`fsGroup` and `runAsUser` might be need for some storage classes to avoid getting
+`fsGroup` and `runAsUser` might be need to be set for some storage classes to avoid 
 permission errors when accessing the persistent volume. For example, the following
+[securityContext](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-pod-security-context)
 setting were required for the [Blob Storage module](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-store-data-blob?view=iotedge-2018-06) 
 to work with [Longhorn](https://longhorn.io) volumes on [K3s](https://k3s.io):
 
-```diff
-{
-  .
+<pre><code>{
   .
   .
   "k8s-experimental": {
-+   "securityContext": {
-+     "fsGroup": "3000",
-+     "runAsUser": "1000"
-+   }
+    .
+    .
+    <strong>"securityContext": {
+      "fsGroup": "3000",
+      "runAsUser": "1000"
+    }</strong>
   }
 }
-```
+</code></pre>
