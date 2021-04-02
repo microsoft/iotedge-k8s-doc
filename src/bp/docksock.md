@@ -1,4 +1,4 @@
-# Docker socket
+# Avoid using Docker socket
 
 ## Do not mount `docker.sock` into any module!
 
