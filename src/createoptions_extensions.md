@@ -17,6 +17,6 @@ These are turned on by default in edgek8s/edge-kubernetes Helm chart.
 
 Several examples in the [tutorials](examples.html) section demonstrate how to use the feature.
 
-## Translation details
+## Supported extensions
 
-See the [repo docs](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md) for translation details.
+See the [repo docs](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md) for supported extensions.

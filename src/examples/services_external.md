@@ -26,8 +26,7 @@ This example demonstrates how to expose a [Kubernetes Service](https://kubernete
     # Install the edge workload into the cluster namespace
     helm install --repo https://edgek8s.blob.core.windows.net/staging external-service-example edge-kubernetes \
       --namespace external-service \
-      --set "provisioning.deviceConnectionString=$connStr" \
-      --set "edgeAgent.env.portMappingServiceType=LoadBalancer"
+      --set "provisioning.deviceConnectionString=$connStr"
     ```
     >
     >This example demonstrates the easiest way to expose your service externally. It requires your cluster to be able to assign external IP addresses to services of type **LoadBalancer**.
@@ -45,13 +44,12 @@ This example demonstrates how to expose a [Kubernetes Service](https://kubernete
 
    You'll update **deployment.template.json** (see navigation pane on the left) to add a sample module that exposes an in-cluster endpoint as a Kubernetes Service.
 
-1. Add a sample **aspnetapp** module under **edgeAgent's** **properties.desired** section as shown below. 
+1. Add a sample **aspnetapp** module under **edgeAgent's** **properties.desired** section as shown below. See the 
+[Service createOptions extensions](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-service-options)
+for more details.
 
     >The **PortBindings** section of module's [createOptions](https://docs.docker.com/engine/api/v1.34/#operation/ContainerCreate) is translated to a Kubernetes Service of type **ClusterIP** by default. This type of service is not accessible outside the cluster directly.
     >
-    >You can change **HostPort** in the module's **createOptions** to configure the port exposed by the service.
-    >
-    > To only expose the **aspnetapp** module's endpoint externally, the example below changes the **edgeHub** module from using **PortBinding** to **ExposedPorts**. This change prevents **edgeHub** from exposing its endpoints outside the cluster while still being available in-cluster.
 
     ```diff
     {
@@ -119,14 +117,19 @@ This example demonstrates how to expose a [Kubernetes Service](https://kubernete
     +                     }
     +                   ]
     +                 }
+    +               }, 
+    +               "k8s-experimental": {
+    +                 "serviceOptions" : {
+    +                   "type" : "LoadBalancer"
+    +                 }
     +               }
     +             }
-    +           },
-    +           "type": "docker",
-    +           "version": "1.0",
-    +           "status": "running",
-    +           "restartPolicy": "always"
-    +         }
+                },
+                "type": "docker",
+                "version": "1.0",
+                "status": "running",
+                "restartPolicy": "always"
+              }
             }
           }
         },
