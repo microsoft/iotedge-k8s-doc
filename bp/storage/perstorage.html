@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Persistent storage - Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="chapter-item expanded "><a href="../../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="chapter-item expanded "><a href="../../scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="chapter-item expanded "><a href="../../createoptions_extensions.html"><strong aria-hidden="true">2.4.</strong> createOptions extensions</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../bestpractices.html"><strong aria-hidden="true">3.</strong> Best practices</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Storage</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../bp/storage/hoststorage.html"><strong aria-hidden="true">3.1.1.</strong> Host storage</a></li><li class="chapter-item expanded "><a href="../../bp/storage/perstorage.html" class="active"><strong aria-hidden="true">3.1.2.</strong> Persistent storage</a></li><li class="chapter-item expanded "><a href="../../bp/storage/ase.html"><strong aria-hidden="true">3.1.3.</strong> Azure Stack Edge</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Networking</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../bp/network/proxy.html"><strong aria-hidden="true">3.2.1.</strong> Work with proxies</a></li><li class="chapter-item expanded "><a href="../../bp/network/modulecomms.html"><strong aria-hidden="true">3.2.2.</strong> Expose module services</a></li><li class="chapter-item expanded "><a href="../../bp/network/hostnetwork.html"><strong aria-hidden="true">3.2.3.</strong> Run on host network</a></li></ol></li><li class="chapter-item expanded "><a href="../../bp/resources.html"><strong aria-hidden="true">3.3.</strong> Use resources and set limits</a></li><li class="chapter-item expanded "><a href="../../bp/depstrat.html"><strong aria-hidden="true">3.4.</strong> Adjust Deployment strategy</a></li><li class="chapter-item expanded "><a href="../../bp/docksock.html"><strong aria-hidden="true">3.5.</strong> Avoid using Docker socket</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="../../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="chapter-item expanded "><a href="../../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="chapter-item expanded "><a href="../../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Use volumes with configmaps</a></li><li class="chapter-item expanded "><a href="../../examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="chapter-item expanded "><a href="../../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Expose services within the cluster</a></li><li class="chapter-item expanded "><a href="../../examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Expose services outside the cluster</a></li><li class="chapter-item expanded "><a href="../../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Schedule on specific nodes</a></li><li class="chapter-item expanded "><a href="../../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specify resource requirements and limits </a></li><li class="chapter-item expanded "><a href="../../examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> Connect to IoT Central</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../knownissues.html"><strong aria-hidden="true">5.</strong> Known issues</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../../reference.html"><strong aria-hidden="true">6.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../translations.html"><strong aria-hidden="true">6.1.</strong> Translations</a></li><li class="chapter-item expanded "><a href="../../helmOptions.html"><strong aria-hidden="true">6.2.</strong> Helm chart install options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../iotedged_vars.html"><strong aria-hidden="true">6.2.1.</strong> iotedged</a></li><li class="chapter-item expanded "><a href="../../edgeagent_vars.html"><strong aria-hidden="true">6.2.2.</strong> edgeagent</a></li></ol></li><li class="chapter-item expanded "><a href="../../vk.html"><strong aria-hidden="true">6.3.</strong> Compare with virtual-kubelet provider</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="persistent-storage"><a class="header" href="#persistent-storage">Persistent storage</a></h1>
+<blockquote>
+<p>💡 For Azure Stack Edge specific guidance, please see the <a href="ase.html">ASE section</a>.</p>
+</blockquote>
+<h2 id="use-kubernetes-persistent-volumes"><a class="header" href="#use-kubernetes-persistent-volumes">Use Kubernetes persistent volumes.</a></h2>
+<p>If your module needs to persist non-ephemeral data, be sure to use
+<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a>.
+In the namespace for your IoT Edge workloads, pre-create <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">Persistent Volume
+Claims</a> 
+(PVC) for modules that require persistence.</p>
+<h2 id="always-configure-iotedged-with-a-pvc"><a class="header" href="#always-configure-iotedged-with-a-pvc">Always configure <code>iotedged</code> with a PVC</a></h2>
+<p>At a minimum, one PVC is required for <code>iotedged</code> to store its crypto material.
+On multi-node k8s clusters this PVC cannot be backed by host local storage as 
+its stored state needs to be attached to <code>iotedged</code> pod even if it gets moved 
+to a different agent node. </p>
+<p><em>If a new instance of <code>iotedged</code> pod cannot access its previously created 
+state, it will create new state and starting running. However, all previously 
+running modules will fail and will need to be manually restarted to sync up with 
+the new <code>iotedged</code> instance.</em></p>
+<p>When installing <code>iotedged</code> into the cluster, simply reference the pre-created 
+PVC in the <code>helm install</code> command like so:</p>
+<pre><code class="language-bash">helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
+  --namespace pv-iotedged \
+  --set &quot;iotedged.data.persistentVolumeClaim.name=replace-with-PVC-name&quot; \
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+</code></pre>
+<h2 id="configure-edgehub-with-a-pvc-to-avoid-message-loss"><a class="header" href="#configure-edgehub-with-a-pvc-to-avoid-message-loss">Configure <code>edgeHub</code> with a PVC to avoid message loss</a></h2>
+<p><code>edgeHub</code> always persists messages before sending an <em>ack</em> to the sender. This 
+is what enables offline store-and-forward functionality. If <code>edgeHub</code> is not 
+configured with a persistent volume for its message store and it restarts (either
+on the same node or different node) any undelivered messages stored by the older
+instance are lost. </p>
+<p>If your scenario requires no message loss be sure to configure <code>edgeHub</code> with 
+a PVC. On a multi-node cluster, this persistent volume should be backed by non-host-local storage. </p>
+<h2 id="configure-modules-persistent-storage-using-createoption-extensions"><a class="header" href="#configure-modules-persistent-storage-using-createoption-extensions">Configure modules' persistent storage using createOption extensions</a></h2>
+<p>Rather than rely on Docker API translations, it is simplest to use createOption 
+extensions to assign pre-created PVCs to modules. The technique is demonstrated 
+by <a href="../../examples/pervol_extensions.html">this</a> tutorial. </p>
+<h2 id="readwriteonce-volumes-need-additional-configuration"><a class="header" href="#readwriteonce-volumes-need-additional-configuration"><code>ReadWriteOnce</code> volumes need additional configuration</a></h2>
+<p>Volumes can have different <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">access modes</a>. </p>
+<p>For <code>ReadWriteOnce</code> volumes deployment strategy should be set to <code>Recreate</code>. For 
+more details, see <a href="../depstrat.html">Deployment strategy guidance</a></p>
+<h2 id="some-storageclasses-may-need-custom-security-context"><a class="header" href="#some-storageclasses-may-need-custom-security-context">Some StorageClasses may need custom security context</a></h2>
+<p><code>fsGroup</code> and <code>runAsUser</code> might be need to be set for some storage classes to avoid 
+permission errors when accessing the persistent volume. For example, the following
+<a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-pod-security-context">securityContext</a>
+setting were required for the <a href="https://docs.microsoft.com/en-us/azure/iot-edge/how-to-store-data-blob?view=iotedge-2018-06">Blob Storage module</a> 
+to work with <a href="https://longhorn.io">Longhorn</a> volumes on <a href="https://k3s.io">K3s</a>:</p>
+<pre><code>{
+  .
+  .
+  "k8s-experimental": {
+    .
+    .
+    <strong>"securityContext": {
+      "fsGroup": "3000",
+      "runAsUser": "1000"
+    }</strong>
+  }
+}
+</code></pre>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../bp/storage/hoststorage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../bp/storage/ase.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../bp/storage/hoststorage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../bp/storage/ase.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -3,24 +3,38 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Exposing services outside the cluster - Deploy Azure IoT Edge on Kubernetes (preview)</title>
+        <title>Expose services outside the cluster - Deploy Azure IoT Edge on Kubernetes (preview)</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -80,8 +94,8 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="expanded "><a href="../vk.html"><strong aria-hidden="true">2.4.</strong> Compare with virtual-kubelet provider</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="../translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="../helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="../examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="../examples/services_external.html" class="active"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li><li class="expanded "><a href="../examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> IoT Central Tutorial </a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="chapter-item expanded "><a href="../security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="chapter-item expanded "><a href="../scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="chapter-item expanded "><a href="../createoptions_extensions.html"><strong aria-hidden="true">2.4.</strong> createOptions extensions</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../bestpractices.html"><strong aria-hidden="true">3.</strong> Best practices</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Storage</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../bp/storage/hoststorage.html"><strong aria-hidden="true">3.1.1.</strong> Host storage</a></li><li class="chapter-item expanded "><a href="../bp/storage/perstorage.html"><strong aria-hidden="true">3.1.2.</strong> Persistent storage</a></li><li class="chapter-item expanded "><a href="../bp/storage/ase.html"><strong aria-hidden="true">3.1.3.</strong> Azure Stack Edge</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Networking</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../bp/network/proxy.html"><strong aria-hidden="true">3.2.1.</strong> Work with proxies</a></li><li class="chapter-item expanded "><a href="../bp/network/modulecomms.html"><strong aria-hidden="true">3.2.2.</strong> Expose module services</a></li><li class="chapter-item expanded "><a href="../bp/network/hostnetwork.html"><strong aria-hidden="true">3.2.3.</strong> Run on host network</a></li></ol></li><li class="chapter-item expanded "><a href="../bp/resources.html"><strong aria-hidden="true">3.3.</strong> Use resources and set limits</a></li><li class="chapter-item expanded "><a href="../bp/depstrat.html"><strong aria-hidden="true">3.4.</strong> Adjust Deployment strategy</a></li><li class="chapter-item expanded "><a href="../bp/docksock.html"><strong aria-hidden="true">3.5.</strong> Avoid using Docker socket</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="../examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="chapter-item expanded "><a href="../examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Use volumes with configmaps</a></li><li class="chapter-item expanded "><a href="../examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="chapter-item expanded "><a href="../examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Expose services within the cluster</a></li><li class="chapter-item expanded "><a href="../examples/services_external.html" class="active"><strong aria-hidden="true">4.7.</strong> Expose services outside the cluster</a></li><li class="chapter-item expanded "><a href="../examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Schedule on specific nodes</a></li><li class="chapter-item expanded "><a href="../examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specify resource requirements and limits </a></li><li class="chapter-item expanded "><a href="../examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> Connect to IoT Central</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../knownissues.html"><strong aria-hidden="true">5.</strong> Known issues</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../reference.html"><strong aria-hidden="true">6.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../translations.html"><strong aria-hidden="true">6.1.</strong> Translations</a></li><li class="chapter-item expanded "><a href="../helmOptions.html"><strong aria-hidden="true">6.2.</strong> Helm chart install options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../iotedged_vars.html"><strong aria-hidden="true">6.2.1.</strong> iotedged</a></li><li class="chapter-item expanded "><a href="../edgeagent_vars.html"><strong aria-hidden="true">6.2.2.</strong> edgeagent</a></li></ol></li><li class="chapter-item expanded "><a href="../vk.html"><strong aria-hidden="true">6.3.</strong> Compare with virtual-kubelet provider</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -90,41 +104,42 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
+                    <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
 
-                        <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                            <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
-                                <i id="git-repository-button" class="fa fa-github"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -153,7 +168,7 @@
                 <div id="content" class="content">
                     <main>
                         <p>This example demonstrates how to expose a <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module outside the cluster. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
+<h3 id="setup-steps"><a class="header" href="#setup-steps">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -180,8 +195,7 @@ export connStr='replace-with-device-connection-string-from-step-1'
 # Install the edge workload into the cluster namespace
 helm install --repo https://edgek8s.blob.core.windows.net/staging external-service-example edge-kubernetes \
   --namespace external-service \
-  --set &quot;provisioning.deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.portMappingServiceType=LoadBalancer&quot;
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
 </code></pre>
 <blockquote>
 <p>This example demonstrates the easiest way to expose your service externally. It requires your cluster to be able to assign external IP addresses to services of type <strong>LoadBalancer</strong>.</p>
@@ -198,11 +212,11 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 <p>You'll update <strong>deployment.template.json</strong> (see navigation pane on the left) to add a sample module that exposes an in-cluster endpoint as a Kubernetes Service.</p>
 </li>
 <li>
-<p>Add a sample <strong>aspnetapp</strong> module under <strong>edgeAgent's</strong> <strong>properties.desired</strong> section as shown below. </p>
+<p>Add a sample <strong>aspnetapp</strong> module under <strong>edgeAgent's</strong> <strong>properties.desired</strong> section as shown below. See the 
+<a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-service-options">Service createOptions extensions</a>
+for more details.</p>
 <blockquote>
 <p>The <strong>PortBindings</strong> section of module's <a href="https://docs.docker.com/engine/api/v1.34/#operation/ContainerCreate">createOptions</a> is translated to a Kubernetes Service of type <strong>ClusterIP</strong> by default. This type of service is not accessible outside the cluster directly.</p>
-<p>You can change <strong>HostPort</strong> in the module's <strong>createOptions</strong> to configure the port exposed by the service.</p>
-<p>To only expose the <strong>aspnetapp</strong> module's endpoint externally, the example below changes the <strong>edgeHub</strong> module from using <strong>PortBinding</strong> to <strong>ExposedPorts</strong>. This change prevents <strong>edgeHub</strong> from exposing its endpoints outside the cluster while still being available in-cluster.</p>
 </blockquote>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
@@ -269,14 +283,19 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 +                     }
 +                   ]
 +                 }
++               }, 
++               &quot;k8s-experimental&quot;: {
++                 &quot;serviceOptions&quot; : {
++                   &quot;type&quot; : &quot;LoadBalancer&quot;
++                 }
 +               }
 +             }
-+           },
-+           &quot;type&quot;: &quot;docker&quot;,
-+           &quot;version&quot;: &quot;1.0&quot;,
-+           &quot;status&quot;: &quot;running&quot;,
-+           &quot;restartPolicy&quot;: &quot;always&quot;
-+         }
+            },
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;version&quot;: &quot;1.0&quot;,
+            &quot;status&quot;: &quot;running&quot;,
+            &quot;restartPolicy&quot;: &quot;always&quot;
+          }
         }
       }
     },
@@ -305,7 +324,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
+<h3 id="cleanup"><a class="header" href="#cleanup">Cleanup</a></h3>
 <pre><code class="language-bash">
 # Cleanup
 helm del external-service-example -n external-service &amp;&amp; \
@@ -337,13 +356,13 @@ kubectl delete ns external-service
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../examples/services_internal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../examples/services_internal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../examples/nodeselector.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../examples/nodeselector.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -356,10 +375,10 @@ kubectl delete ns external-service
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

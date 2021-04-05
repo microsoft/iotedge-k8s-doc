@@ -7,22 +7,36 @@
         
         <meta name="robots" content="noindex" />
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
         <link rel="shortcut icon" href="favicon.png">
+        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
+        
         <link rel="stylesheet" href="css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -38,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -82,8 +96,8 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="expanded "><a href="vk.html"><strong aria-hidden="true">2.4.</strong> Compare with virtual-kubelet provider</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li><li class="expanded "><a href="examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> IoT Central Tutorial </a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="chapter-item expanded "><a href="security.html"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="chapter-item expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="chapter-item expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">2.4.</strong> createOptions extensions</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="bestpractices.html"><strong aria-hidden="true">3.</strong> Best practices</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Storage</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp/storage/hoststorage.html"><strong aria-hidden="true">3.1.1.</strong> Host storage</a></li><li class="chapter-item expanded "><a href="bp/storage/perstorage.html"><strong aria-hidden="true">3.1.2.</strong> Persistent storage</a></li><li class="chapter-item expanded "><a href="bp/storage/ase.html"><strong aria-hidden="true">3.1.3.</strong> Azure Stack Edge</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Networking</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp/network/proxy.html"><strong aria-hidden="true">3.2.1.</strong> Work with proxies</a></li><li class="chapter-item expanded "><a href="bp/network/modulecomms.html"><strong aria-hidden="true">3.2.2.</strong> Expose module services</a></li><li class="chapter-item expanded "><a href="bp/network/hostnetwork.html"><strong aria-hidden="true">3.2.3.</strong> Run on host network</a></li></ol></li><li class="chapter-item expanded "><a href="bp/resources.html"><strong aria-hidden="true">3.3.</strong> Use resources and set limits</a></li><li class="chapter-item expanded "><a href="bp/depstrat.html"><strong aria-hidden="true">3.4.</strong> Adjust Deployment strategy</a></li><li class="chapter-item expanded "><a href="bp/docksock.html"><strong aria-hidden="true">3.5.</strong> Avoid using Docker socket</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="chapter-item expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="chapter-item expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Use volumes with configmaps</a></li><li class="chapter-item expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="chapter-item expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Expose services within the cluster</a></li><li class="chapter-item expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Expose services outside the cluster</a></li><li class="chapter-item expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Schedule on specific nodes</a></li><li class="chapter-item expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specify resource requirements and limits </a></li><li class="chapter-item expanded "><a href="examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> Connect to IoT Central</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="knownissues.html"><strong aria-hidden="true">5.</strong> Known issues</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="reference.html"><strong aria-hidden="true">6.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="translations.html"><strong aria-hidden="true">6.1.</strong> Translations</a></li><li class="chapter-item expanded "><a href="helmOptions.html"><strong aria-hidden="true">6.2.</strong> Helm chart install options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">6.2.1.</strong> iotedged</a></li><li class="chapter-item expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">6.2.2.</strong> edgeagent</a></li></ol></li><li class="chapter-item expanded "><a href="vk.html"><strong aria-hidden="true">6.3.</strong> Compare with virtual-kubelet provider</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -92,41 +106,42 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
+                    <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                            <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
-                                <i id="git-repository-button" class="fa fa-github"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -154,7 +169,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#introduction" id="introduction">Introduction</a></h2>
+                        <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
 <p>Azure IoT Edge can integrate with Kubernetes, using it as a resilient, highly available infrastructure layer. It registers an IoT Edge Custom Resource Definition (CRD) with the Kubernetes API Server and provides a CRD controller that reconciles cloud-managed desired state with the local cluster state.</p>
 <p>Module lifetime is managed by the Kubernetes scheduler, which maintains module availability and chooses their placement. IoT Edge manages the edge application platform running on top, continuously reconciling the desired state specified in IoT Hub with the state on the edge cluster. The edge application model is still the familiar model based on IoT Edge modules and routes. The IoT Edge agent performs the role of a CRD controller, automatically <em>translating</em> from IoT Edge application model to Kubernetes native constructs like pods, deployments, services etc.</p>
 <p><img src="./media/k8s_model.png" alt="" /></p>
@@ -163,12 +178,12 @@
 <p>💡</p>
 <p>A good mental model for this integration is to think of Kubernetes as another operating environment IoT Edge applications can run on in addition to Linux and Windows.</p>
 </blockquote>
-<h2><a class="header" href="#architecture-and-initialization-flow" id="architecture-and-initialization-flow">Architecture and initialization flow</a></h2>
+<h2 id="architecture-and-initialization-flow"><a class="header" href="#architecture-and-initialization-flow">Architecture and initialization flow</a></h2>
 <p><img src="./media/pp-refresh-k8s.png" alt="" /></p>
-<h2><a class="header" href="#multi-tenancy" id="multi-tenancy">Multi-tenancy</a></h2>
+<h2 id="multi-tenancy"><a class="header" href="#multi-tenancy">Multi-tenancy</a></h2>
 <p>When installed on Kubernetes, IoT Edge is deployed into a specified Kubernetes <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>. All resources and services required by the deployment are created within this namespace. Therefore, it's possible to install multiple IoT Edge deployments into the same cluster, each in its seperate namespace. </p>
 <p>There is no upper limit enforced on the number of namespaces, this is generally a function of resource capacity of the cluster.</p>
-<h2><a class="header" href="#security-architecture" id="security-architecture">Security architecture</a></h2>
+<h2 id="security-architecture"><a class="header" href="#security-architecture">Security architecture</a></h2>
 <p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
 <pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
 | ServiceAccount |---+---| ClusterRoleBinding            |------| ClusterRole                          |
@@ -189,7 +204,7 @@
 | edgeagent      |       | edgeagent                     |      | edgeagent                            |
 +----------------+       +-------------------------------+      +--------------------------------------+
 </code></pre>
-<h3><a class="header" href="#iotedged" id="iotedged">iotedged</a></h3>
+<h3 id="iotedged"><a class="header" href="#iotedged">iotedged</a></h3>
 <p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">source repository</a>. </p>
 <p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
 <p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
@@ -198,11 +213,11 @@
 <li>TokenReview, which is the foundation of module authentication.</li>
 </ul>
 <p>Each installation will create its own ClusterRole and ClusterRoleBinding for iotedged.</p>
-<h3><a class="header" href="#edgeagent" id="edgeagent">EdgeAgent</a></h3>
+<h3 id="edgeagent"><a class="header" href="#edgeagent">EdgeAgent</a></h3>
 <p>EdgeAgent doesnt need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.</p>
-<h3><a class="header" href="#edgehub-and-modules" id="edgehub-and-modules">EdgeHub and modules</a></h3>
+<h3 id="edgehub-and-modules"><a class="header" href="#edgehub-and-modules">EdgeHub and modules</a></h3>
 <p>EdgeHub and other modules shouldn''t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.</p>
-<h2><a class="header" href="#module-authentication" id="module-authentication">Module Authentication</a></h2>
+<h2 id="module-authentication"><a class="header" href="#module-authentication">Module Authentication</a></h2>
 <p>In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.</p>
 <p>Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as module identity in Kubernetes cluster. It doesn''t require to have any roles associated with it so EdgeAgent doesn't create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to iotedged as an Authorization bearer token which iotedged reviews against Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.</p>
 <p>For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between iotedged and module container. The trust bundle that iotedged generates during an initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.</p>
@@ -227,8 +242,8 @@
     |  Kube API  |                                                                                 
     +------------+                                                                                 
 </code></pre>
-<h2><a class="header" href="#high-availability-and-scaling" id="high-availability-and-scaling">High availability and scaling</a></h2>
-<h3><a class="header" href="#what-is-supported" id="what-is-supported">What is supported</a></h3>
+<h2 id="high-availability-and-scaling"><a class="header" href="#high-availability-and-scaling">High availability and scaling</a></h2>
+<h3 id="what-is-supported"><a class="header" href="#what-is-supported">What is supported</a></h3>
 <p><strong>Resilience to node failure</strong> </p>
 <p>As IoT Edge uses Kubernetes native constructs like Deployments, it benefits from inherent platform capabilities (when configured for HA) to keep workloads running by moving them off unhealthy nodes to healthy ones. This avoids having a single point of failure for mission critical edge workloads.</p>
 <blockquote>
@@ -237,18 +252,11 @@
 </blockquote>
 <p><strong>Scaling by adding modules to the deployment manifest</strong></p>
 <p>It is possible to scale edge modules <em>mechanically</em> by specifying modules with different IDs but same container image in the same IoT Edge deployment and fronting them with a reverse proxy.</p>
-<h3><a class="header" href="#what-is-not-supported" id="what-is-not-supported">What is not supported</a></h3>
+<h3 id="what-is-not-supported"><a class="header" href="#what-is-not-supported">What is not supported</a></h3>
 <p>IoT Edge on Kubernetes does not yet provide high availability with manual or auto scaling per the usual Kubernetes definition. In other words, all modules deployed via IoT Edge are currently <em>singletons</em> - only single instances are supported. </p>
 <p>The primary reason for this is that IoT Edge couples the application model based on Docker API with an opinionated programming model based on Azure IoT SDK. The programming model is optimized for in-order message delivery which is important for many IoT scenarios. While it is certainly possible to deploy modules that do not use IoT SDK using IoT Edge, each module gets an IoT Hub identity anyway even if it doesn't use it.</p>
 <p>The ability to dynamically create new module identities when multiple replicas are requested is not yet implemented. IoT Edge's in-order message delivery guarantee combined with multiple module replicas is challenging to implement and needs careful design. We intend to explore this use case in the future.</p>
-<h1><a class="header" href="#compare-with-virtual-kubelet-provider" id="compare-with-virtual-kubelet-provider">Compare with virtual-kubelet provider</a></h1>
-<p>Running IoT Edge on Kubernetes has  different goals from the <a href="https://github.com/Azure/iot-edge-virtual-kubelet-provider">iot-edge-virtual-kubelet-provider</a> project. The virtual-kubelet integration is a mechanism to define an edge workload deployment in a Kubernetes-native way and deliver it to IoT Edge devices via the IoT Hub. While IoT Edge on Kubernetes is about running the workloads on a Kubernetes cluster.</p>
-<p>In fact they can used together to both define the edge workloads and run them on Kubernetes. However, you do not get to use the full fidelity of the Kubernetes application model with IoT Edge on Kubernetes.</p>
-<p>Azure IoT Edge's application model is based on the Docker API specifically the <a href="https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate">createOptions</a> schema. When running on Kubernetes, the same application model is retained and the runtime performs a number of automatic translations to the  Kubernetes application model. The goal is that these edge applications designed to run on a single node will work with minimal modifications when installed in a Kubernetes cluster. To achieve this, IoT Edge on Kubernetes has to transform the edge deployment into Kubernetes objects which will support module-module communication. </p>
-<p>IoT Edge on Kubernetes creates Namespaces, Deployments, Services, ImagePullSecrets, PersistentVolumeClaims, and ServiceAccounts to establish this framework. </p>
-<h2><a class="header" href="#translation-details" id="translation-details">Translation details</a></h2>
-<p>Please see <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/edge-deployment-to-k8s-translations.md">repo docs</a>.</p>
-<h2><a class="header" href="#createoptions-extensions" id="createoptions-extensions">createOptions extensions</a></h2>
+<h2 id="createoptions-extensions"><a class="header" href="#createoptions-extensions">createOptions extensions</a></h2>
 <p>As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.</p>
 <p>In order to leverage some useful Kubernetes specific constructs in an IoT Edge deployment manifest, you can use the createOptions extensions feature. This allows you to use native Kubernetes API format to express requirements in a module's createOptions section.</p>
 <p>Here are some key points to take note of regarding this feature:</p>
@@ -260,60 +268,235 @@
 <p>When present, the createOptions extensions section is ignored without error when processed by the edgeAgent operating in a non-Kuberenetes mode (i.e. when deployed on a single device with a docker engine).</p>
 </li>
 </ul>
-<h2><a class="header" href="#feature-enabling" id="feature-enabling">Feature enabling</a></h2>
+<h2 id="feature-enabling"><a class="header" href="#feature-enabling">Feature enabling</a></h2>
 <p>These options will take effect if both variables <strong>ExperimentalFeatures__Enabled</strong> and <strong>ExperimentalFeatures__EnableK8SExtensions</strong> are set to <strong>true</strong> for edgeAgent when operating in Kubernetes mode. </p>
 <p>These are turned on by default in edgek8s/edge-kubernetes Helm chart.</p>
 <p>Several examples in the <a href="examples.html">tutorials</a> section demonstrate how to use the feature.</p>
-<h2><a class="header" href="#translation-details-1" id="translation-details-1">Translation details</a></h2>
-<p>See the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">repo docs</a> for translation details.</p>
-<h1><a class="header" href="#helm-chart-install-options" id="helm-chart-install-options">Helm chart install options</a></h1>
-<p>This section lists the <code>edgeAgent</code> and <code>iotedged</code> options can be set using command line or the Helm chart's <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/values.yaml">values.yaml</a> file during installation.</p>
-<p>Few examples in the <a href="./examples.html">Tutorials</a> section demonstrate how to set the options from command line.</p>
-<p>IoT Edge Daemon can be configured with various settings as described below</p>
-<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
-<tr><td>data.enableGetNodesRBAC</td><td><ul><li><strong>true</strong> indicates <code>iotedged</code> has permssions to query node type for the purposes of reporting this value to IoT Hub. Setting to <code>true</code> will attempt to create a <em>NodeObserver</em> cluster role</li><br><br> <li><strong>false</strong> indicates <code>iotedged</code> does not have persmission to query node type information <br><br> Should be set to <code>false</code> if <code>NodeObserver</code> cluster role cannot be created with your access permissions. </li></ul></td></tr>
-<tr><td>data.persistentVolumeClaim.storageClassName</td><td><ul>Storage class name that backs iotedged data directory. </ul></td></tr>
-<tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name that backs iotedged data directory. </ul></td></tr>
-<tr><td>data.persistentVolumeClaim.size</td><td><ul>size, in Mb, of persistent volume claim that backs iotedged data directory </ul></td></tr>
-</tbody></table>
-<p>Edge agent can be configured with various environment variables as described below</p>
-<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
-<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expose the service externally using a cloud provider's load balancer </li> <ul></td></tr>
-<tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>
-<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>true</strong> to enable the logging for K8s service API </li> <li><strong>false</strong> to enable the logging for K8s service API </li></td></tr>
-<tr><td>runtimeLogLevel</td><td><ul><li> debug </li> <li> info </li> <li> warn </li> <li> error </li></ul></td></tr>
-<tr><td>upstreamProtocol</td><td><ul><li><strong>Amqp</strong> for AMQP protocol </li>  <li><strong>AmqpWs</strong> for the fallback sceanrio </ul></td></tr>
-<tr><td>runAsNonRoot</td><td><ul><li><strong>true</strong> starts all modules as a non-root user (uid 1000) </li>  <li><strong>false</strong> starts all module per user specfied in Dockerfile (docker defaults to <code>root</code> if no user is specified in Dockerfile) </li> <ul></td></tr>
-<tr><td>enableK8sExtensions</td><td><ul><li><strong>true</strong> to enable the module's create options with K8s primitives </li>  <li> <strong>false</strong> to disable the module's create options with K8s primitives </li> </ul></td></tr>
-<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>true</strong> to enable the experimental features </li> <li> <strong>false</strong> to disable the experimental features </li> </ul></td></tr>
-<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that backs persistent storage in modules to use dynamically provisioned PVCs. <br><br> When the edgeAgent is started with this option, any module that specifies a docker mount of type <code>volume</code> will be backed by a dynamically created PVC. </ul></td></tr>
-<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that backs up the persistent storage in modules to use that PV </ul></td></tr>
-<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
-</tbody></table>
-<h1><a class="header" href="#examples" id="examples">Examples</a></h1>
-<h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
-<h2><a class="header" href="#a-kubernetes-cluster" id="a-kubernetes-cluster">A Kubernetes cluster</a></h2>
+<h2 id="supported-extensions"><a class="header" href="#supported-extensions">Supported extensions</a></h2>
+<p>See the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">repo docs</a> for supported extensions.</p>
+<p>IoT Edge on Kubernetes uses the same Docker-based application model built around
+edge modules as a single device with Docker engine. </p>
+<p>However, <em>configuring</em> the modules to run on 
+Kubernetes involve a number of differences compared to a Docker engine 
+environment and require a grasp of a few k8s-specific concepts.</p>
+<p>The content in the section highlights the major differences to be aware of and 
+best practice recommendations informed by real-world customer deployments.</p>
+<h1 id="host-storage"><a class="header" href="#host-storage">Host storage</a></h1>
+<p><strong>Do not mount storage from the host directly into a module.</strong></p>
+<p>Unlike a single device environment, host storage on Kubernetes is ephemeral. 
+As pods can be moved between agent nodes, any data that your application 
+persists directly on a node will be lost when the pod gets re-scheduled to a 
+different node. </p>
+<p>It follows that you should not attempt to directly mount files from the host
+either. In fact, this is not supported on Kubernetes. If your module needs to 
+read its configuration from a file consider using a <a href="https://kubernetes.io/docs/concepts/configuration/configmap/">configmap</a>
+as demonstrated in a <a href="bp/storage/../../examples/configmaps.html">subsequent tutorial</a>. </p>
+<p>If your modules need to persist data, use Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">persistent volumes</a>
+leveraging best practices recommended in the following section.</p>
+<h1 id="persistent-storage"><a class="header" href="#persistent-storage">Persistent storage</a></h1>
+<blockquote>
+<p>💡 For Azure Stack Edge specific guidance, please see the <a href="bp/storage/ase.html">ASE section</a>.</p>
+</blockquote>
+<h2 id="use-kubernetes-persistent-volumes"><a class="header" href="#use-kubernetes-persistent-volumes">Use Kubernetes persistent volumes.</a></h2>
+<p>If your module needs to persist non-ephemeral data, be sure to use
+<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a>.
+In the namespace for your IoT Edge workloads, pre-create <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">Persistent Volume
+Claims</a> 
+(PVC) for modules that require persistence.</p>
+<h2 id="always-configure-iotedged-with-a-pvc"><a class="header" href="#always-configure-iotedged-with-a-pvc">Always configure <code>iotedged</code> with a PVC</a></h2>
+<p>At a minimum, one PVC is required for <code>iotedged</code> to store its crypto material.
+On multi-node k8s clusters this PVC cannot be backed by host local storage as 
+its stored state needs to be attached to <code>iotedged</code> pod even if it gets moved 
+to a different agent node. </p>
+<p><em>If a new instance of <code>iotedged</code> pod cannot access its previously created 
+state, it will create new state and starting running. However, all previously 
+running modules will fail and will need to be manually restarted to sync up with 
+the new <code>iotedged</code> instance.</em></p>
+<p>When installing <code>iotedged</code> into the cluster, simply reference the pre-created 
+PVC in the <code>helm install</code> command like so:</p>
+<pre><code class="language-bash">helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-example edge-kubernetes \
+  --namespace pv-iotedged \
+  --set &quot;iotedged.data.persistentVolumeClaim.name=replace-with-PVC-name&quot; \
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
+</code></pre>
+<h2 id="configure-edgehub-with-a-pvc-to-avoid-message-loss"><a class="header" href="#configure-edgehub-with-a-pvc-to-avoid-message-loss">Configure <code>edgeHub</code> with a PVC to avoid message loss</a></h2>
+<p><code>edgeHub</code> always persists messages before sending an <em>ack</em> to the sender. This 
+is what enables offline store-and-forward functionality. If <code>edgeHub</code> is not 
+configured with a persistent volume for its message store and it restarts (either
+on the same node or different node) any undelivered messages stored by the older
+instance are lost. </p>
+<p>If your scenario requires no message loss be sure to configure <code>edgeHub</code> with 
+a PVC. On a multi-node cluster, this persistent volume should be backed by non-host-local storage. </p>
+<h2 id="configure-modules-persistent-storage-using-createoption-extensions"><a class="header" href="#configure-modules-persistent-storage-using-createoption-extensions">Configure modules' persistent storage using createOption extensions</a></h2>
+<p>Rather than rely on Docker API translations, it is simplest to use createOption 
+extensions to assign pre-created PVCs to modules. The technique is demonstrated 
+by <a href="bp/storage/../../examples/pervol_extensions.html">this</a> tutorial. </p>
+<h2 id="readwriteonce-volumes-need-additional-configuration"><a class="header" href="#readwriteonce-volumes-need-additional-configuration"><code>ReadWriteOnce</code> volumes need additional configuration</a></h2>
+<p>Volumes can have different <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">access modes</a>. </p>
+<p>For <code>ReadWriteOnce</code> volumes deployment strategy should be set to <code>Recreate</code>. For 
+more details, see <a href="bp/storage/../depstrat.html">Deployment strategy guidance</a></p>
+<h2 id="some-storageclasses-may-need-custom-security-context"><a class="header" href="#some-storageclasses-may-need-custom-security-context">Some StorageClasses may need custom security context</a></h2>
+<p><code>fsGroup</code> and <code>runAsUser</code> might be need to be set for some storage classes to avoid 
+permission errors when accessing the persistent volume. For example, the following
+<a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-pod-security-context">securityContext</a>
+setting were required for the <a href="https://docs.microsoft.com/en-us/azure/iot-edge/how-to-store-data-blob?view=iotedge-2018-06">Blob Storage module</a> 
+to work with <a href="https://longhorn.io">Longhorn</a> volumes on <a href="https://k3s.io">K3s</a>:</p>
+<pre><code>{
+  .
+  .
+  "k8s-experimental": {
+    .
+    .
+    <strong>"securityContext": {
+      "fsGroup": "3000",
+      "runAsUser": "1000"
+    }</strong>
+  }
+}
+</code></pre><h1 id="azure-stack-edge"><a class="header" href="#azure-stack-edge">Azure Stack Edge</a></h1>
+<p>Azure Stack Edge (ASE) appliances have IoT Edge running in a Kubernetes environment
+as an option for <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-deploy-configure-compute#configure-compute">compute</a>.
+ASE provides a way to create <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-manage-shares">shares</a>
+that can be used as storage for IoT Edge modules via createOption translations
+as demonstrated in a subsequent <a href="bp/storage/../../examples/pervol_translation.html">tutorial</a>. </p>
+<h2 id="always-use-mounts-with-type-volume-to-reference-shares"><a class="header" href="#always-use-mounts-with-type-volume-to-reference-shares">Always use <code>Mounts</code> with type <code>volume</code> to reference shares</a></h2>
+<p>After creating an ASE share, to assign it to a module use <code>Mounts</code> in the module's
+<code>createOptions</code> of type <code>volume</code>. The <code>Source</code> value should be the same as the 
+ASE share name. <code>Target</code> value is the module's filesystem location where the 
+volume should be mounted.</p>
+<pre><code>"createOptions": {
+    "HostConfig": {
+         <strong>"Mounts": [
+            {
+                "Target": "/storage",
+                "Source": "message-storage",
+                "Type": "volume",
+                "ReadOnly": "false"
+            }
+        ]</strong>
+    }
+}</code></pre>
+<blockquote>
+<p>💣 Note</p>
+<p>To avoid message loss the <code>edgeHub</code> module should be configured with persistent volumes
+as demonstrated in the subsequent persistent volumes <a href="bp/storage/../../examples/pervol_translation.html">tutorial</a>.
+Ignore the <code>helm</code> commands as those are not required on ASE.</p>
+</blockquote>
+<h1 id="work-with-proxies"><a class="header" href="#work-with-proxies">Work with proxies</a></h1>
+<p>If IoT Edge is required to connect via a proxy server, specify its address in the 
+install command.</p>
+<pre><code>helm install --repo https://edgek8s.blob.core.windows.net/staging example edge-kubernetes \
+  --namespace helloworld \
+  --set "iotedged.data.persistentVolumeClaim.name=iotedged-data" \
+  <strong>--set "iotedged.data.httpsProxy=replace-with-proxy-server-address" \</strong>
+  <strong>--set "iotedged.data.noProxy=localhost" \</strong>
+  --set "provisioning.deviceConnectionString=$connStr"</code></pre>
+<p>Proxy settings are propagated to <code>edgeAgent</code> as well in addition to <code>iotedged</code>.
+<code>noProxy=localhost</code> is required to prevent local communication from passing through the
+proxy server.</p>
+<blockquote>
+<p>🗒 On Azure Stack Edge, follow <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-deploy-configure-network-compute-web-proxy#configure-web-proxy">guidance</a> from their docs.</p>
+</blockquote>
+<h2 id="modules-specify-proxy-settings-in-deployment-manifest"><a class="header" href="#modules-specify-proxy-settings-in-deployment-manifest">Modules specify proxy settings in deployment manifest</a></h2>
+<p>All other modules in the IoT Edge deployment that need communicate via the proxy
+server (e.g. <code>edgeHub</code>) should follow <a href="https://docs.microsoft.com/azure/iot-edge/how-to-configure-proxy-support?view=iotedge-2018-06#configure-deployment-manifests">guidance</a> to specify the proxy address in
+the deployment manifest. </p>
+<p><em>They should also add a <strong>NO_PROXY</strong> environment variable set to <strong>localhost</strong>.</em>
+This is an additional requirement when running on Kubernetes because modules 
+are configured to communicate with <code>iotedged</code> using <code>http://localhost</code></p>
+<h1 id="expose-module-services"><a class="header" href="#expose-module-services">Expose module services</a></h1>
+<h2 id="ensure-all-ports-required-for-communication-are-specified-under-portbindings"><a class="header" href="#ensure-all-ports-required-for-communication-are-specified-under-portbindings">Ensure all ports required for communication are specified under <code>PortBindings</code>.</a></h2>
+<p>The <a href="bp/network/../../examples/services_internal.html">expose services within the cluster tutorial</a> 
+details how to expose a module's endpoint(s) to enable communication between modules
+in the same namespace. See the <a href="bp/network/../../examples/services_external.html">external services tutorial</a> 
+for guidance on how to expose services to clients external to the cluster.</p>
+<p>The important difference compared to Docker-based deployments is that clients cannot
+access ports that are not defined in <code>PortBindings</code> section. </p>
+<h1 id="run-on-host-network"><a class="header" href="#run-on-host-network">Run on host network</a></h1>
+<p>For some scenarios, especially those involving the BACNet protocol, workloads need 
+to run on the host network namespace. This is not the default configuration for 
+Kubernetes, so to run a module on the host network use following createOptions:</p>
+<pre><code>{
+    &quot;HostConfig&quot;: {
+        &quot;NetworkMode&quot;: &quot;host&quot;
+    }
+}
+</code></pre>
+<p>The <code>edgeAgent</code> translates these createOptions to setup the module to run in the 
+host network namespace on Kubernetes. Unlike Docker-based deployments the <code>NetworkingConfig</code>
+section is not required. It will be ignored if specified. </p>
+<blockquote>
+<p>All modules don't need to run in the host network to be able to communicate with each other.
+For example, a BACNet module running on the host network can connect to <code>edgeHub</code>
+module running on the internal cluster network.</p>
+</blockquote>
+<h1 id="use-resources-and-limits"><a class="header" href="#use-resources-and-limits">Use resources and limits</a></h1>
+<h2 id="set-module-cpumemory-limits-andor-reservations"><a class="header" href="#set-module-cpumemory-limits-andor-reservations">Set module CPU/memory limits and/or reservations</a></h2>
+<p>In many scenarios, IoT Edge is sharing cluster resources with other user and system
+workloads. Therefore, it is highly recommended that modules declare their CPU and 
+memory reservations or limits using createOption extensions as demonstrated by the
+<a href="bp/../../examples/resources.html">tutorial on using resources</a>. See the <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">Kubernetes documentation</a> on how to correctly use this. </p>
+<p>Reservations for <code>iotedged</code> and <code>edgeAgent</code> pods are already specified in the Helm
+chart, so you don't need to set them yourself for these two pods.</p>
+<h2 id="leverage-device-plugins-for-using-other-device-resources"><a class="header" href="#leverage-device-plugins-for-using-other-device-resources">Leverage device plugins for using other device resources</a></h2>
+<p>If your module needs access to special device hardware like accelerators, use the
+device plugin framework. See the <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-modify-fpga-modules-gpu#resource-usage">GPU/FPGA access Azure Stack Edge documentation</a> as an example.</p>
+<p><strong>Do not mount device paths directly into the module using its createOptions.</strong></p>
+<h1 id="adjust-deployment-strategy"><a class="header" href="#adjust-deployment-strategy">Adjust Deployment strategy</a></h1>
+<p>The default module update behavior is <code>RollingUpdate</code>. This spins up a new instance
+of the module and ensures it is running before tearing down the old instance. This 
+is great for reducing module downtime, however there are conditions where this update
+strategy does not work.</p>
+<p>If a module is using an exclusive resource like a persistent volume of type
+<code>ReadWriteOnce</code> or a device plugin resource like a GPU, the new instance remains in 
+the pending state until the old instance relinquishes the held resource. At the same
+time, the old instance is not removed until the new instance starts running. So,
+things are deadlocked and the update process becomes stuck indefinitely.</p>
+<p>To avoid this condition, adjust the createOptions of a module that is using exclusive
+resources by setting its <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-deployment-strategy">deployment strategy to <code>Recreate</code></a>.</p>
+<blockquote>
+<p>💣</p>
+<p><code>Recreate</code> deployment strategy can increase module downtime as the old module instance
+is torn down before the new instance starts running. If the update specifies a new
+container image, for example, the module will remain down until the new image is pulled
+and started.</p>
+</blockquote>
+<h1 id="avoid-using-docker-socket"><a class="header" href="#avoid-using-docker-socket">Avoid using Docker socket</a></h1>
+<h2 id="do-not-mount-dockersock-into-any-module"><a class="header" href="#do-not-mount-dockersock-into-any-module">Do not mount <code>docker.sock</code> into any module!</a></h2>
+<p>Some modules in the single device, Docker-engine, scenario mount the Docker 
+socket from the host. That is practice not recommended in any scenario since it 
+essentially gives the module <code>root</code> privileges on the system. </p>
+<p>It is particularly egregious on Kubernetes since many Kubernetes distributions
+do not even have the Docker engine installed and rely on a lower level Container
+runtime like containerd. Taking a dependency on the Docker socket is guaranteed 
+to fail at run time on such clusters.</p>
+<p>Getting access to logs and metrics is a common reason for mounting the Docker socket. The 
+recommended way to get logs and metrics on a Kubernetes cluster is to install a cluster-wide 
+observability solution like <a href="https://docs.microsoft.com/azure/azure-monitor/containers/container-insights-analyze">Azure Monitor</a>.</p>
+<h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<h1 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h1>
+<h2 id="a-kubernetes-cluster"><a class="header" href="#a-kubernetes-cluster">A Kubernetes cluster</a></h2>
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>
 <p>For a managed cluster offering, consider Azure Kubernetes Service (AKS). You can stand one up using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">AKS QuickStart</a> instructions.</p>
 <p>For a local development environment, you can use <a href="https://kubernetes.io/docs/setup/learning-environment/minikube/">Minikube</a> or <a href="https://github.com/rancher/k3d#k3s-in-docker">k3d</a> (recommended).</p>
-<h2><a class="header" href="#persistent-storage-for-the-iot-edge-daemon-iotedged" id="persistent-storage-for-the-iot-edge-daemon-iotedged">Persistent storage for the IoT Edge daemon (iotedged)</a></h2>
+<h2 id="persistent-storage-for-the-iot-edge-daemon-iotedged"><a class="header" href="#persistent-storage-for-the-iot-edge-daemon-iotedged">Persistent storage for the IoT Edge daemon (iotedged)</a></h2>
 <p>IoT Edge has a stateful architecture. Even if the workload modules are stateless, at a minimum, the context store for <code>iotedged</code> pod should be backed by non-ephemeral storage. Barring first-class support for native persistent volumes in your distribution, the <a href="https://github.com/rancher/local-path-provisioner">local-path-provisioner</a> provides a convenient way to utilize device local storage as a persistent store in a Kubernetes-native manner. For multi-node setup with node failure resilience, see the <a href="examples/../scaling.html#what-is-supported">HA and scaling</a> section.</p>
 <blockquote>
 <p>For convenience, most tutorials that follow don't set up iotedged persistence. Persistence is not needed for getting things up and running but is highly recommended for demos, PoCs and, of course, production pilots. See the <a href="https://microsoft.github.io/iotedge-k8s-doc/examples/ha.html">iotedged persistence tutorial</a> for configuring state persistence for <code>iotedged</code>.</p>
 </blockquote>
-<h2><a class="header" href="#helm-3" id="helm-3">Helm 3</a></h2>
+<h2 id="helm-3"><a class="header" href="#helm-3">Helm 3</a></h2>
 <p>Helm is a package manager for Kubernetes which allows you to install applications, including IoT Edge, into your cluster. Please follow the <strong>Helm 3</strong> install <a href="https://helm.sh/docs/intro/install/">instructions</a>. </p>
 <blockquote>
 <p>The source code for Helm charts used by IoT Edge is available in the <a href="https://github.com/Azure/iotedge/tree/release/1.1/kubernetes/charts">azure/iotedge repo</a></p>
 </blockquote>
-<h2><a class="header" href="#kubectl" id="kubectl">kubectl</a></h2>
+<h2 id="kubectl"><a class="header" href="#kubectl">kubectl</a></h2>
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is an essential tool for interacting with your cluster.</p>
-<h2><a class="header" href="#visual-studio-code" id="visual-studio-code">Visual Studio Code</a></h2>
+<h2 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h2>
 <p><a href="https://code.visualstudio.com/download">Visual Studio Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge">IoT Edge extension</a> is recommended for working with IoT Edge's deployment manifests and submitting them to IoT Hub.</p>
-<h2><a class="header" href="#visualization-tools-optional" id="visualization-tools-optional">Visualization tools (optional)</a></h2>
+<h2 id="visualization-tools-optional"><a class="header" href="#visualization-tools-optional">Visualization tools (optional)</a></h2>
 <p>Tools like <a href="https://github.com/vmware-tanzu/octant">Octant</a> and <a href="https://k9ss.io">K9s</a> can help you understand the architecture and state of your cluster application.</p>
 <p>This example demonstrates a &quot;Hello, world&quot; scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>.</p>
-<h3><a class="header" href="#setup-steps" id="setup-steps">Setup steps</a></h3>
+<h3 id="setup-steps"><a class="header" href="#setup-steps">Setup steps</a></h3>
 <ol>
 <li>
 <p><a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">Register an IoT Edge device</a> and <a href="https://docs.microsoft.com/azure/iot-edge/quickstart-linux#deploy-a-module">deploy the simulated temperature sensor module</a>. Be sure to note the device's connection string.</p>
@@ -353,17 +536,17 @@ kubectl logs -n helloworld replace-with-temp-sensor-pod-name simulatedtemperatur
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h3>
+<h3 id="cleanup"><a class="header" href="#cleanup">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del edge1 -n helloworld &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
-<h2><a class="header" href="#using-kubernetes-persistent-volumes" id="using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
+<h2 id="using-kubernetes-persistent-volumes"><a class="header" href="#using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
 <p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while preserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
 <p>IoT Edge modules can leverage persistent volumes implicitly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
 <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>implicitly</em> via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-1" id="setup-steps-1">Setup steps</a></h3>
+<h3 id="setup-steps-1"><a class="header" href="#setup-steps-1">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -501,14 +684,14 @@ kubectl get pvc -n pv1
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-1" id="cleanup-1">Cleanup</a></h3>
+<h3 id="cleanup-1"><a class="header" href="#cleanup-1">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del pv-example1 -n pv1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>explicitly</em> via K8s createOptions extensions. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-2" id="setup-steps-2">Setup steps</a></h3>
+<h3 id="setup-steps-2"><a class="header" href="#setup-steps-2">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -658,14 +841,14 @@ kubectl get pvc -n pv2
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-2" id="cleanup-2">Cleanup</a></h3>
+<h3 id="cleanup-2"><a class="header" href="#cleanup-2">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del pv-example2 -n pv2 &amp;&amp; \
 kubectl delete ns pv2
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-3" id="setup-steps-3">Setup steps</a></h3>
+<h3 id="setup-steps-3"><a class="header" href="#setup-steps-3">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -816,7 +999,7 @@ kubectl exec --namespace=cm $ehname -c edgehub ls /etc/module
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-3" id="cleanup-3">Cleanup</a></h3>
+<h3 id="cleanup-3"><a class="header" href="#cleanup-3">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del cm-example -n cm &amp;&amp; \
 kubectl delete ns cm
@@ -829,7 +1012,7 @@ kubectl delete ns cm
 <p>Local storage backed persistent volumes provide resilience to pod failure if the new pod happens to land on the same node but does not help in cases where the pod migrates nodes.</p>
 <p>See the <a href="examples/prereqs.html#persistent-storage-for-the-iot-edge-daemon-iotedged">prerequisites section</a> for more details.</p>
 </blockquote>
-<h3><a class="header" href="#setup-steps-4" id="setup-steps-4">Setup steps</a></h3>
+<h3 id="setup-steps-4"><a class="header" href="#setup-steps-4">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -882,14 +1065,14 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging pv-iotedged-ex
 <p>In addition to <code>iotedged</code>, the <code>edgeHub</code> module's message store should also be a backed by a persistent volume to prevent data loss when deployed in a Kubernetes environment. See <a href="examples/pervol_extensions.html">this tutorial</a> for the steps on how to do this.</p>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-4" id="cleanup-4">Cleanup</a></h3>
+<h3 id="cleanup-4"><a class="header" href="#cleanup-4">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del pv-iotedged-example -n pv-iotedged &amp;&amp; \
 kubectl delete ns pv-iotedged
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).</p>
 <p>This example demonstrates how to expose an in-cluster <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-5" id="setup-steps-5">Setup steps</a></h3>
+<h3 id="setup-steps-5"><a class="header" href="#setup-steps-5">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -1036,7 +1219,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging internal-servi
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-5" id="cleanup-5">Cleanup</a></h3>
+<h3 id="cleanup-5"><a class="header" href="#cleanup-5">Cleanup</a></h3>
 <pre><code class="language-bash">
 # Cleanup
 helm del internal-service-example -n internal-service &amp;&amp; \
@@ -1045,7 +1228,7 @@ kubectl delete ns internal-service
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demonstrates how to expose a <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module outside the cluster. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-6" id="setup-steps-6">Setup steps</a></h3>
+<h3 id="setup-steps-6"><a class="header" href="#setup-steps-6">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -1072,8 +1255,7 @@ export connStr='replace-with-device-connection-string-from-step-1'
 # Install the edge workload into the cluster namespace
 helm install --repo https://edgek8s.blob.core.windows.net/staging external-service-example edge-kubernetes \
   --namespace external-service \
-  --set &quot;provisioning.deviceConnectionString=$connStr&quot; \
-  --set &quot;edgeAgent.env.portMappingServiceType=LoadBalancer&quot;
+  --set &quot;provisioning.deviceConnectionString=$connStr&quot;
 </code></pre>
 <blockquote>
 <p>This example demonstrates the easiest way to expose your service externally. It requires your cluster to be able to assign external IP addresses to services of type <strong>LoadBalancer</strong>.</p>
@@ -1090,11 +1272,11 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 <p>You'll update <strong>deployment.template.json</strong> (see navigation pane on the left) to add a sample module that exposes an in-cluster endpoint as a Kubernetes Service.</p>
 </li>
 <li>
-<p>Add a sample <strong>aspnetapp</strong> module under <strong>edgeAgent's</strong> <strong>properties.desired</strong> section as shown below. </p>
+<p>Add a sample <strong>aspnetapp</strong> module under <strong>edgeAgent's</strong> <strong>properties.desired</strong> section as shown below. See the 
+<a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md#apply-service-options">Service createOptions extensions</a>
+for more details.</p>
 <blockquote>
 <p>The <strong>PortBindings</strong> section of module's <a href="https://docs.docker.com/engine/api/v1.34/#operation/ContainerCreate">createOptions</a> is translated to a Kubernetes Service of type <strong>ClusterIP</strong> by default. This type of service is not accessible outside the cluster directly.</p>
-<p>You can change <strong>HostPort</strong> in the module's <strong>createOptions</strong> to configure the port exposed by the service.</p>
-<p>To only expose the <strong>aspnetapp</strong> module's endpoint externally, the example below changes the <strong>edgeHub</strong> module from using <strong>PortBinding</strong> to <strong>ExposedPorts</strong>. This change prevents <strong>edgeHub</strong> from exposing its endpoints outside the cluster while still being available in-cluster.</p>
 </blockquote>
 <pre><code class="language-diff">{
   &quot;$schema-template&quot;: &quot;2.0.0&quot;,
@@ -1161,14 +1343,19 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 +                     }
 +                   ]
 +                 }
++               }, 
++               &quot;k8s-experimental&quot;: {
++                 &quot;serviceOptions&quot; : {
++                   &quot;type&quot; : &quot;LoadBalancer&quot;
++                 }
 +               }
 +             }
-+           },
-+           &quot;type&quot;: &quot;docker&quot;,
-+           &quot;version&quot;: &quot;1.0&quot;,
-+           &quot;status&quot;: &quot;running&quot;,
-+           &quot;restartPolicy&quot;: &quot;always&quot;
-+         }
+            },
+            &quot;type&quot;: &quot;docker&quot;,
+            &quot;version&quot;: &quot;1.0&quot;,
+            &quot;status&quot;: &quot;running&quot;,
+            &quot;restartPolicy&quot;: &quot;always&quot;
+          }
         }
       }
     },
@@ -1197,7 +1384,7 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging external-servi
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-6" id="cleanup-6">Cleanup</a></h3>
+<h3 id="cleanup-6"><a class="header" href="#cleanup-6">Cleanup</a></h3>
 <pre><code class="language-bash">
 # Cleanup
 helm del external-service-example -n external-service &amp;&amp; \
@@ -1206,7 +1393,7 @@ kubectl delete ns external-service
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demonstrates how to assign modules to run on specific nodes. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-7" id="setup-steps-7">Setup steps</a></h3>
+<h3 id="setup-steps-7"><a class="header" href="#setup-steps-7">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -1347,14 +1534,14 @@ kubectl label nodes &lt;node-name&gt; edgehub=true
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-7" id="cleanup-7">Cleanup</a></h3>
+<h3 id="cleanup-7"><a class="header" href="#cleanup-7">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del node-selector-example -n nodeselector &amp;&amp; \
 kubectl delete ns nodeselector
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <p>This example demostrates how you can use <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes resources</a> in an IoT Edge workload deployment manifest.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
-<h3><a class="header" href="#setup-steps-8" id="setup-steps-8">Setup steps</a></h3>
+<h3 id="setup-steps-8"><a class="header" href="#setup-steps-8">Setup steps</a></h3>
 <ol>
 <li>
 <p>As needed, follow the steps to <a href="https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device">register an IoT Edge device</a>. Take note of the device connection string.</p>
@@ -1497,7 +1684,7 @@ kubectl describe pod --namespace=resources $ehname
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-8" id="cleanup-8">Cleanup</a></h3>
+<h3 id="cleanup-8"><a class="header" href="#cleanup-8">Cleanup</a></h3>
 <pre><code class="language-bash">
 # Cleanup
 helm del resources-example -n resources &amp;&amp; \
@@ -1505,10 +1692,10 @@ kubectl delete ns resources
 
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
-<h2><a class="header" href="#azure-iot-edge-on-kubernetes-connnected-to-iot-central" id="azure-iot-edge-on-kubernetes-connnected-to-iot-central">Azure IoT Edge on Kubernetes Connnected to IoT Central</a></h2>
+<h2 id="azure-iot-edge-on-kubernetes-connnected-to-iot-central"><a class="header" href="#azure-iot-edge-on-kubernetes-connnected-to-iot-central">Azure IoT Edge on Kubernetes Connnected to IoT Central</a></h2>
 <p><img src="examples/images/k8sedgecentral.png" alt="header" /></p>
 <p>This tutorial demonstrates a scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>. This tutorial will use an AKS cluster deployed on Azure.</p>
-<h3><a class="header" href="#iot-central-prerequisites" id="iot-central-prerequisites">IoT Central Prerequisites</a></h3>
+<h3 id="iot-central-prerequisites"><a class="header" href="#iot-central-prerequisites">IoT Central Prerequisites</a></h3>
 <ol>
 <li>
 <p>Follow the Prerequisites section of this <a href="https://docs.microsoft.com/en-us/azure/iot-central/core/tutorial-add-edge-as-leaf-device#prerequisites">doc</a> to setup an IoT Central application</p>
@@ -1520,7 +1707,7 @@ kubectl delete ns resources
 <p>Add IoT Edge Device, follow the section in this <a href="https://docs.microsoft.com/en-us/azure/iot-central/core/tutorial-add-edge-as-leaf-device#add-iot-edge-device">doc</a></p>
 </li>
 </ol>
-<h3><a class="header" href="#setup-steps-for-provisoning-edge-device-to-central" id="setup-steps-for-provisoning-edge-device-to-central">Setup steps for provisoning Edge device to Central</a></h3>
+<h3 id="setup-steps-for-provisoning-edge-device-to-central"><a class="header" href="#setup-steps-for-provisoning-edge-device-to-central">Setup steps for provisoning Edge device to Central</a></h3>
 <ol>
 <li>
 <p>Once you have an AKS cluster deployed go to <strong>shell.azure.com</strong></p>
@@ -1578,12 +1765,54 @@ helm install --repo https://edgek8s.blob.core.windows.net/staging edge1 edge-kub
 <p><img src="examples/images/view.png" alt="Central View" /></p>
 </li>
 </ol>
-<h3><a class="header" href="#cleanup-9" id="cleanup-9">Cleanup</a></h3>
+<h3 id="cleanup-9"><a class="header" href="#cleanup-9">Cleanup</a></h3>
 <pre><code class="language-bash"># Cleanup
 helm del edge1 -n helloworld &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<h1 id="known-issues"><a class="header" href="#known-issues">Known issues</a></h1>
+<h2 id="not-all-docker-api-createoptions-are-translated"><a class="header" href="#not-all-docker-api-createoptions-are-translated">Not all Docker API <code>createOptions</code> are translated</a></h2>
+<p>Only a <a href="../translations.html">subset</a> of Docker options are translated to Kubernetes. This subset is determined
+by what is <em>translatable</em> in Kubernetes environment and customer usage scenarios.</p>
+<h2 id="environment-variables-with-colons-in-their-name-cannot-be-used"><a class="header" href="#environment-variables-with-colons-in-their-name-cannot-be-used">Environment variables with <em>colons</em> in their name cannot be used</a></h2>
+<p>Replace <code>:</code> with <code>_</code> to conform to Kubernetes environment variable naming requirements.</p>
+<h2 id="only-a-single-module-in-a-deployment-can-be-started-on-the-host-network"><a class="header" href="#only-a-single-module-in-a-deployment-can-be-started-on-the-host-network">Only a single module in a deployment can be started on the host network</a></h2>
+<p>Since every module has a sidecar proxy listening on <code>locahost</code> ports, currently only
+one module in the edge deployment can be started on the host network. However, a module
+on the host network can communicate with other modules on the cluster internal
+network without any other changes. </p>
+<p>Azure IoT Edge's application model is based on the Docker API specifically the <a href="https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate">createOptions</a> schema. When running on Kubernetes, the same application model is retained and the runtime performs a number of automatic translations to the  Kubernetes application model. The goal is that these edge applications designed to run on a single node will work with minimal modifications when installed in a Kubernetes cluster. To achieve this, IoT Edge on Kubernetes has to transform the edge deployment into Kubernetes objects which will support module-module communication. </p>
+<p>IoT Edge on Kubernetes creates Namespaces, Deployments, Services, ImagePullSecrets, PersistentVolumeClaims, and ServiceAccounts to establish this framework. </p>
+<h2 id="translation-details"><a class="header" href="#translation-details">Translation details</a></h2>
+<p>Please see <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/edge-deployment-to-k8s-translations.md">repo docs</a>.</p>
+<h1 id="helm-chart-install-options"><a class="header" href="#helm-chart-install-options">Helm chart install options</a></h1>
+<p>This section lists the <code>edgeAgent</code> and <code>iotedged</code> options can be set using command line or the Helm chart's <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/values.yaml">values.yaml</a> file during installation.</p>
+<p>Few examples in the <a href="./examples.html">Tutorials</a> section demonstrate how to set the options from command line.</p>
+<p>IoT Edge Daemon can be configured with various settings as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>data.enableGetNodesRBAC</td><td><ul><li><strong>true</strong> indicates <code>iotedged</code> has permssions to query node type for the purposes of reporting this value to IoT Hub. Setting to <code>true</code> will attempt to create a <em>NodeObserver</em> cluster role</li><br><br> <li><strong>false</strong> indicates <code>iotedged</code> does not have persmission to query node type information <br><br> Should be set to <code>false</code> if <code>NodeObserver</code> cluster role cannot be created with your access permissions. </li></ul></td></tr>
+<tr><td>data.persistentVolumeClaim.storageClassName</td><td><ul>Storage class name that backs iotedged data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name that backs iotedged data directory. </ul></td></tr>
+<tr><td>data.persistentVolumeClaim.size</td><td><ul>size, in Mb, of persistent volume claim that backs iotedged data directory </ul></td></tr>
+</tbody></table>
+<p>Edge agent can be configured with various environment variables as described below</p>
+<table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
+<tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expose the service externally using a cloud provider's load balancer </li> <ul></td></tr>
+<tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>
+<tr><td>enableK8sServiceCallTracing</td><td><ul><li><strong>true</strong> to enable the logging for K8s service API </li> <li><strong>false</strong> to enable the logging for K8s service API </li></td></tr>
+<tr><td>runtimeLogLevel</td><td><ul><li> debug </li> <li> info </li> <li> warn </li> <li> error </li></ul></td></tr>
+<tr><td>upstreamProtocol</td><td><ul><li><strong>Amqp</strong> for AMQP protocol </li>  <li><strong>AmqpWs</strong> for the fallback sceanrio </ul></td></tr>
+<tr><td>runAsNonRoot</td><td><ul><li><strong>true</strong> starts all modules as a non-root user (uid 1000) </li>  <li><strong>false</strong> starts all module per user specfied in Dockerfile (docker defaults to <code>root</code> if no user is specified in Dockerfile) </li> <ul></td></tr>
+<tr><td>enableK8sExtensions</td><td><ul><li><strong>true</strong> to enable the module's create options with K8s primitives </li>  <li> <strong>false</strong> to disable the module's create options with K8s primitives </li> </ul></td></tr>
+<tr><td>enableExperimentalFeatures</td><td><ul><li><strong>true</strong> to enable the experimental features </li> <li> <strong>false</strong> to disable the experimental features </li> </ul></td></tr>
+<tr><td>storageClassName</td><td><ul> Specify the storage class name if you wish the volumes that backs persistent storage in modules to use dynamically provisioned PVCs. <br><br> When the edgeAgent is started with this option, any module that specifies a docker mount of type <code>volume</code> will be backed by a dynamically created PVC. </ul></td></tr>
+<tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that backs up the persistent storage in modules to use that PV </ul></td></tr>
+<tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
+</tbody></table>
+<h1 id="compare-with-virtual-kubelet-provider"><a class="header" href="#compare-with-virtual-kubelet-provider">Compare with virtual-kubelet provider</a></h1>
+<p>Running IoT Edge on Kubernetes has  different goals from the <a href="https://github.com/Azure/iot-edge-virtual-kubelet-provider">iot-edge-virtual-kubelet-provider</a> project. The virtual-kubelet integration is a mechanism to define an edge workload deployment in a Kubernetes-native way and deliver it to IoT Edge devices via the IoT Hub. While IoT Edge on Kubernetes is about running the workloads on a Kubernetes cluster.</p>
+<p>In fact they can used together to both define the edge workloads and run them on Kubernetes. However, you do not get to use the full fidelity of the Kubernetes application model with IoT Edge on Kubernetes.</p>
 
                     </main>
 
@@ -1611,10 +1840,10 @@ kubectl delete ns helloworld
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

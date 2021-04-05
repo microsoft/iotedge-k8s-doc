@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Security - Deploy Azure IoT Edge on Kubernetes (preview)</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
         <link rel="shortcut icon" href="favicon.png">
+        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
+        
         <link rel="stylesheet" href="css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -80,8 +94,8 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="expanded "><a href="security.html" class="active"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="expanded "><a href="vk.html"><strong aria-hidden="true">2.4.</strong> Compare with virtual-kubelet provider</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="reference.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="expanded "><a href="translations.html"><strong aria-hidden="true">3.1.</strong> Translations</a></li><li class="expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">3.2.</strong> createOptions extensions</a></li><li class="expanded "><a href="helmOptions.html"><strong aria-hidden="true">3.3.</strong> Helm chart install options</a></li><li><ol class="section"><li class="expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">3.3.1.</strong> iotedged</a></li><li class="expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">3.3.2.</strong> edgeagent</a></li><li class="spacer"></li></ol></li></ol></li><li class="expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Using  volumes with configmaps</a></li><li class="expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Exposing services within the cluster</a></li><li class="expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Exposing services outside the cluster</a></li><li class="expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Scheduling on specific nodes</a></li><li class="expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specifying resource requirements and limits </a></li><li class="expanded "><a href="examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> IoT Central Tutorial </a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="multitenancy.html"><strong aria-hidden="true">2.1.</strong> Multi-tenancy</a></li><li class="chapter-item expanded "><a href="security.html" class="active"><strong aria-hidden="true">2.2.</strong> Security</a></li><li class="chapter-item expanded "><a href="scaling.html"><strong aria-hidden="true">2.3.</strong> HA and scaling</a></li><li class="chapter-item expanded "><a href="createoptions_extensions.html"><strong aria-hidden="true">2.4.</strong> createOptions extensions</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="bestpractices.html"><strong aria-hidden="true">3.</strong> Best practices</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Storage</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp/storage/hoststorage.html"><strong aria-hidden="true">3.1.1.</strong> Host storage</a></li><li class="chapter-item expanded "><a href="bp/storage/perstorage.html"><strong aria-hidden="true">3.1.2.</strong> Persistent storage</a></li><li class="chapter-item expanded "><a href="bp/storage/ase.html"><strong aria-hidden="true">3.1.3.</strong> Azure Stack Edge</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Networking</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp/network/proxy.html"><strong aria-hidden="true">3.2.1.</strong> Work with proxies</a></li><li class="chapter-item expanded "><a href="bp/network/modulecomms.html"><strong aria-hidden="true">3.2.2.</strong> Expose module services</a></li><li class="chapter-item expanded "><a href="bp/network/hostnetwork.html"><strong aria-hidden="true">3.2.3.</strong> Run on host network</a></li></ol></li><li class="chapter-item expanded "><a href="bp/resources.html"><strong aria-hidden="true">3.3.</strong> Use resources and set limits</a></li><li class="chapter-item expanded "><a href="bp/depstrat.html"><strong aria-hidden="true">3.4.</strong> Adjust Deployment strategy</a></li><li class="chapter-item expanded "><a href="bp/docksock.html"><strong aria-hidden="true">3.5.</strong> Avoid using Docker socket</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="examples.html"><strong aria-hidden="true">4.</strong> Tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/prereqs.html"><strong aria-hidden="true">4.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="examples/helloworld.html"><strong aria-hidden="true">4.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="examples/pervol.html"><strong aria-hidden="true">4.3.</strong> Using persistent volumes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/pervol_translation.html"><strong aria-hidden="true">4.3.1.</strong> With createOptions translations</a></li><li class="chapter-item expanded "><a href="examples/pervol_extensions.html"><strong aria-hidden="true">4.3.2.</strong> With createOptions extensions</a></li></ol></li><li class="chapter-item expanded "><a href="examples/configmaps.html"><strong aria-hidden="true">4.4.</strong> Use volumes with configmaps</a></li><li class="chapter-item expanded "><a href="examples/ha.html"><strong aria-hidden="true">4.5.</strong> Setup iotedged for failure resilience</a></li><li class="chapter-item expanded "><a href="examples/services_internal.html"><strong aria-hidden="true">4.6.</strong> Expose services within the cluster</a></li><li class="chapter-item expanded "><a href="examples/services_external.html"><strong aria-hidden="true">4.7.</strong> Expose services outside the cluster</a></li><li class="chapter-item expanded "><a href="examples/nodeselector.html"><strong aria-hidden="true">4.8.</strong> Schedule on specific nodes</a></li><li class="chapter-item expanded "><a href="examples/resources.html"><strong aria-hidden="true">4.9.</strong> Specify resource requirements and limits </a></li><li class="chapter-item expanded "><a href="examples/iotcentraltutorial.html"><strong aria-hidden="true">4.10.</strong> Connect to IoT Central</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="knownissues.html"><strong aria-hidden="true">5.</strong> Known issues</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="reference.html"><strong aria-hidden="true">6.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="translations.html"><strong aria-hidden="true">6.1.</strong> Translations</a></li><li class="chapter-item expanded "><a href="helmOptions.html"><strong aria-hidden="true">6.2.</strong> Helm chart install options</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="iotedged_vars.html"><strong aria-hidden="true">6.2.1.</strong> iotedged</a></li><li class="chapter-item expanded "><a href="edgeagent_vars.html"><strong aria-hidden="true">6.2.2.</strong> edgeagent</a></li></ol></li><li class="chapter-item expanded "><a href="vk.html"><strong aria-hidden="true">6.3.</strong> Compare with virtual-kubelet provider</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -90,41 +104,42 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
+                    <h1 class="menu-title">Deploy Azure IoT Edge on Kubernetes (preview)</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                            <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
-                                <i id="git-repository-button" class="fa fa-github"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/microsoft/iotedge-k8s-doc/tree/master/src" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -152,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#security-architecture" id="security-architecture">Security architecture</a></h2>
+                        <h2 id="security-architecture"><a class="header" href="#security-architecture">Security architecture</a></h2>
 <p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
 <pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
 | ServiceAccount |---+---| ClusterRoleBinding            |------| ClusterRole                          |
@@ -173,7 +188,7 @@
 | edgeagent      |       | edgeagent                     |      | edgeagent                            |
 +----------------+       +-------------------------------+      +--------------------------------------+
 </code></pre>
-<h3><a class="header" href="#iotedged" id="iotedged">iotedged</a></h3>
+<h3 id="iotedged"><a class="header" href="#iotedged">iotedged</a></h3>
 <p><code>iotedged</code> is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml">source repository</a>. </p>
 <p>In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.</p>
 <p><code>iotedged</code> has a ClusterRole because it performs the following cluster wide operations:</p>
@@ -182,11 +197,11 @@
 <li>TokenReview, which is the foundation of module authentication.</li>
 </ul>
 <p>Each installation will create its own ClusterRole and ClusterRoleBinding for iotedged.</p>
-<h3><a class="header" href="#edgeagent" id="edgeagent">EdgeAgent</a></h3>
+<h3 id="edgeagent"><a class="header" href="#edgeagent">EdgeAgent</a></h3>
 <p>EdgeAgent doesnt need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.</p>
-<h3><a class="header" href="#edgehub-and-modules" id="edgehub-and-modules">EdgeHub and modules</a></h3>
+<h3 id="edgehub-and-modules"><a class="header" href="#edgehub-and-modules">EdgeHub and modules</a></h3>
 <p>EdgeHub and other modules shouldn''t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.</p>
-<h2><a class="header" href="#module-authentication" id="module-authentication">Module Authentication</a></h2>
+<h2 id="module-authentication"><a class="header" href="#module-authentication">Module Authentication</a></h2>
 <p>In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.</p>
 <p>Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as module identity in Kubernetes cluster. It doesn''t require to have any roles associated with it so EdgeAgent doesn't create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to iotedged as an Authorization bearer token which iotedged reviews against Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.</p>
 <p>For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between iotedged and module container. The trust bundle that iotedged generates during an initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.</p>
@@ -235,13 +250,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="multitenancy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="multitenancy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="scaling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="scaling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -254,10 +269,10 @@
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 
