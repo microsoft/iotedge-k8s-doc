@@ -1772,6 +1772,7 @@ kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
 <h1 id="known-issues"><a class="header" href="#known-issues">Known issues</a></h1>
+<p>Some capabilities available on IoT Edge with Docker on a single device are not available in IoT Edge on Kubernetes. </p>
 <h2 id="not-all-docker-api-createoptions-are-translated"><a class="header" href="#not-all-docker-api-createoptions-are-translated">Not all Docker API <code>createOptions</code> are translated</a></h2>
 <p>Only a <a href="../translations.html">subset</a> of Docker options are translated to Kubernetes. This subset is determined
 by what is <em>translatable</em> in Kubernetes environment and customer usage scenarios.</p>
@@ -1781,7 +1782,9 @@ by what is <em>translatable</em> in Kubernetes environment and customer usage sc
 <p>Since every module has a sidecar proxy listening on <code>locahost</code> ports, currently only
 one module in the edge deployment can be started on the host network. However, a module
 on the host network can communicate with other modules on the cluster internal
-network without any other changes. </p>
+network without any other changes.</p>
+<h2 id="logging-related-edgeagent-direct-methods-are-not-available"><a class="header" href="#logging-related-edgeagent-direct-methods-are-not-available">Logging-related edgeAgent direct methods are not available</a></h2>
+<p>On Docker-based systems, <code>edgeAgent</code> has <a href="https://docs.microsoft.com/azure/iot-edge/how-to-retrieve-iot-edge-logs?view=iotedge-2018-06">logging-related direct methods</a> that enable experiences such as <a href="https://docs.microsoft.com/azure/iot-edge/troubleshoot-in-portal?view=iotedge-2018-06">troubleshooting from IoT Hub Portal</a>. These direct methods and experiences are not available when running on Kubernetes.</p>
 <p>Azure IoT Edge's application model is based on the Docker API specifically the <a href="https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate">createOptions</a> schema. When running on Kubernetes, the same application model is retained and the runtime performs a number of automatic translations to the  Kubernetes application model. The goal is that these edge applications designed to run on a single node will work with minimal modifications when installed in a Kubernetes cluster. To achieve this, IoT Edge on Kubernetes has to transform the edge deployment into Kubernetes objects which will support module-module communication. </p>
 <p>IoT Edge on Kubernetes creates Namespaces, Deployments, Services, ImagePullSecrets, PersistentVolumeClaims, and ServiceAccounts to establish this framework. </p>
 <h2 id="translation-details"><a class="header" href="#translation-details">Translation details</a></h2>
