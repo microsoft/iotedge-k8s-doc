@@ -3,7 +3,7 @@
 Some capabilities available on IoT Edge with Docker on a single device are not available in IoT Edge on Kubernetes. 
 
 ## Not all Docker API `createOptions` are translated
-Only a [subset](../translations.html) of Docker options are translated to Kubernetes. This subset is determined
+Only a [subset](translations.html) of Docker options are translated to Kubernetes. This subset is determined
 by what is *translatable* in Kubernetes environment and customer usage scenarios.
 
 ## Environment variables with *colons* in their name cannot be used
@@ -17,3 +17,6 @@ network without any other changes.
 
 ## Logging-related edgeAgent direct methods are not available
 On Docker-based systems, `edgeAgent` has [logging-related direct methods](https://docs.microsoft.com/azure/iot-edge/how-to-retrieve-iot-edge-logs?view=iotedge-2018-06) that enable experiences such as [troubleshooting from IoT Hub Portal](https://docs.microsoft.com/azure/iot-edge/troubleshoot-in-portal?view=iotedge-2018-06). These direct methods and experiences are not available when running on Kubernetes.
+
+## Node.js modules do not start
+IoT Edge modules running on Kubernetes based on Node.js IoT SDKs are currently not able to successfully retrieve credentials from `iotedged` and so cannot start. 
