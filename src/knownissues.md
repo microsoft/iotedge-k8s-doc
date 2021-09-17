@@ -18,5 +18,8 @@ network without any other changes.
 ## Logging-related edgeAgent direct methods are not available
 On Docker-based systems, `edgeAgent` has [logging-related direct methods](https://docs.microsoft.com/azure/iot-edge/how-to-retrieve-iot-edge-logs?view=iotedge-2018-06) that enable experiences such as [troubleshooting from IoT Hub Portal](https://docs.microsoft.com/azure/iot-edge/troubleshoot-in-portal?view=iotedge-2018-06). These direct methods and experiences are not available when running on Kubernetes.
 
+## Built-in metrics from edgeAgent are not available
+On Kubernetes, the edgeAgent does not emit [built-in metrics](https://docs.microsoft.com/azure/iot-edge/how-to-access-built-in-metrics?view=iotedge-2018-06#available-metrics). Therefore some of the [curated visualizations](https://docs.microsoft.com/azure/iot-edge/how-to-explore-curated-visualizations?view=iotedge-2018-06&tabs=devices%2Chost#iot-edge-device-details-workbook) are not available.
+
 ## Node.js modules do not start
 IoT Edge modules running on Kubernetes based on Node.js IoT SDKs are currently not able to successfully retrieve credentials from `iotedged` and so cannot start. 
