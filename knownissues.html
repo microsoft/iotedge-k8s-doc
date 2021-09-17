@@ -181,6 +181,8 @@ on the host network can communicate with other modules on the cluster internal
 network without any other changes.</p>
 <h2 id="logging-related-edgeagent-direct-methods-are-not-available"><a class="header" href="#logging-related-edgeagent-direct-methods-are-not-available">Logging-related edgeAgent direct methods are not available</a></h2>
 <p>On Docker-based systems, <code>edgeAgent</code> has <a href="https://docs.microsoft.com/azure/iot-edge/how-to-retrieve-iot-edge-logs?view=iotedge-2018-06">logging-related direct methods</a> that enable experiences such as <a href="https://docs.microsoft.com/azure/iot-edge/troubleshoot-in-portal?view=iotedge-2018-06">troubleshooting from IoT Hub Portal</a>. These direct methods and experiences are not available when running on Kubernetes.</p>
+<h2 id="built-in-metrics-from-edgeagent-are-not-available"><a class="header" href="#built-in-metrics-from-edgeagent-are-not-available">Built-in metrics from edgeAgent are not available</a></h2>
+<p>On Kubernetes, the edgeAgent does not emit <a href="https://docs.microsoft.com/azure/iot-edge/how-to-access-built-in-metrics?view=iotedge-2018-06#available-metrics">built-in metrics</a>. Therefore some of the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-explore-curated-visualizations?view=iotedge-2018-06&amp;tabs=devices%2Chost#iot-edge-device-details-workbook">curated visualizations</a> are not available.</p>
 <h2 id="nodejs-modules-do-not-start"><a class="header" href="#nodejs-modules-do-not-start">Node.js modules do not start</a></h2>
 <p>IoT Edge modules running on Kubernetes based on Node.js IoT SDKs are currently not able to successfully retrieve credentials from <code>iotedged</code> and so cannot start. </p>
 
