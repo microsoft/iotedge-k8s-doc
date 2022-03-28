@@ -167,7 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="createoptions-extensions"><a class="header" href="#createoptions-extensions">createOptions extensions</a></h2>
+                        <blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
+<h2 id="createoptions-extensions"><a class="header" href="#createoptions-extensions">createOptions extensions</a></h2>
 <p>As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.</p>
 <p>In order to leverage some useful Kubernetes specific constructs in an IoT Edge deployment manifest, you can use the createOptions extensions feature. This allows you to use native Kubernetes API format to express requirements in a module's createOptions section.</p>
 <p>Here are some key points to take note of regarding this feature:</p>

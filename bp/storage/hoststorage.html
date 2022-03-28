@@ -167,7 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="host-storage"><a class="header" href="#host-storage">Host storage</a></h1>
+                        <blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
+<h1 id="host-storage"><a class="header" href="#host-storage">Host storage</a></h1>
 <p><strong>Do not mount storage from the host directly into a module.</strong></p>
 <p>Unlike a single device environment, host storage on Kubernetes is ephemeral. 
 As pods can be moved between agent nodes, any data that your application 

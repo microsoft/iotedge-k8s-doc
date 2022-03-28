@@ -167,7 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Edge agent can be configured with various environment variables as described below</p>
+                        <blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
+<p>Edge agent can be configured with various environment variables as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
 <tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expose the service externally using a cloud provider's load balancer </li> <ul></td></tr>
 <tr><td>backupConfigFilePath</td><td><ul> Path of the location for the backup configuration file </ul></td></tr>

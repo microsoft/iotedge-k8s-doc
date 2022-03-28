@@ -167,7 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="security-architecture"><a class="header" href="#security-architecture">Security architecture</a></h2>
+                        <blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
+<h2 id="security-architecture"><a class="header" href="#security-architecture">Security architecture</a></h2>
 <p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
 <pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
 | ServiceAccount |---+---| ClusterRoleBinding            |------| ClusterRole                          |

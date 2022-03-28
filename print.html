@@ -169,7 +169,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+                        <blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a>.</p>
+</blockquote>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
 <p>Azure IoT Edge can integrate with Kubernetes, using it as a resilient, highly available infrastructure layer. It registers an IoT Edge Custom Resource Definition (CRD) with the Kubernetes API Server and provides a CRD controller that reconciles cloud-managed desired state with the local cluster state.</p>
 <p>Module lifetime is managed by the Kubernetes scheduler, which maintains module availability and chooses their placement. IoT Edge manages the edge application platform running on top, continuously reconciling the desired state specified in IoT Hub with the state on the edge cluster. The edge application model is still the familiar model based on IoT Edge modules and routes. The IoT Edge agent performs the role of a CRD controller, automatically <em>translating</em> from IoT Edge application model to Kubernetes native constructs like pods, deployments, services etc.</p>
 <p><img src="./media/k8s_model.png" alt="" /></p>
@@ -178,11 +182,23 @@
 <p>💡</p>
 <p>A good mental model for this integration is to think of Kubernetes as another operating environment IoT Edge applications can run on in addition to Linux and Windows.</p>
 </blockquote>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="architecture-and-initialization-flow"><a class="header" href="#architecture-and-initialization-flow">Architecture and initialization flow</a></h2>
 <p><img src="./media/pp-refresh-k8s.png" alt="" /></p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="multi-tenancy"><a class="header" href="#multi-tenancy">Multi-tenancy</a></h2>
 <p>When installed on Kubernetes, IoT Edge is deployed into a specified Kubernetes <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>. All resources and services required by the deployment are created within this namespace. Therefore, it's possible to install multiple IoT Edge deployments into the same cluster, each in its seperate namespace. </p>
 <p>There is no upper limit enforced on the number of namespaces, this is generally a function of resource capacity of the cluster.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="security-architecture"><a class="header" href="#security-architecture">Security architecture</a></h2>
 <p>IoT Edge runtime on Kubernetes leverages standard <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.</p>
 <pre><code>+----------------+       +-------------------------------+      +--------------------------------------+
@@ -242,6 +258,10 @@
     |  Kube API  |                                                                                 
     +------------+                                                                                 
 </code></pre>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="high-availability-and-scaling"><a class="header" href="#high-availability-and-scaling">High availability and scaling</a></h2>
 <h3 id="what-is-supported"><a class="header" href="#what-is-supported">What is supported</a></h3>
 <p><strong>Resilience to node failure</strong> </p>
@@ -256,6 +276,10 @@
 <p>IoT Edge on Kubernetes does not yet provide high availability with manual or auto scaling per the usual Kubernetes definition. In other words, all modules deployed via IoT Edge are currently <em>singletons</em> - only single instances are supported. </p>
 <p>The primary reason for this is that IoT Edge couples the application model based on Docker API with an opinionated programming model based on Azure IoT SDK. The programming model is optimized for in-order message delivery which is important for many IoT scenarios. While it is certainly possible to deploy modules that do not use IoT SDK using IoT Edge, each module gets an IoT Hub identity anyway even if it doesn't use it.</p>
 <p>The ability to dynamically create new module identities when multiple replicas are requested is not yet implemented. IoT Edge's in-order message delivery guarantee combined with multiple module replicas is challenging to implement and needs careful design. We intend to explore this use case in the future.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="createoptions-extensions"><a class="header" href="#createoptions-extensions">createOptions extensions</a></h2>
 <p>As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.</p>
 <p>In order to leverage some useful Kubernetes specific constructs in an IoT Edge deployment manifest, you can use the createOptions extensions feature. This allows you to use native Kubernetes API format to express requirements in a module's createOptions section.</p>
@@ -274,6 +298,10 @@
 <p>Several examples in the <a href="examples.html">tutorials</a> section demonstrate how to use the feature.</p>
 <h2 id="supported-extensions"><a class="header" href="#supported-extensions">Supported extensions</a></h2>
 <p>See the <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/create-options.md">repo docs</a> for supported extensions.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>IoT Edge on Kubernetes uses the same Docker-based application model built around
 edge modules as a single device with Docker engine. </p>
 <p>However, <em>configuring</em> the modules to run on 
@@ -281,6 +309,10 @@ Kubernetes involve a number of differences compared to a Docker engine
 environment and require a grasp of a few k8s-specific concepts.</p>
 <p>The content in the section highlights the major differences to be aware of and 
 best practice recommendations informed by real-world customer deployments.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="host-storage"><a class="header" href="#host-storage">Host storage</a></h1>
 <p><strong>Do not mount storage from the host directly into a module.</strong></p>
 <p>Unlike a single device environment, host storage on Kubernetes is ephemeral. 
@@ -293,6 +325,10 @@ read its configuration from a file consider using a <a href="https://kubernetes.
 as demonstrated in a <a href="bp/storage/../../examples/configmaps.html">subsequent tutorial</a>. </p>
 <p>If your modules need to persist data, use Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">persistent volumes</a>
 leveraging best practices recommended in the following section.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="persistent-storage"><a class="header" href="#persistent-storage">Persistent storage</a></h1>
 <blockquote>
 <p>💡 For Azure Stack Edge specific guidance, please see the <a href="bp/storage/ase.html">ASE section</a>.</p>
@@ -353,7 +389,11 @@ to work with <a href="https://longhorn.io">Longhorn</a> volumes on <a href="http
     }</strong>
   }
 }
-</code></pre><h1 id="azure-stack-edge"><a class="header" href="#azure-stack-edge">Azure Stack Edge</a></h1>
+</code></pre><blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
+<h1 id="azure-stack-edge"><a class="header" href="#azure-stack-edge">Azure Stack Edge</a></h1>
 <p>Azure Stack Edge (ASE) appliances have IoT Edge running in a Kubernetes environment
 as an option for <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-deploy-configure-compute#configure-compute">compute</a>.
 ASE provides a way to create <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-manage-shares">shares</a>
@@ -382,6 +422,10 @@ volume should be mounted.</p>
 as demonstrated in the subsequent persistent volumes <a href="bp/storage/../../examples/pervol_translation.html">tutorial</a>.
 Ignore the <code>helm</code> commands as those are not required on ASE.</p>
 </blockquote>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="work-with-proxies"><a class="header" href="#work-with-proxies">Work with proxies</a></h1>
 <p>If IoT Edge is required to connect via a proxy server, specify its address in the 
 install command.</p>
@@ -404,6 +448,10 @@ the deployment manifest. </p>
 <p><em>They should also add a <strong>NO_PROXY</strong> environment variable set to <strong>localhost</strong>.</em>
 This is an additional requirement when running on Kubernetes because modules 
 are configured to communicate with <code>iotedged</code> using <code>http://localhost</code></p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="expose-module-services"><a class="header" href="#expose-module-services">Expose module services</a></h1>
 <h2 id="ensure-all-ports-required-for-communication-are-specified-under-portbindings"><a class="header" href="#ensure-all-ports-required-for-communication-are-specified-under-portbindings">Ensure all ports required for communication are specified under <code>PortBindings</code>.</a></h2>
 <p>The <a href="bp/network/../../examples/services_internal.html">expose services within the cluster tutorial</a> 
@@ -412,6 +460,10 @@ in the same namespace. See the <a href="bp/network/../../examples/services_exter
 for guidance on how to expose services to clients external to the cluster.</p>
 <p>The important difference compared to Docker-based deployments is that clients cannot
 access ports that are not defined in <code>PortBindings</code> section. </p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="run-on-host-network"><a class="header" href="#run-on-host-network">Run on host network</a></h1>
 <p>For some scenarios, especially those involving the BACNet protocol, workloads need 
 to run on the host network namespace. This is not the default configuration for 
@@ -430,6 +482,10 @@ section is not required. It will be ignored if specified. </p>
 For example, a BACNet module running on the host network can connect to <code>edgeHub</code>
 module running on the internal cluster network.</p>
 </blockquote>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="use-resources-and-limits"><a class="header" href="#use-resources-and-limits">Use resources and limits</a></h1>
 <h2 id="set-module-cpumemory-limits-andor-reservations"><a class="header" href="#set-module-cpumemory-limits-andor-reservations">Set module CPU/memory limits and/or reservations</a></h2>
 <p>In many scenarios, IoT Edge is sharing cluster resources with other user and system
@@ -442,6 +498,10 @@ chart, so you don't need to set them yourself for these two pods.</p>
 <p>If your module needs access to special device hardware like accelerators, use the
 device plugin framework. See the <a href="https://docs.microsoft.com/azure/databox-online/azure-stack-edge-gpu-modify-fpga-modules-gpu#resource-usage">GPU/FPGA access Azure Stack Edge documentation</a> as an example.</p>
 <p><strong>Do not mount device paths directly into the module using its createOptions.</strong></p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="adjust-deployment-strategy"><a class="header" href="#adjust-deployment-strategy">Adjust Deployment strategy</a></h1>
 <p>The default module update behavior is <code>RollingUpdate</code>. This spins up a new instance
 of the module and ensures it is running before tearing down the old instance. This 
@@ -461,6 +521,10 @@ is torn down before the new instance starts running. If the update specifies a n
 container image, for example, the module will remain down until the new image is pulled
 and started.</p>
 </blockquote>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="avoid-using-docker-socket"><a class="header" href="#avoid-using-docker-socket">Avoid using Docker socket</a></h1>
 <h2 id="do-not-mount-dockersock-into-any-module"><a class="header" href="#do-not-mount-dockersock-into-any-module">Do not mount <code>docker.sock</code> into any module!</a></h2>
 <p>Some modules in the single device, Docker-engine, scenario mount the Docker 
@@ -473,7 +537,15 @@ to fail at run time on such clusters.</p>
 <p>Getting access to logs and metrics is a common reason for mounting the Docker socket. The 
 recommended way to get logs and metrics on a Kubernetes cluster is to install a cluster-wide 
 observability solution like <a href="https://docs.microsoft.com/azure/azure-monitor/containers/container-insights-analyze">Azure Monitor</a>.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h1>
 <h2 id="a-kubernetes-cluster"><a class="header" href="#a-kubernetes-cluster">A Kubernetes cluster</a></h2>
 <p>A Kubernetes cluster that supports Custom Resource Definitions (CRD) is required for using Azure IoT Edge with Kubernetes. <strong>v1.12 or newer is recommended</strong>. Here are some options if you don't already have a cluster available:</p>
@@ -495,7 +567,11 @@ observability solution like <a href="https://docs.microsoft.com/azure/azure-moni
 <p><a href="https://code.visualstudio.com/download">Visual Studio Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge">IoT Edge extension</a> is recommended for working with IoT Edge's deployment manifests and submitting them to IoT Hub.</p>
 <h2 id="visualization-tools-optional"><a class="header" href="#visualization-tools-optional">Visualization tools (optional)</a></h2>
 <p>Tools like <a href="https://github.com/vmware-tanzu/octant">Octant</a> and <a href="https://k9ss.io">K9s</a> can help you understand the architecture and state of your cluster application.</p>
-<p>This example demonstrates a &quot;Hello, world&quot; scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a>
+This example demonstrates a &quot;Hello, world&quot; scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>.</p>
+</blockquote>
 <h3 id="setup-steps"><a class="header" href="#setup-steps">Setup steps</a></h3>
 <ol>
 <li>
@@ -542,9 +618,17 @@ helm del edge1 -n helloworld &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="using-kubernetes-persistent-volumes"><a class="header" href="#using-kubernetes-persistent-volumes">Using Kubernetes Persistent Volumes</a></h2>
 <p><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes (PV)</a> are a key construct for stateful applications in Kubernetes. By attaching them to pods, compute can be allowed to &quot;roam&quot; among cluster nodes while preserving their data, <em>as long as pods store their state in persistent volumes</em>. To workloads, PVs appear as locations on the filesystem they can use to store and retrieve files.</p>
 <p>IoT Edge modules can leverage persistent volumes implicitly via IoT Edge app model translations or explicitly using createOptions extensions. The next two examples with demonstrate how to use PVs to make modules resilient to node failures using either option.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>implicitly</em> via app model translations. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-1"><a class="header" href="#setup-steps-1">Setup steps</a></h3>
 <ol>
@@ -690,6 +774,10 @@ helm del pv-example1 -n pv1 &amp;&amp; \
 kubectl delete ns pv1
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demostrates how to back the <code>edgeHub</code> module's message store by using persistent volumes <em>explicitly</em> via K8s createOptions extensions. It requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-2"><a class="header" href="#setup-steps-2">Setup steps</a></h3>
 <ol>
@@ -847,6 +935,10 @@ helm del pv-example2 -n pv2 &amp;&amp; \
 kubectl delete ns pv2
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demostrates how you can use Kubernetes configmaps, in an IoT Edge deployment.  It requires a Kubernetes cluster with Helm initailized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-3"><a class="header" href="#setup-steps-3">Setup steps</a></h3>
 <ol>
@@ -1005,6 +1097,10 @@ helm del cm-example -n cm &amp;&amp; \
 kubectl delete ns cm
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted)</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demonstrates how to back the <code>iotedged</code> pod using persistent volumes. <code>iotedged</code> contains certificates and other security state which must be persisted on durable storage in order for the edge deployment to be remain functional should the <code>iotedged</code> pod be restarted and/or relocated to another node.</p>
 <p>This tutorial requires a Azure Kubernetes (AKS) cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites.</p>
 <blockquote>
@@ -1071,6 +1167,10 @@ helm del pv-iotedged-example -n pv-iotedged &amp;&amp; \
 kubectl delete ns pv-iotedged
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this tutorial (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demonstrates how to expose an in-cluster <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-5"><a class="header" href="#setup-steps-5">Setup steps</a></h3>
 <ol>
@@ -1227,6 +1327,10 @@ kubectl delete ns internal-service
 
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demonstrates how to expose a <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes Service</a> from an IoT Edge module outside the cluster. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-6"><a class="header" href="#setup-steps-6">Setup steps</a></h3>
 <ol>
@@ -1392,7 +1496,11 @@ kubectl delete ns external-service
 
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
-<p>This example demonstrates how to assign modules to run on specific nodes. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a>
+This example demonstrates how to assign modules to run on specific nodes. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
+</blockquote>
 <h3 id="setup-steps-7"><a class="header" href="#setup-steps-7">Setup steps</a></h3>
 <ol>
 <li>
@@ -1540,6 +1648,10 @@ helm del node-selector-example -n nodeselector &amp;&amp; \
 kubectl delete ns nodeselector
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>This example demostrates how you can use <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes resources</a> in an IoT Edge workload deployment manifest.  It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.</p>
 <h3 id="setup-steps-8"><a class="header" href="#setup-steps-8">Setup steps</a></h3>
 <ol>
@@ -1692,6 +1804,10 @@ kubectl delete ns resources
 
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h2 id="azure-iot-edge-on-kubernetes-connnected-to-iot-central"><a class="header" href="#azure-iot-edge-on-kubernetes-connnected-to-iot-central">Azure IoT Edge on Kubernetes Connnected to IoT Central</a></h2>
 <p><img src="examples/images/k8sedgecentral.png" alt="header" /></p>
 <p>This tutorial demonstrates a scenario of deploying a simulated temperature sensor edge module. It requires a Kubernetes cluster with Helm initialized and <code>kubectl</code> installed as noted in the <a href="examples/./prereqs.html">prerequisites</a>. This tutorial will use an AKS cluster deployed on Azure.</p>
@@ -1771,6 +1887,10 @@ helm del edge1 -n helloworld &amp;&amp; \
 kubectl delete ns helloworld
 </code></pre>
 <p>...will remove all the  Kubernetes resources deployed as part of the edge deployment in this example (IoT Edge CRD will not be deleted).</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="known-issues"><a class="header" href="#known-issues">Known issues</a></h1>
 <p>Some capabilities available on IoT Edge with Docker on a single device are not available in IoT Edge on Kubernetes. </p>
 <h2 id="not-all-docker-api-createoptions-are-translated"><a class="header" href="#not-all-docker-api-createoptions-are-translated">Not all Docker API <code>createOptions</code> are translated</a></h2>
@@ -1789,13 +1909,25 @@ network without any other changes.</p>
 <p>On Kubernetes, the edgeAgent does not emit <a href="https://docs.microsoft.com/azure/iot-edge/how-to-access-built-in-metrics?view=iotedge-2018-06#available-metrics">built-in metrics</a>. Therefore some of the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-explore-curated-visualizations?view=iotedge-2018-06&amp;tabs=devices%2Chost#iot-edge-device-details-workbook">curated visualizations</a> are not available.</p>
 <h2 id="nodejs-modules-do-not-start"><a class="header" href="#nodejs-modules-do-not-start">Node.js modules do not start</a></h2>
 <p>IoT Edge modules running on Kubernetes based on Node.js IoT SDKs are currently not able to successfully retrieve credentials from <code>iotedged</code> and so cannot start. </p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>Azure IoT Edge's application model is based on the Docker API specifically the <a href="https://docs.docker.com/engine/api/v1.40/#operation/ContainerCreate">createOptions</a> schema. When running on Kubernetes, the same application model is retained and the runtime performs a number of automatic translations to the  Kubernetes application model. The goal is that these edge applications designed to run on a single node will work with minimal modifications when installed in a Kubernetes cluster. To achieve this, IoT Edge on Kubernetes has to transform the edge deployment into Kubernetes objects which will support module-module communication. </p>
 <p>IoT Edge on Kubernetes creates Namespaces, Deployments, Services, ImagePullSecrets, PersistentVolumeClaims, and ServiceAccounts to establish this framework. </p>
 <h2 id="translation-details"><a class="header" href="#translation-details">Translation details</a></h2>
 <p>Please see <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/doc/edge-deployment-to-k8s-translations.md">repo docs</a>.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="helm-chart-install-options"><a class="header" href="#helm-chart-install-options">Helm chart install options</a></h1>
 <p>This section lists the <code>edgeAgent</code> and <code>iotedged</code> options can be set using command line or the Helm chart's <a href="https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/values.yaml">values.yaml</a> file during installation.</p>
 <p>Few examples in the <a href="./examples.html">Tutorials</a> section demonstrate how to set the options from command line.</p>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>IoT Edge Daemon can be configured with various settings as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
 <tr><td>data.enableGetNodesRBAC</td><td><ul><li><strong>true</strong> indicates <code>iotedged</code> has permssions to query node type for the purposes of reporting this value to IoT Hub. Setting to <code>true</code> will attempt to create a <em>NodeObserver</em> cluster role</li><br><br> <li><strong>false</strong> indicates <code>iotedged</code> does not have persmission to query node type information <br><br> Should be set to <code>false</code> if <code>NodeObserver</code> cluster role cannot be created with your access permissions. </li></ul></td></tr>
@@ -1803,6 +1935,10 @@ network without any other changes.</p>
 <tr><td>data.persistentVolumeClaim.name</td><td><ul>persistent volume claim name that backs iotedged data directory. </ul></td></tr>
 <tr><td>data.persistentVolumeClaim.size</td><td><ul>size, in Mb, of persistent volume claim that backs iotedged data directory </ul></td></tr>
 </tbody></table>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <p>Edge agent can be configured with various environment variables as described below</p>
 <table><thead><tr><th>Variable Name</th><th>Value</th></tr></thead><tbody>
 <tr><td>portMappingServiceType</td><td><ul><li><strong>clusterIP</strong> to expose the service on a cluster Internal IP </li> <li> <strong>NodePort</strong> to expose the service on each Node's IP at a static port </li>   <li> <strong>LoadBalancer</strong> to expose the service externally using a cloud provider's load balancer </li> <ul></td></tr>
@@ -1817,6 +1953,10 @@ network without any other changes.</p>
 <tr><td>persistentVolumeName</td><td><ul>Specify the persistent volume name if you wish the volume that backs up the persistent storage in modules to use that PV </ul></td></tr>
 <tr><td>persistentVolumeClaimDefaultSizeInMb</td><td><ul>Specify the persistent volume claim size in Mb when creating PVCs</ul></td></tr>
 </tbody></table>
+<blockquote>
+<p>⚠️ <strong>Deprecation notice</strong></p>
+<p>This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the <a href="https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11">product's official docs</a></p>
+</blockquote>
 <h1 id="compare-with-virtual-kubelet-provider"><a class="header" href="#compare-with-virtual-kubelet-provider">Compare with virtual-kubelet provider</a></h1>
 <p>Running IoT Edge on Kubernetes has  different goals from the <a href="https://github.com/Azure/iot-edge-virtual-kubelet-provider">iot-edge-virtual-kubelet-provider</a> project. The virtual-kubelet integration is a mechanism to define an edge workload deployment in a Kubernetes-native way and deliver it to IoT Edge devices via the IoT Hub. While IoT Edge on Kubernetes is about running the workloads on a Kubernetes cluster.</p>
 <p>In fact they can used together to both define the edge workloads and run them on Kubernetes. However, you do not get to use the full fidelity of the Kubernetes application model with IoT Edge on Kubernetes.</p>
