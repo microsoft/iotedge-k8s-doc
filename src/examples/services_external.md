@@ -1,3 +1,7 @@
+> ⚠️ **Deprecation notice**
+>
+> This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the [product's official docs](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11)
+
 This example demonstrates how to expose a [Kubernetes Service](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) from an IoT Edge module outside the cluster. It requires a Kubernetes cluster with Helm initialized and `kubectl` installed as noted in the prerequisites. You'll also be using VS Code with Azure IoT tools to work with the edge workload (deployment) manifest.
 
 ### Setup steps

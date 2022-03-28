@@ -1,3 +1,7 @@
+> ⚠️ **Deprecation notice**
+>
+> This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the [product's official docs](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11).
+
 ## Introduction
 
 Azure IoT Edge can integrate with Kubernetes, using it as a resilient, highly available infrastructure layer. It registers an IoT Edge Custom Resource Definition (CRD) with the Kubernetes API Server and provides a CRD controller that reconciles cloud-managed desired state with the local cluster state.

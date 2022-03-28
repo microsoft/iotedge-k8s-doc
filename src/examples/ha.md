@@ -1,3 +1,7 @@
+> ⚠️ **Deprecation notice**
+>
+> This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the [product's official docs](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11)
+
 This example demonstrates how to back the `iotedged` pod using persistent volumes. `iotedged` contains certificates and other security state which must be persisted on durable storage in order for the edge deployment to be remain functional should the `iotedged` pod be restarted and/or relocated to another node.
 
  This tutorial requires a Azure Kubernetes (AKS) cluster with Helm initialized and `kubectl` installed as noted in the prerequisites.

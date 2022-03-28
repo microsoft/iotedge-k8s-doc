@@ -1,3 +1,7 @@
+> ⚠️ **Deprecation notice**
+>
+> This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the [product's official docs](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11)
+
 ## createOptions extensions
 
 As mentioned previously, IoT Edge on Kubernetes automatically translates IoT Edge's docker-based application model to the Kubernetes native application model. However, there are many concepts in the Kubernetes that cannot be expressed in a docker-based application model. Examples include persistent volumes, node selectors, secrets etc.

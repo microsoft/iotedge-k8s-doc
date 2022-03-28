@@ -1,4 +1,8 @@
 
+> ⚠️ **Deprecation notice**
+>
+> This preview integration of IoT Edge 1.x and Kubernetes will not be made generally available, and is no longer supported. The recommended way to run IoT Edge 1.x on Kubernetes is noted in the [product's official docs](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-kubernetes?view=iotedge-2020-11)
+
 ## Security architecture
 
 IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) method to regulate access to resources inside Kubernetes cluster. Edge runtime installs itself in a namespace provided by user. All resources it creates during installation and work are scoped to the namespace.
