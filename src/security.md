@@ -30,9 +30,9 @@ IoT Edge runtime on Kubernetes leverages standard [RBAC](https://kubernetes.io/d
 
 ### iotedged
 
-`iotedged` is the most privileged component in an Edge deployment so it requires a ClusterRole but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for iotedged can be found in the [source repository](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml). 
+`iotedged` is the most privileged component in an Edge deployment, so it requires a ClusterRole, but with very limited scope of roles. It needs these permissions to start the EdgeAgent and monitor its status. The full list of permissions required for `iotedged` can be found in the [source repository](https://github.com/Azure/iotedge/blob/release/1.1-k8s-preview/kubernetes/charts/edge-kubernetes/templates/edge-rbac.yaml). 
 
-In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps etc (within the device namespace), it requires security related permissions.
+In addition to standard permissions to list, create, delete, update and watch Kubernetes resources like Deployments, Pods, Services, ConfigMaps, etc. (within the device namespace), it requires security-related permissions.
 
 `iotedged` has a ClusterRole because it performs the following cluster wide operations:
 * When reporting system information, it lists nodes and collects all unique types of architecture with number of nodes of this type. 
@@ -42,23 +42,23 @@ Each installation will create its own ClusterRole and ClusterRoleBinding for iot
 
 ### EdgeAgent
 
-EdgeAgent doesnt need to perform cluster-wide operations so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to iotedged.
+EdgeAgent doesn't need to perform cluster-wide operations, so it is downgraded to a Role with permissions scoped to the namespace the edge device is installed in. All security operations are delegated to `iotedged`.
 
 ### EdgeHub and modules
 
-EdgeHub and other modules shouldn''t rely on any Kubernetes specific APIs and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.
+EdgeHub and other modules shouldn't rely on any Kubernetes-specific APIs, and are runtime agnostic. As a result, no specific roles and permissions to access Kubernetes resources is required.
 
 ## Module Authentication
 
-In order to authenticate modules in Kubernetes iotedged leverages approach Kubernetes API itself uses to authenticate its clients.
+In order to authenticate modules in Kubernetes, `iotedged` leverages the approach the Kubernetes API itself uses to authenticate its clients.
 
-Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as module identity in Kubernetes cluster. It doesn''t require to have any roles associated with it so EdgeAgent doesn't create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to iotedged as an Authorization bearer token which iotedged reviews against Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.
+Each Edge module has a dedicated ServiceAccount assigned to deployment. This ServiceAccount works as the module identity in Kubernetes cluster. It doesn't require  any roles associated with it, so EdgeAgent doesn't create any Roles and RoleBindings for modules. Each deployed pod module contains a token that can be passed to `iotedged` as an Authorization bearer token, which `iotedged` reviews against the Kubernetes API. The response contains a status field of the request to indicate the success of the review. If the review finishes successfully, it will contain the name of the ServiceAccount the token belongs to. A given ServiceAccount is used as a module identity to allow an access to certain iotedged operation calls.
 
-For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between iotedged and module container. The trust bundle that iotedged generates during an initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.
+For each user module, EdgeAgent puts a sidecar proxy container that establish secure TLS connection between `iotedged` and the module's container. The trust bundle that `iotedged` generates during its initialization process is mounted as a ConfigMap volume to a proxy container. It contains certs required to establish secure communication with iotedged.
 
-In addition, proxy reads auth token file from mounted pod volume and provide it as an Authorization bearer token with every outgoing request to iotedged.
+In addition, the proxy reads an auth token file from a mounted pod volume and provides it as an Authorization bearer token with every outgoing request to `iotedged`.
 
-From a module point of view, it communicates with iotedged via HTTP and all necessary work to secure connection is taking care of by sidecar proxy.
+From a module point of view, it communicates with `iotedged` via HTTP, and all necessary work to secure connection is taking care of by sidecar proxy.
 
 ```
 +--------------------------------------------------------------------------------+
